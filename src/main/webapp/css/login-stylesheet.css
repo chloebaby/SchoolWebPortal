@@ -1,0 +1,59 @@
+/**********************************************************************/
+/*                          GLOBAL                                    */
+/**********************************************************************/
+
+.right{
+     float: right;
+}
+
+.left{
+     float: left;
+}
+
+
+/**********************************************************************/
+/*                          Login Page                                */
+/**********************************************************************/
+
+.jumbotron{
+     background-color: #ffffff;
+     box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.35);
+}
+
+.jumbotron img{
+    display: block;
+    margin: 0 auto;
+    width: 256px;
+}
+
+.login-page form{
+     padding: 10px 10px;
+     width: 290px;
+}
+
+@media(min-width: 768px){
+    .jumbotron img{
+         display: block;
+         margin: 0 auto;
+         width: 400px;
+    }
+    
+    .login-page form{
+        padding: 10px 10px;
+        width: 300px;
+    }
+}
+
+@media(min-width: 1200px){
+    .jumbotron img{
+         display: block;
+         margin: 0 auto;
+         width: 600px;
+    }
+    
+    .login-page form{
+        padding: 10px 10px;
+        width: 400px;
+    }	
+}
+
