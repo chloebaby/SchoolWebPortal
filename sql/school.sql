@@ -1,3 +1,5 @@
+create schema School;
+
 create table Students(
 	student_id		int unsigned not null auto_increment,
     first_name		varchar(25) not null,
@@ -42,12 +44,12 @@ create table Results(
     constraint rslt_marks_ck check (marks >= 0 and marks <= 100)
 );
 
-insert into Students(student_id, first_name, last_name, student_active, email, last_modified)
-values (null, "David", "Parr", true, "david.parr@hotmail.ca", current_date());
-insert into Students(student_id, first_name, last_name, student_active, email, last_modified)
-values (null, "Morty", "Smith", true, "morty.smith@hotmail.ca", current_date());
-insert into Students(student_id, first_name, last_name, student_active, email, last_modified)
-values (null, "Rick", "Sanchez", true, "rick.sanchez@hotmail.ca", current_date());
+insert into Students(student_id, first_name, last_name, email, last_modified)
+values (null, "David", "Parr", "david.parr@hotmail.ca", current_date());
+insert into Students(student_id, first_name, last_name, email, last_modified)
+values (null, "Morty", "Smith", "morty.smith@hotmail.ca", current_date());
+insert into Students(student_id, first_name, last_name, email, last_modified)
+values (null, "Rick", "Sanchez", "rick.sanchez@hotmail.ca", current_date());
 
 select * from Students;
 select * from Courses;
