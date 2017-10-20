@@ -26,9 +26,40 @@
     width: 256px;
 }
 
+.login-page{
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto 70px;
+}
+
+.login-page h2{
+	text-align: center;
+}
+
 .login-page form{
      padding: 10px 10px;
      width: 290px;
+     display: block;
+     margin: 0 auto;
+}
+
+footer{
+    text-align: center;
+}
+
+
+footer, .push{
+	height: 70px;
+}
+
+footer ul{
+	list-style: none;
+}
+
+footer ul li{
+	display: inline;
+	padding: 0 5px;
 }
 
 @media(min-width: 768px){
@@ -46,9 +77,9 @@
 
 @media(min-width: 1200px){
     .jumbotron img{
-         display: block;
-         margin: 0 auto;
-         width: 600px;
+	    display: block;
+	    margin: 0 auto;
+	    width: 600px;
     }
     
     .login-page form{
