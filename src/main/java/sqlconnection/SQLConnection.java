@@ -12,7 +12,7 @@ public class SQLConnection {
 	
 	public SQLConnection() {
 		url = "jdbc:mysql://localhost:3306/School";
-		username = "school";
+		username = "schooluser";
 		password = "mysql";
 	}
 	
