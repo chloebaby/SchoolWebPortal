@@ -60,7 +60,7 @@ select * from Students;
 select * from Courses;
 select * from Semesters;
 select * from Results;
-select * from Persons;
+select * from Person;
 
 drop table Students;
 drop table Courses;
