@@ -1,5 +1,10 @@
 create schema School;
 
+create table Person(
+	person_id	int,
+    person_name varchar(25)
+);
+
 create table Students(
 	student_id		int unsigned not null auto_increment,
     first_name		varchar(25) not null,
@@ -55,6 +60,7 @@ select * from Students;
 select * from Courses;
 select * from Semesters;
 select * from Results;
+select * from Persons;
 
 drop table Students;
 drop table Courses;
