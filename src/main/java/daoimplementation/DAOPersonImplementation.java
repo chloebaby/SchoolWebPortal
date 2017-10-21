@@ -58,5 +58,19 @@ public class DAOPersonImplementation extends SQLConnection implements PersonDAO 
 			sqle.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void deleteById(int id) {
+		String deletePerson = "delete from Person where person_id = ?";
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(deletePerson);
+			ps.setInt(1, id);
+			
+			ps.executeUpdate();
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
 
 }
