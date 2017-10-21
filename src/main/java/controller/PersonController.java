@@ -34,4 +34,16 @@ public class PersonController extends HttpServlet{
 		getServletContext().getRequestDispatcher("/jsp/person-details.jsp").forward(request, response);
 				
 	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String action = request.getParameter("action");
+		
+		if(action.equalsIgnoreCase("delete")) {
+			int personId = Integer.valueOf(request.getParameter("personId"));
+			daoPersonImplementation.deleteById(personId);
+			request.setAttribute("allPersons", daoPersonImplementation.select());
+			getServletContext().getRequestDispatcher("/jsp/person-details.jsp").forward(request, response);
+		}
+	}
 }
