@@ -33,7 +33,7 @@
         </div> <!-- ./navbar-header -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
+            <li><a href="#">${user.firstName}&nbsp;${user.lastName}</a></li>
           </ul>
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->

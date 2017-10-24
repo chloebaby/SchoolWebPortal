@@ -30,6 +30,7 @@ public class UserLoginController extends HttpServlet {
 		String returnPassword = user.getPassword();
 		
 		if(returnUsername.equals(username) && returnPassword.equals(password)) {
+			request.setAttribute("user", user);
 			getServletContext().getRequestDispatcher("/jsp/homepage.jsp").forward(request, response);
 		}
 	}
