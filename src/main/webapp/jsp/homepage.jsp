@@ -40,7 +40,7 @@
     </nav> <!-- ./navbar navbar-default navbar-fixed-top -->
 
     <div class="sidebar">  
-      <div class="container-fluid-sidebar">
+      <div class="container-fluid">
         <div class="row">
         	<div class="col-sm-2">
             <nav class="nav-sidebar">
