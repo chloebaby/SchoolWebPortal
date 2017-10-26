@@ -103,14 +103,14 @@
 				                  </tr>
 			                  </thead>
                         <tbody>
-			                  <c:forEach var="student" items="${allStudents}">
-				                  <tr>
-				                    <td><c:out value="${student.studentId}"/></td>
-				                    <td><c:out value="${student.firstName}"/></td>
-				                    <td><c:out value="${student.lastName}"/></td>
-				                    <td><c:out value="${student.email}"/></td>
-				                  </tr>
-			                  </c:forEach>
+				                  <c:forEach var="student" items="${allStudents}">
+					                  <tr>
+					                    <td><c:out value="${student.studentId}"/></td>
+					                    <td><c:out value="${student.firstName}"/></td>
+					                    <td><c:out value="${student.lastName}"/></td>
+					                    <td><c:out value="${student.email}"/></td>
+					                  </tr>
+				                  </c:forEach>
 			                  </tbody>
 			                </table>
 		                </div>
