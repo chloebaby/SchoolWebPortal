@@ -16,7 +16,6 @@
 
     <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/css/sidebar-stylesheet.css" />" rel="stylesheet">
-   <!-- <link href="css/login-stylesheet.css" rel="stylesheet">-->
   </head>
   
   <body>
@@ -33,14 +32,14 @@
         </div> <!-- ./navbar-header -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
+            <li><a href="#"><c:out value="${user.firstName}"/>&nbsp;<c:out value="${user.lastName}" /></a></li>
           </ul>
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->
     </nav> <!-- ./navbar navbar-default navbar-fixed-top -->
 
     <div class="sidebar">  
-      <div class="container-fluid-sidebar">
+      <div class="container-fluid">
         <div class="row">
         	<div class="col-sm-2">
             <nav class="nav-sidebar">

@@ -17,7 +17,7 @@ public class DAOUserImplementation extends SQLConnection implements UserDAO{
 	}
 	
 	public User selectUsernamePasswordByUsername(String username) {
-		String selectUserPass = "select user_name, user_password from Users where user_name = ?";
+		String selectUserPass = "select user_name, user_password, first_name, last_name from Users where user_name = ?";
 		User user = new User();
 		
 		try(Connection connection = getConnection()){
@@ -27,7 +27,8 @@ public class DAOUserImplementation extends SQLConnection implements UserDAO{
 			rs.next();
 			user.setUserName(rs.getString("user_name"));
 			user.setPassword(rs.getString("user_password"));
-			
+			user.setFirstName(rs.getString("first_name"));
+			user.setLastName(rs.getString("last_name"));
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
