@@ -21,7 +21,7 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 	public List<Student> select(){
 		List<Student> allStudents = new ArrayList<Student>();
 		
-		String selectAllStudents = "select * from person";
+		String selectAllStudents = "select * from Students";
 		
 		try(Connection connection = getConnection()){
 			PreparedStatement ps = connection.prepareStatement(selectAllStudents);
@@ -34,7 +34,6 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 				student.setFirstName(rs.getString("first_name"));
 				student.setLastName(rs.getString("last_name"));
 				student.setEmail(rs.getString("email"));
-				student.setLastModified(rs.getDate("last_modified"));
 				allStudents.add(student);
 			}
 			
