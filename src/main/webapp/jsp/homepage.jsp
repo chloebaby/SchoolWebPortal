@@ -46,6 +46,7 @@
             <nav class="nav-sidebar">
               <ul class="nav tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">Students</a></li>
+                <!-- <li class="active"><a href="<c:url value="/login/studentDetails?action=getStudents"/>" data-toggle="tab">Student</a></li>-->
                 <li class=""><a href="#tab2" data-toggle="tab">Courses</a></li>
                 <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>                               
               </ul>
@@ -54,16 +55,22 @@
           <div class="col-sm-10">
             <div class="tab-content">
               <div class="tab-pane active text-style" id="tab1">
-                <h2>Lorem ipsum</h2>
-                     <p>
-                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                       standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
-                       a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining 
-                       essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                       and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  
-                     </p>
-                     <hr>
-                    <img src="http://placehold.it/350x250" class="img-rounded pull-right">   
+                <table>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                  </tr>
+                  <c:forEach var="student" items="${allStudents}">
+                  <tr>
+                    <td><c:out value="${student.studentId}"/></td>
+                    <td><c:out value="${student.firstName}"/></td>
+                    <td><c:out value="${student.lastName}"/></td>
+                    <td><c:out value="${student.email}"/></td>
+                  </tr>
+                  </c:forEach>
+                </table>  
               </div>
               <div class="tab-pane text-style" id="tab2">
                 <h2>Dolor asit amet</h2>
@@ -73,7 +80,7 @@
                   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
                   et dolore magna aliquyam erat, sed diam voluptua.</p>
                   <hr>
-                        <img src="http://placehold.it/150x90" class="img-rounded pull-left">
+                  <img src="http://placehold.it/150x90" class="img-rounded pull-left">
               </div>
               <div class="tab-pane text-style" id="tab3">
                 <h2>Stet clita</h2>
