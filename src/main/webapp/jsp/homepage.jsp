@@ -16,6 +16,7 @@
 
     <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/css/sidebar-stylesheet.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/student-stylesheet.css" />" rel="stylesheet">
   </head>
   
   <body>
@@ -46,29 +47,75 @@
               <ul class="nav tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">Students</a></li>
                 <li class=""><a href="#tab2" data-toggle="tab">Courses</a></li>
-                <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>                               
+                <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>
               </ul>
             </nav>
           </div>
           <div class="col-sm-10">
             <div class="tab-content">
               <div class="tab-pane active text-style" id="tab1">
-                <table>
-                  <tr>
-                    <th>Student ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                  </tr>
-                  <c:forEach var="student" items="${allStudents}">
-                  <tr>
-                    <td><c:out value="${student.studentId}"/></td>
-                    <td><c:out value="${student.firstName}"/></td>
-                    <td><c:out value="${student.lastName}"/></td>
-                    <td><c:out value="${student.email}"/></td>
-                  </tr>
-                  </c:forEach>
-                </table>  
+                <div class="student-form">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h2>Student Details</h2>
+                    </div>
+                  </div>
+	                <div class="row">
+	                  <div class="col-sm-12">
+	                    <form>
+	                      <div class="row">
+	                        <div class="col-sm-6">
+			                      <div class="form-group">
+			                        <label for="firstName">First Name</label>
+			                        <input type="text" class="form-control" id="firstName">
+			                      </div>
+		                      </div>
+		                      <div class="col-sm-6">
+		                       <div class="form-group">
+		                         <label for="lastName">Last Name</label>
+		                         <input type="text" class="form-control" id="lastName">
+		                       </div>
+		                      </div>
+	                      </div>
+	                      <div class="row">
+	                        <div class="col-sm-6">
+	                          <div class="form-group">
+	                            <label for="emai">Email Address</label>
+	                            <input type="email" class="form-control" id="email">
+	                          </div>
+	                        </div>
+	                      </div>
+	                      <button type="submit" class="btn btn-primary">Submit</button>
+	                    </form>
+	                  </div>
+	                </div>
+                </div>
+                <div class="table-section">
+	                <div class="row">
+		                <div class="col-sm-12">
+			                <table class="table table-hover">
+			                 <thead>
+				                  <tr>
+				                    <th>Student ID</th>
+				                    <th>First Name</th>
+				                    <th>Last Name</th>
+				                    <th>Email</th>
+				                  </tr>
+			                  </thead>
+                        <tbody>
+			                  <c:forEach var="student" items="${allStudents}">
+				                  <tr>
+				                    <td><c:out value="${student.studentId}"/></td>
+				                    <td><c:out value="${student.firstName}"/></td>
+				                    <td><c:out value="${student.lastName}"/></td>
+				                    <td><c:out value="${student.email}"/></td>
+				                  </tr>
+			                  </c:forEach>
+			                  </tbody>
+			                </table>
+		                </div>
+	                </div>
+                </div>
               </div>
               <div class="tab-pane text-style" id="tab2">
                 <h2>Dolor asit amet</h2>
