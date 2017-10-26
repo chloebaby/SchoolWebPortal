@@ -45,7 +45,6 @@
             <nav class="nav-sidebar">
               <ul class="nav tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab">Students</a></li>
-                <!-- <li class="active"><a href="<c:url value="/login/studentDetails?action=getStudents"/>" data-toggle="tab">Student</a></li>-->
                 <li class=""><a href="#tab2" data-toggle="tab">Courses</a></li>
                 <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>                               
               </ul>
