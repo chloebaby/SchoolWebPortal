@@ -1,1 +1,12 @@
-@charset "UTF-8";
+.student-form h2{
+    text-align: center;
+}
+
+.student-form button{
+    display: block;
+    margin: 0 auto;
+}
+
+.table-section{
+    margin-top: 100px;
+}
