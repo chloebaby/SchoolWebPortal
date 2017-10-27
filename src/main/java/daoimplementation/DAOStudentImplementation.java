@@ -75,7 +75,7 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 		return studentById;
 	}
 	
-	public void insertStudent(String firstName, String lastName, String email) {
+	public void insertStudent(Student student) {
 		String insertStudent = "insert into Students(student_id, first_name, last_name, email, last_modified) values (?, ?, ?, ?, ?)";
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
@@ -85,12 +85,12 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 			PreparedStatement ps = connection.prepareStatement(insertStudent);
 
 			ps.setNull(1, java.sql.Types.INTEGER);
-			ps.setString(2, firstName);
-			ps.setString(3, lastName);
-			ps.setString(4, email);
+			ps.setString(2, student.getFirstName());
+			ps.setString(3, student.getLastName());
+			ps.setString(4, student.getEmail());
 			ps.setDate(5, date);
 			
-			ps.executeQuery();
+			ps.executeUpdate();
 			ps.close();
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
