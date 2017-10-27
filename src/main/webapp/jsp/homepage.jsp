@@ -62,30 +62,30 @@
                   </div>
 	                <div class="row">
 	                  <div class="col-sm-12">
-	                    <form>
+	                    <form action="login/student" method="post">
 	                      <div class="row">
 	                        <div class="col-sm-6">
 			                      <div class="form-group">
-			                        <label for="firstName">First Name</label>
-			                        <input type="text" class="form-control" id="firstName">
+			                        <label for="studentfirstName">First Name</label>
+			                        <input type="text" name="firstName" class="form-control" id="studentfirstName">
 			                      </div>
 		                      </div>
 		                      <div class="col-sm-6">
 		                       <div class="form-group">
-		                         <label for="lastName">Last Name</label>
-		                         <input type="text" class="form-control" id="lastName">
+		                         <label for="studentLastName">Last Name</label>
+		                         <input type="text" name="lastName" class="form-control" id="studentLastName">
 		                       </div>
 		                      </div>
 	                      </div>
 	                      <div class="row">
 	                        <div class="col-sm-6">
 	                          <div class="form-group">
-	                            <label for="emai">Email Address</label>
-	                            <input type="email" class="form-control" id="email">
+	                            <label for="studentEmail">Email Address</label>
+	                            <input type="email" name="email" class="form-control" id="studentEmail">
 	                          </div>
 	                        </div>
 	                      </div>
-	                      <button type="submit" class="btn btn-primary">Submit</button>
+	                      <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
 	                    </form>
 	                  </div>
 	                </div>
