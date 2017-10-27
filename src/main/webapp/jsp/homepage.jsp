@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><c:out value="${user.firstName}"/>&nbsp;<c:out value="${user.lastName}" /></a></li>
-          </ul>
+          </ul> <!-- /.nav .navbar-nav .navbar-right -->
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->
     </nav> <!-- ./navbar navbar-default navbar-fixed-top -->
@@ -48,9 +48,9 @@
                 <li class="active"><a href="#tab1" data-toggle="tab">Students</a></li>
                 <li class=""><a href="#tab2" data-toggle="tab">Courses</a></li>
                 <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>
-              </ul>
-            </nav>
-          </div>
+              </ul> <!-- /.nav .tabs -->
+            </nav> <!-- /.nav-sidebar -->
+          </div> <!-- /.col-sm-2 -->
           <div class="col-sm-10">
             <div class="tab-content">
               <div class="tab-pane active text-style" id="tab1">
@@ -126,7 +126,7 @@
                   et dolore magna aliquyam erat, sed diam voluptua.</p>
                   <hr>
                   <img src="http://placehold.it/150x90" class="img-rounded pull-left">
-              </div>
+              </div> <!-- /.tab-pane .text-style -->
               <div class="tab-pane text-style" id="tab3">
                 <h2>Stet clita</h2>
                 <p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
@@ -137,12 +137,12 @@
                   <div class="col-xs-6 col-md-3">
                     <img src="http://placehold.it/150x150" class="img-rounded pull-right">
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              </div> <!-- /.tab-pane .text-style -->
+            </div> <!-- /.tab-content -->
+          </div> <!-- /.col-sm-10 -->
+        </div> <!-- /.row -->
+      </div> <!-- /.container-fluid -->
+    </div> <!-- /.sidebar -->
     
     <!-- Bootstrap core JavaScript
     ================================================== -->
