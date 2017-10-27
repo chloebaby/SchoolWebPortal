@@ -1,6 +1,8 @@
 package dao;
 
+import model.Student;
+
 public interface StudentDAO {
-	public void insertStudent(String firstName, String lastName, String email);
+	public void insertStudent(Student student);
 	public void deleteStudent(String email);
 }
