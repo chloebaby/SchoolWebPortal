@@ -109,6 +109,7 @@
 					                    <td><c:out value="${student.firstName}"/></td>
 					                    <td><c:out value="${student.lastName}"/></td>
 					                    <td><c:out value="${student.email}"/></td>
+					                    <td><a href=<c:url value="/login/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
 					                  </tr>
 				                  </c:forEach>
 			                  </tbody>
