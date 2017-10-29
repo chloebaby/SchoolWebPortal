@@ -49,7 +49,7 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 	public List<Student> selectById(Object id){
 		List<Student> studentById = new ArrayList<Student>();
 		
-		String selectStudentsById = "select * from students where student_id = ?";
+		String selectStudentsById = "select * from Students where student_id = ?";
 		
 		try(Connection connection = getConnection()){
 			PreparedStatement ps = connection.prepareStatement(selectStudentsById);
