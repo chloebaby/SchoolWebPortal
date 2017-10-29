@@ -42,7 +42,7 @@
     <div class="sidebar">  
       <div class="container-fluid">
         <div class="row">
-        	<div class="col-sm-2">
+  	     <div class="col-sm-2">
             <nav class="nav-sidebar">
               <ul class="nav tabs">
                 <li class=""><a href="<c:url value="/login/student"/>">Students</a></li>
@@ -53,7 +53,7 @@
           </div> <!-- /.col-sm-2 -->
           <div class="col-sm-10">
             <div class="tab-content">
-              <div class="tab-pane text-style" id="tab2">
+              <div class="tab-pane active text-style" id="tab2">
                 <div class="course-form">
                   <div class="row">
                     <div class="col-sm-12">
