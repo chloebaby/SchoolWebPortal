@@ -54,6 +54,8 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 		try(Connection connection = getConnection()){
 			PreparedStatement ps = connection.prepareStatement(selectStudentsById);
 			
+			ps.setInt(1, (int)id);
+			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
