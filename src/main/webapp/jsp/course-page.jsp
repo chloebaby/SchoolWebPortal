@@ -16,7 +16,7 @@
 
     <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/css/sidebar-stylesheet.css" />" rel="stylesheet">
-    <link href="<c:url value="/css/student-stylesheet.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/course-stylesheet.css" />" rel="stylesheet">
   </head>
   
   <body>
@@ -45,8 +45,8 @@
         	<div class="col-sm-2">
             <nav class="nav-sidebar">
               <ul class="nav tabs">
-                <li class=""><a href="<c:url value="/login/student"/>" data-toggle="tab">Students</a></li>
-                <li class="active"><a href="<c:url value="/login/course"/>" data-toggle="tab">Courses</a></li>
+                <li class=""><a href="<c:url value="/login/student"/>">Students</a></li>
+                <li class="active"><a href="<c:url value="/login/course"/>">Courses</a></li>
                 <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
@@ -54,14 +54,13 @@
           <div class="col-sm-10">
             <div class="tab-content">
               <div class="tab-pane text-style" id="tab2">
-                <h2>Dolor asit amet</h2>
-                 <p>Dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt 
-                  ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo 
-                  dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore 
-                  et dolore magna aliquyam erat, sed diam voluptua.</p>
-                  <hr>
-                  <img src="http://placehold.it/150x90" class="img-rounded pull-left">
+                <div class="course-form">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h2>Course Details</h2>
+                    </div>
+                  </div>
+                </div>
               </div> <!-- /.tab-pane .text-style -->
             </div> <!-- /.tab-content -->
           </div> <!-- /.col-sm-10 -->
