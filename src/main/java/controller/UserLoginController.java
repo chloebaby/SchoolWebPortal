@@ -23,6 +23,7 @@ public class UserLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String action = "login";
 		
 		User user = daoUserImplmenetation.selectUsernamePasswordByUsername(username);
 		
@@ -30,8 +31,9 @@ public class UserLoginController extends HttpServlet {
 		String returnPassword = user.getPassword();
 		
 		if(returnUsername.equals(username) && returnPassword.equals(password)) {
+			
 			request.setAttribute("user", user);
-			getServletContext().getRequestDispatcher("/login/student").forward(request, response);
+			getServletContext().getRequestDispatcher("/login/student?action=" + action).forward(request, response);
 		}
 	}
 }
