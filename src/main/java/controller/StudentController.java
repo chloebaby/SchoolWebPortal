@@ -51,6 +51,14 @@ public class StudentController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String action = request.getParameter("action");
+		
+		
+		if(action.equalsIgnoreCase("delete")) {
+			int studentId = Integer.valueOf(request.getParameter("studentId"));
+			studentService.deleteStudentById(studentId);
+		}
+		
 		request.setAttribute("allStudents", studentService.findAllStudents());
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
