@@ -27,4 +27,9 @@ public class StudentService implements StudentServiceInterface<Student> {
 		daoStudentImplementation.insertStudent(entity);
 		return findAllStudents();
 	}
+	
+	@Override
+	public void deleteStudentById(int studentId) {
+		daoStudentImplementation.deleteStudent(studentId);
+	}
 }
