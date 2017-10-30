@@ -44,7 +44,6 @@ public class StudentController extends HttpServlet{
 		}
 		
 		request.setAttribute("allStudents", allStudents);
-		//getServletContext().getRequestDispatcher("/jsp/homepage.jsp").forward(request, response);
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
 		
@@ -53,7 +52,6 @@ public class StudentController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setAttribute("allStudents", studentService.findAllStudents());
-		//getServletContext().getRequestDispatcher("/jsp/homepage.jsp").forward(request, response);
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
 	}
