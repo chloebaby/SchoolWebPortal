@@ -99,15 +99,15 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 		}
 	}
 	
-	public void deleteStudent(String email) {
-		String deleteStudent = "delete from Students where email = ?";
+	public void deleteStudent(int studentId) {
+		String deleteStudent = "delete from Students where student_id = ?";
 		
 		try(Connection connection = getConnection()){
 			PreparedStatement ps = connection.prepareStatement(deleteStudent);
 			
-			ps.setString(1, email);
+			ps.setInt(1, studentId);
 			
-			ps.executeQuery();
+			ps.executeUpdate();
 			
 			ps.close();
 		}catch(SQLException sqle) {
