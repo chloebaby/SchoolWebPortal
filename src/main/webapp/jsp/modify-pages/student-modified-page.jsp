@@ -38,6 +38,13 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
+                    <input type="hidden" name="studentId" class="form-control" id="studentId" value="${student.studentId}">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
                     <label for="studentFirstName">First Name</label>
                     <input type="text" name="firstName" class="form-control" id="studentFirstName" value="${student.firstName}">
                   </div>
@@ -58,6 +65,7 @@
                 </div>
               </div>
               <button type="submit" name="option" value="update" class="btn btn-primary">Submit</button>
+              <button type="submit" name="option" value="cancel" class="btn btn-danger">Cancel</button>
             </form>
           </div>
         </div>
