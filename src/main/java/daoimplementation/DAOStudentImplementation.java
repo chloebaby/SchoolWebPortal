@@ -46,26 +46,27 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 		return allStudents;
 	}
 	
-	public List<Student> selectById(Object id){
-		List<Student> studentById = new ArrayList<Student>();
+	public Student selectById(int id){
+		//List<Student> studentById = new ArrayList<Student>();
+		Student student = new Student();
 		
 		String selectStudentsById = "select * from Students where student_id = ?";
 		
 		try(Connection connection = getConnection()){
 			PreparedStatement ps = connection.prepareStatement(selectStudentsById);
 			
-			ps.setInt(1, (int)id);
+			ps.setInt(1, id);
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Student student = new Student();
+				//Student student = new Student();
 				student.setStudentId(rs.getInt("student_id"));
 				student.setFirstName(rs.getString("first_name"));
 				student.setLastName(rs.getString("last_name"));
 				student.setEmail(rs.getString("email"));
 				student.setLastModified(rs.getDate("last_modified"));
-				studentById.add(student);
+				//studentById.add(student);
 			}
 			
 			rs.close();
@@ -74,7 +75,7 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 			sqle.printStackTrace();
 		}
 		
-		return studentById;
+		return student;
 	}
 	
 	public void insertStudent(Student student) {
@@ -113,6 +114,13 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
+	}
+	
+	public void updateStudent(Student student) {
+		String updatePerson = "update person set student_id = ?, first_name = ?, last_name = ?, email = ?, last_modified = ? where person_id = " + student.getStudentId();
+		
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
 	}
 	
 }
