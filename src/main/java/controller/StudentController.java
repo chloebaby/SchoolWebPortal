@@ -40,7 +40,10 @@ public class StudentController extends HttpServlet{
 		if(option.equalsIgnoreCase("save")) {
 			allStudents = studentService.saveStudent(student);
 		}else if(option.equalsIgnoreCase("update")) {
-			
+			student.setStudentId(Integer.valueOf(request.getParameter("studentId")));
+			studentService.updateStudent(student);
+		}else if(option.equalsIgnoreCase("cancel")){
+			allStudents = studentService.findAllStudents();
 		}else {
 			allStudents = studentService.findAllStudents();
 		}
@@ -58,14 +61,16 @@ public class StudentController extends HttpServlet{
 		if(action.equalsIgnoreCase("delete")) {
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
 			studentService.deleteStudentById(studentId);
+			request.setAttribute("allStudents", studentService.findAllStudents());
+			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		}else if(action.equalsIgnoreCase("edit")) {
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
 			request.setAttribute("student", studentService.findStudentById(studentId));
 			getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
+		}else {
+			request.setAttribute("allStudents", studentService.findAllStudents());
+			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		}
-		
-		request.setAttribute("allStudents", studentService.findAllStudents());
-		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
 	}
 }
