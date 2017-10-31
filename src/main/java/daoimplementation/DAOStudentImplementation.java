@@ -117,10 +117,26 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 	}
 	
 	public void updateStudent(Student student) {
-		String updatePerson = "update person set student_id = ?, first_name = ?, last_name = ?, email = ?, last_modified = ? where person_id = " + student.getStudentId();
+		String updatePerson = "update Students set first_name = ?, last_name = ?, email = ?, last_modified = ? where student_id = ?" ;
 		
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(updatePerson);
+			
+			ps.setString(1, student.getFirstName());
+			ps.setString(2, student.getLastName());
+			ps.setString(3, student.getEmail());
+			ps.setDate(4, date);
+			ps.setInt(5, student.getStudentId());
+			
+			ps.executeUpdate();
+			ps.close();
+			
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
 	}
 	
 }
