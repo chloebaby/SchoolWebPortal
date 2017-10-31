@@ -67,8 +67,8 @@
 	                      <div class="row">
 	                        <div class="col-sm-6">
 			                      <div class="form-group">
-			                        <label for="studentfirstName">First Name</label>
-			                        <input type="text" name="firstName" class="form-control" id="studentfirstName">
+			                        <label for="studentFirstName">First Name</label>
+			                        <input type="text" name="firstName" class="form-control" id="studentFirstName">
 			                      </div>
 		                      </div>
 		                      <div class="col-sm-6">
@@ -100,6 +100,7 @@
 				                    <th>Student ID</th>
 				                    <th>First Name</th>
 				                    <th>Last Name</th>
+                            <th>Edit</th>
 				                    <th>Delete</th>
 				                    <th>Email</th>
 				                  </tr>
@@ -110,8 +111,8 @@
 					                    <td><c:out value="${student.firstName}"/></td>
 					                    <td><c:out value="${student.lastName}"/></td>
 					                    <td><c:out value="${student.email}"/></td>
+                              <td><a href=<c:url value="/login/student?action=edit&studentId=${student.studentId}"/>>Edit</a></td>
 	                            <td><a href=<c:url value="/login/student?action=delete&studentId=${student.studentId}"/>>Delete</a></td>
-                              <!-- <td><a href=<c:url value="/personDetails?action=edit&personId=${person.id}"/>>Edit</a></td> -->
 					                    <td><a href=<c:url value="/login/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
 					                  </tr>
 				                  </c:forEach>
