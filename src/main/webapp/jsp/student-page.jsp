@@ -46,8 +46,8 @@
             <nav class="nav-sidebar">
               <ul class="nav tabs">
                 <!-- <li class="active"><a href="#tab1" data-toggle="tab">Students</a></li> -->
-                <li class="active"><a href="<c:url value="/login/student"/>">Students</a></li>
-                <li class=""><a href="<c:url value="/login/course"/>">Courses</a></li>
+                <li class="active"><a href="<c:url value="/login/student?action=#"/>">Students</a></li>
+                <li class=""><a href="<c:url value="/login/course?action=#"/>">Courses</a></li>
                 <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
@@ -97,12 +97,12 @@
 			                <table class="table table-hover">
 			                 <thead>
 				                  <tr>
-				                    <th>Student ID</th>
 				                    <th>First Name</th>
 				                    <th>Last Name</th>
-                            <th>Edit</th>
+                            <th>email</th>
+				                    <th>Edit</th>
 				                    <th>Delete</th>
-				                    <th>Email</th>
+				                    <th>Send Email</th>
 				                  </tr>
 			                  </thead>
                         <tbody>
