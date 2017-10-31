@@ -46,8 +46,8 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 		return allCourses;
 	}
 	
-	public List<Course> selectById(Object id){
-		List<Course> courseById = new ArrayList<Course>();
+	public Course selectById(int id){
+		Course course = new Course();
 		
 		String selectCourseById = "select * from Courses where course_id = ?";
 		
@@ -59,16 +59,14 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				Course course = new Course();
 				course.setCourseId(rs.getInt("course_id"));
 				course.setCourseName(rs.getString("course_name"));
-				courseById.add(course);
 			}
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		
-		return courseById;
+		return course;
 	}
 	
 	public void insertCourse(Course course) {
