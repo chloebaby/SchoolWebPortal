@@ -39,6 +39,8 @@ public class StudentController extends HttpServlet{
 		
 		if(option.equalsIgnoreCase("save")) {
 			allStudents = studentService.saveStudent(student);
+		}else if(option.equalsIgnoreCase("update")) {
+			
 		}else {
 			allStudents = studentService.findAllStudents();
 		}
@@ -52,11 +54,14 @@ public class StudentController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String action = request.getParameter("action");
-		
-		
+			
 		if(action.equalsIgnoreCase("delete")) {
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
 			studentService.deleteStudentById(studentId);
+		}else if(action.equalsIgnoreCase("edit")) {
+			int studentId = Integer.valueOf(request.getParameter("studentId"));
+			request.setAttribute("student", studentService.findStudentById(studentId));
+			getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
 		}
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
