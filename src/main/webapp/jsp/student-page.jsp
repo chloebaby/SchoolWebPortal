@@ -45,13 +45,13 @@
         	<div class="col-sm-2">
             <nav class="nav-sidebar">
               <ul class="nav tabs">
-                <!-- <li class="active"><a href="#tab1" data-toggle="tab">Students</a></li> -->
                 <li class="active"><a href="<c:url value="/login/student?action=#"/>">Students</a></li>
                 <li class=""><a href="<c:url value="/login/course?action=#"/>">Courses</a></li>
                 <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
           </div> <!-- /.col-sm-2 -->
+          
           <div class="col-sm-10">
             <div class="tab-content">
               <div class="tab-pane active text-style" id="tab1">
@@ -59,41 +59,47 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <h2>Student Details</h2>
-                    </div>
-                  </div>
+                    </div> <!-- /.col-sm-12 -->
+                  </div> <!-- /.row -->
 	                <div class="row">
 	                  <div class="col-sm-12">
+	                    
 	                    <form action="${pageContext.request.contextPath}/login/student" method="post">
 	                      <div class="row">
 	                        <div class="col-sm-6">
 			                      <div class="form-group">
 			                        <label for="studentFirstName">First Name</label>
 			                        <input type="text" name="firstName" class="form-control" id="studentFirstName">
-			                      </div>
-		                      </div>
+			                      </div> <!-- /.form-group -->
+		                      </div> <!-- /.col-sm-6 -->
 		                      <div class="col-sm-6">
 		                       <div class="form-group">
 		                         <label for="studentLastName">Last Name</label>
 		                         <input type="text" name="lastName" class="form-control" id="studentLastName">
-		                       </div>
-		                      </div>
-	                      </div>
+		                       </div> <!-- /.form-group -->
+		                      </div> <!-- /.col-sm-6 -->
+	                      </div> <!-- /.row -->
+	                      
 	                      <div class="row">
 	                        <div class="col-sm-6">
 	                          <div class="form-group">
 	                            <label for="studentEmail">Email Address</label>
 	                            <input type="email" name="email" class="form-control" id="studentEmail">
-	                          </div>
-	                        </div>
-	                      </div>
+	                          </div> <!-- /.form-group -->
+	                        </div> <!-- /.col-sm-6 -->
+	                      </div> <!-- /.row -->
+	                      
 	                      <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
 	                    </form>
-	                  </div>
-	                </div>
-                </div>
+	                  
+	                  </div> <!-- /.col-sm-12 -->
+	                </div> <!-- /.row -->
+                </div> <!-- /.student-form -->
+                
                 <div class="table-section">
 	                <div class="row">
 		                <div class="col-sm-12">
+			                
 			                <table class="table table-hover">
 			                 <thead>
 				                  <tr>
@@ -117,11 +123,12 @@
 					                  </tr>
 				                  </c:forEach>
 			                  </tbody>
-			                </table>
-		                </div>
-	                </div>
-                </div>
-              </div>
+			                </table> <!-- /.table .table-hover -->
+		                
+		                </div> <!-- /.col-sm-12 -->
+	                </div> <!-- /.row -->
+                </div> <!-- /.table-section -->
+              </div> <!-- /.tab-pane active .text-style -->
             </div> <!-- /.tab-content -->
           </div> <!-- /.col-sm-10 -->
         </div> <!-- /.row -->

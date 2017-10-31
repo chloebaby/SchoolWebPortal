@@ -47,7 +47,6 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 	}
 	
 	public Student selectById(int id){
-		//List<Student> studentById = new ArrayList<Student>();
 		Student student = new Student();
 		
 		String selectStudentsById = "select * from Students where student_id = ?";
@@ -60,13 +59,11 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				//Student student = new Student();
 				student.setStudentId(rs.getInt("student_id"));
 				student.setFirstName(rs.getString("first_name"));
 				student.setLastName(rs.getString("last_name"));
 				student.setEmail(rs.getString("email"));
 				student.setLastModified(rs.getDate("last_modified"));
-				//studentById.add(student);
 			}
 			
 			rs.close();

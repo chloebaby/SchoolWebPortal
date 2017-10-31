@@ -58,9 +58,9 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <h2>Course Details</h2>
-                    </div>
-                  </div>
-                </div>
+                    </div> <!-- /.col-sm-12 -->
+                  </div> <!-- /.row -->
+                </div> <!-- /.course-form -->
               </div> <!-- /.tab-pane .text-style -->
             </div> <!-- /.tab-content -->
           </div> <!-- /.col-sm-10 -->

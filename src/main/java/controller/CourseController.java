@@ -22,7 +22,6 @@ public class CourseController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setAttribute("allCourses", courseService.findAllCourses());
-		//getServletContext().getRequestDispatcher("/jsp/homepage.jsp").forward(request, response);
 		getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 		
 	}

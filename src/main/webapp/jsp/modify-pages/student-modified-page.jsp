@@ -25,10 +25,10 @@
         <div class="row">
           <div class="col-sm-12">
             <h2>Update Student Page</h2>
-          </div>
-        </div>
-      </div>
-    </section>
+          </div> <!-- /.col-sm-12 -->
+        </div> <!-- /.row -->
+      </div> <!-- /.container -->
+    </section> <!-- /.update-student-header -->
     
     <section class="update-student-body">
       <div class="container">
@@ -39,38 +39,38 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <input type="hidden" name="studentId" class="form-control" id="studentId" value="${student.studentId}">
-                  </div>
-                </div>
-              </div>
+                  </div> <!-- /.form-group -->
+                </div> <!-- /.col-sm-6 -->
+              </div> <!--  /.row -->
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="studentFirstName">First Name</label>
                     <input type="text" name="firstName" class="form-control" id="studentFirstName" value="${student.firstName}">
-                  </div>
-                </div>
+                  </div> <!-- /.form-group -->
+                </div> <!-- /.col-sm-6 -->
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="studentLastName">Last Name</label>
                     <input type="text" name="lastName" class="form-control" id="studentLastName" value="${student.lastName}">
-                  </div>
-                </div>
-              </div>
+                  </div> <!-- /.form-group -->
+                </div> <!-- /.col-sm-6 -->
+              </div> <!-- /.row -->
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="studentEmail">Email Address</label>
                     <input type="email" name="email" class="form-control" id="studentEmail" value="${student.email}">
-                  </div> 
-                </div>
-              </div>
+                  </div> <!-- /.form-group --> 
+                </div> <!-- /.col-sm-6 -->
+              </div> <!-- .row -->
               <button type="submit" name="option" value="update" class="btn btn-primary">Submit</button>
               <button type="submit" name="option" value="cancel" class="btn btn-danger">Cancel</button>
             </form>
-          </div>
-        </div>
-      </div>
-    </section>
+          </div> <!-- /.col-sm-12 -->
+        </div> <!-- /.row -->
+      </div> <!-- /.container -->
+    </section> <!-- /.update-student-body -->
     
     
     <!-- Bootstrap core JavaScript
