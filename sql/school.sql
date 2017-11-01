@@ -79,6 +79,8 @@ select * from Courses;
 select * from Semesters;
 select * from Results;
 select * from Person;
+select * from Users;
+select * from UserRole;
 
 drop table Students;
 drop table Courses;
@@ -98,5 +100,11 @@ create table UserRole(
 );
 
 insert into Users values("david.parr", "school1");
+insert into Users values("tomcat", "tomcat");
 insert into UserRole values("david.parr", "admin");
+insert into UserRole values("tomcat" , "admin");
+insert into UserRole values("tomcat", "admin-gui");
+insert into UserRole values("tomcat", "manager-gui");
+insert into UserRole values("tomcat", "programmer");
+insert into UserRole values("tomcat", "service");
 commit;
