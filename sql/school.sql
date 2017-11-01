@@ -84,3 +84,19 @@ drop table Students;
 drop table Courses;
 drop table Semesters;
 drop table Results;
+drop table Users;
+
+create table Users(
+	username varchar(15) not null primary key,
+    password varchar(15) not null
+);
+
+create table UserRole(
+	username varchar(15) not null,
+    rolename varchar(15) not null,
+    primary key(username, rolename)
+);
+
+insert into Users values("david.parr", "school1");
+insert into UserRole values("david.parr", "admin");
+commit;
