@@ -107,4 +107,5 @@ insert into UserRole values("tomcat", "admin-gui");
 insert into UserRole values("tomcat", "manager-gui");
 insert into UserRole values("tomcat", "programmer");
 insert into UserRole values("tomcat", "service");
+insert into UserRole values("tomcat", "student-admin");
 commit;
