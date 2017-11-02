@@ -34,6 +34,8 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 				Course course = new Course();
 				course.setCourseId(rs.getInt("course_id"));
 				course.setCourseName(rs.getString("course_name"));
+				course.setCourseCode(rs.getString("course_code"));
+				allCourses.add(course);
 			}
 			
 			rs.close();
@@ -70,7 +72,7 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 	}
 	
 	public void insertCourse(Course course) {
-		String insertCourse = "insert into Courses(course_id, course_name, last_modified) values (?, ?, ?)";
+		String insertCourse = "insert into Courses(course_id, course_name, course_code, last_modified) values (?, ?, ?, ?)";
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
 		
@@ -79,7 +81,8 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 			
 			ps.setNull(1, java.sql.Types.INTEGER);
 			ps.setString(2, course.getCourseName());
-			ps.setDate(3, date);
+			ps.setString(3, course.getCourseCode());
+			ps.setDate(4, date);
 			
 			ps.executeUpdate();
 			ps.close();
