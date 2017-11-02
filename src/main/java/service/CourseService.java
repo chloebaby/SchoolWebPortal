@@ -20,5 +20,10 @@ public class CourseService implements CourseServiceInterface<Course>{
 	public List<Course> findAllCourses(){
 		return daoSchoolImplementation.select();
 	}
+	
+	public List<Course> saveCourse(Course course){
+		daoCourseImplementation.insertCourse(course);
+		return findAllCourses();
+	}
 
 }
