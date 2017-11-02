@@ -42,6 +42,7 @@ public class StudentController extends HttpServlet{
 		}else if(option.equalsIgnoreCase("update")) {
 			student.setStudentId(Integer.valueOf(request.getParameter("studentId")));
 			studentService.updateStudent(student);
+			allStudents = studentService.findAllStudents();
 		}else if(option.equalsIgnoreCase("cancel")){
 			allStudents = studentService.findAllStudents();
 		}else {
