@@ -19,9 +19,11 @@ create table Students(
 
 create table Courses(
 	course_id		int unsigned not null auto_increment,
+    course_code		varchar(10) not null,
     course_name		varchar(25) not null,
     last_modified	date,
-    constraint crs_crs_id_pk primary key (course_id)
+    constraint crs_crs_id_pk primary key (course_id),
+    constraint crs_course_name_uk unique (course_code)
 );
 
 create table Semesters(
