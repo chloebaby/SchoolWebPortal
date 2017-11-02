@@ -34,7 +34,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <form action="${pageContext.request.contextPath}/login/student" method="post">
+            <form action="${pageContext.request.contextPath}/school/student" method="post">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">

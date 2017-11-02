@@ -45,8 +45,8 @@
         	<div class="col-sm-2">
             <nav class="nav-sidebar">
               <ul class="nav tabs">
-                <li class="active"><a href="<c:url value="/login/student?action=#"/>">Students</a></li>
-                <li class=""><a href="<c:url value="/login/course?action=#"/>">Courses</a></li>
+                <li class="active"><a href="<c:url value="/school/student?action=#"/>">Students</a></li>
+                <li class=""><a href="<c:url value="/school/course?action=#"/>">Courses</a></li>
                 <li class=""><a href="#tab3" data-toggle="tab">Results</a></li>
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
@@ -64,7 +64,7 @@
 	                <div class="row">
 	                  <div class="col-sm-12">
 	                    
-	                    <form action="${pageContext.request.contextPath}/login/student" method="post">
+	                    <form action="${pageContext.request.contextPath}/school/student" method="post">
 	                      <div class="row">
 	                        <div class="col-sm-6">
 			                      <div class="form-group">
@@ -117,9 +117,9 @@
 					                    <td><c:out value="${student.firstName}"/></td>
 					                    <td><c:out value="${student.lastName}"/></td>
 					                    <td><c:out value="${student.email}"/></td>
-                              <td><a href=<c:url value="/login/student?action=edit&studentId=${student.studentId}"/>>Edit</a></td>
-	                            <td><a href=<c:url value="/login/student?action=delete&studentId=${student.studentId}"/>>Delete</a></td>
-					                    <td><a href=<c:url value="/login/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
+                              <td><a href=<c:url value="/school/student?action=edit&studentId=${student.studentId}"/>>Edit</a></td>
+	                            <td><a href=<c:url value="/school/student?action=delete&studentId=${student.studentId}"/>>Delete</a></td>
+					                    <td><a href=<c:url value="/school/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
 					                  </tr>
 				                  </c:forEach>
 			                  </tbody>
