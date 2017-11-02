@@ -58,7 +58,7 @@
       <url-pattern>/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
-      <role-name>student-admin</role-name>
+      <role-name>school-admin</role-name>
     </auth-constraint>
   </security-constraint>
   <security-constraint>

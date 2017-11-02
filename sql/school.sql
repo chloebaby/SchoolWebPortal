@@ -82,11 +82,11 @@ select * from Person;
 select * from Users;
 select * from UserRole;
 
-drop table Students;
-drop table Courses;
-drop table Semesters;
-drop table Results;
-drop table Users;
+#drop table Students;
+#drop table Courses;
+#drop table Semesters;
+#drop table Results;
+#drop table Users;
 
 create table Users(
 	username varchar(15) not null primary key,
@@ -107,5 +107,5 @@ insert into UserRole values("tomcat", "admin-gui");
 insert into UserRole values("tomcat", "manager-gui");
 insert into UserRole values("tomcat", "programmer");
 insert into UserRole values("tomcat", "service");
-insert into UserRole values("tomcat", "student-admin");
+insert into UserRole values("tomcat", "school-admin");
 commit;
