@@ -12,14 +12,6 @@
   </welcome-file-list>
   
   <servlet>
-    <servlet-name>PersonController</servlet-name>
-    <servlet-class>controller.PersonController</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>UserLoginController</servlet-name>
-    <servlet-class>controller.UserLoginController</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>StudentController</servlet-name>
     <servlet-class>controller.StudentController</servlet-class>
   </servlet>
@@ -32,14 +24,6 @@
     <servlet-class>controller.EmailController</servlet-class>
   </servlet>
   
-  <servlet-mapping>
-    <servlet-name>PersonController</servlet-name>
-    <url-pattern>/personDetails</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UserLoginController</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>StudentController</servlet-name>
     <url-pattern>/school/student</url-pattern>
