@@ -60,6 +60,60 @@
                       <h2>Course Details</h2>
                     </div> <!-- /.col-sm-12 -->
                   </div> <!-- /.row -->
+                  <div class="row">
+                    <div class="col-sm-12">
+                      
+                      <form action="${pageContext.request.contextPath}/school/course" method="post">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for=courseCode">Course Code</label>
+                              <input type="text" name="courseCode" class="form-control" id="courseCode">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="courseName">Course Name</label>
+                              <input type="text" name="courseName" class="form-control" id="courseName">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                      </form>
+                      
+                      <div class="table-section">
+                        <div class="row">
+                          <div class="col-sm-12">
+                          
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Course Code</th>
+                                  <th>Course Name</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <c:forEach var="course" items="${allCourses}">
+                                  <tr>
+	                                  <td><c:out value="${course.courseCode}" /></td>
+	                                  <td><c:out value="${course.courseName}"/></td>
+                                  </tr>
+                                </c:forEach>
+                              </tbody>
+                            </table>
+                          
+                          </div>
+                        </div>
+                      </div>
+                    
+                    </div>
+                  </div>
                 </div> <!-- /.course-form -->
               </div> <!-- /.tab-pane .text-style -->
             </div> <!-- /.tab-content -->
