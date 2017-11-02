@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,28 @@ public class CourseController extends HttpServlet{
 	public CourseController() {
 		super();
 		courseService = new CourseService();
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String option = request.getParameter("option");
+		String courseName = request.getParameter("courseName");
+		String courseCode = request.getParameter("courseCode");
+		
+		Course course = new Course();
+		course.setCourseName(courseName);
+		course.setCourseCode(courseCode);
+		
+		List<Course> allCourses = new ArrayList<Course>();
+		
+		if(option.equalsIgnoreCase("save")) {
+			allCourses = courseService.saveCourse(course);
+		}else {
+			allCourses = courseService.findAllCourses();
+		}
+		
+		request.setAttribute("allCourses", allCourses);
+		getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 	}
 	
 	@Override
