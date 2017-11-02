@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Course {
 	private int courseId;
 	private String courseName;
+	private String courseCode;
 	private Date lastModified;
 	
 	public Course() {}
@@ -23,6 +24,14 @@ public class Course {
 	
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+	
+	public String getCourseCode() {
+		return courseCode;
+	}
+	
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
 	}
 	
 	public Date getLastModified() {
