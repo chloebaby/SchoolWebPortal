@@ -33,7 +33,7 @@
         </div> <!-- ./navbar-header -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><c:out value="${user.firstName}"/>&nbsp;<c:out value="${user.lastName}" /></a></li>
+            <li><a href="#"><c:out value="${user}"/>/></a></li>
           </ul> <!-- /.nav .navbar-nav .navbar-right -->
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->
