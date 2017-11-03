@@ -53,29 +53,6 @@ create table Results(
     constraint rslt_marks_ck check (marks >= 0 and marks <= 100)
 );
 
-create table Users(
-	user_id			int unsigned not null auto_increment,
-    user_name		varchar(20) not null,
-    first_name		varchar(25) not null,
-    last_name		varchar(25) not null,
-    user_password	varchar(10) not null,
-    email			varchar(100) not null,
-    last_modified	date,
-    constraint user_user_id_pk primary key (user_id),
-    constraint user_user_username_uk unique (user_name)
-);
-
-insert into Users(user_id, user_name, first_name, last_name, user_password, email, last_modified)
-values (null, "david.parr", "David", "Parr", "school1", "david.parr@hotmail.ca", current_date());
-select * from Users;
-
-insert into Students(student_id, first_name, last_name, email, last_modified)
-values (null, "David", "Parr", "david.parr@hotmail.ca", current_date());
-insert into Students(student_id, first_name, last_name, email, last_modified)
-values (null, "Morty", "Smith", "morty.smith@hotmail.ca", current_date());
-insert into Students(student_id, first_name, last_name, email, last_modified)
-values (null, "Rick", "Sanchez", "rick.sanchez@hotmail.ca", current_date());
-
 select * from Students;
 select * from Courses;
 select * from Semesters;
