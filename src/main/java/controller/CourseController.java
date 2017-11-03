@@ -45,8 +45,14 @@ public class CourseController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String action = request.getParameter("action");
+		
+		if(action.equalsIgnoreCase("delete")) {
+			int courseId = Integer.valueOf(request.getParameter("courseId"));
+			courseService.deleteCourseById(courseId);
+		}
+		
 		request.setAttribute("allCourses", courseService.findAllCourses());
 		getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
-		
 	}
 }
