@@ -24,18 +24,17 @@ public class CourseController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String option = request.getParameter("option");
-		int courseId = Integer.valueOf(request.getParameter("courseId"));
 		String courseName = request.getParameter("courseName");
 		String courseCode = request.getParameter("courseCode");
 		
 		Course course = new Course();
-		course.setCourseId(courseId);
 		course.setCourseName(courseName);
 		course.setCourseCode(courseCode);
 		
 		if(option.equalsIgnoreCase("save")) {
 			courseService.saveCourse(course);
 		}else if(option.equalsIgnoreCase("update")) {
+			course.setCourseId(Integer.valueOf(request.getParameter("courseId")));
 			courseService.updateCourse(course);
 		}
 		
