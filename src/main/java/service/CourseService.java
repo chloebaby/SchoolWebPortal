@@ -9,7 +9,7 @@ import daoimplementation.DAOStudentImplementation;
 import model.Course;
 
 public class CourseService implements CourseServiceInterface<Course>{
-	private SchoolDAO daoSchoolImplementation;
+	private SchoolDAO<Course> daoSchoolImplementation;
 	private CourseDAO daoCourseImplementation;
 	
 	public CourseService() {
@@ -21,13 +21,20 @@ public class CourseService implements CourseServiceInterface<Course>{
 		return daoSchoolImplementation.select();
 	}
 	
-	public List<Course> saveCourse(Course course){
+	public void saveCourse(Course course){
 		daoCourseImplementation.insertCourse(course);
-		return findAllCourses();
 	}
 	
 	public void deleteCourseById(int courseId) {
 		daoCourseImplementation.deleteCourse(courseId);
+	}
+	
+	public Course findCourseById(int courseId) {
+		return daoSchoolImplementation.selectById(courseId);
+	}
+	
+	public void updateCourse(Course course) {
+		daoCourseImplementation.updateCourse(course);
 	}
 
 }
