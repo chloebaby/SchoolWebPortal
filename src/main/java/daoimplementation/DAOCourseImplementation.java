@@ -90,4 +90,20 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 			sqle.printStackTrace();
 		}
 	}
+	
+	public void deleteCourse(int courseId) {
+		String deleteCourse = "delete from Courses where course_id = ?";
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(deleteCourse);
+			
+			ps.setInt(1, courseId);
+			
+			ps.executeUpdate();
+			ps.close();
+			
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
 }
