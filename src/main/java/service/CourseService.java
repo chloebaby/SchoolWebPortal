@@ -25,5 +25,9 @@ public class CourseService implements CourseServiceInterface<Course>{
 		daoCourseImplementation.insertCourse(course);
 		return findAllCourses();
 	}
+	
+	public void deleteCourseById(int courseId) {
+		daoCourseImplementation.deleteCourse(courseId);
+	}
 
 }
