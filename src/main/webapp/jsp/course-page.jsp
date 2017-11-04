@@ -103,6 +103,8 @@
                                   <tr>
 	                                  <td><c:out value="${course.courseCode}" /></td>
 	                                  <td><c:out value="${course.courseName}"/></td>
+                                    <td><a href=<c:url value="/school/course?action=edit&courseId=${course.courseId}"/>>Edit</a></td>
+                                    <td><a href=<c:url value="/school/course?action=delete&courseId=${course.courseId}"/>>Delete</a></td>
                                   </tr>
                                 </c:forEach>
                               </tbody>
