@@ -62,8 +62,10 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 			
 			while(rs.next()) {
 				course.setCourseId(rs.getInt("course_id"));
+				course.setCourseCode(rs.getString("course_code"));
 				course.setCourseName(rs.getString("course_name"));
 			}
+			
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
@@ -98,6 +100,27 @@ public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<
 			PreparedStatement ps = connection.prepareStatement(deleteCourse);
 			
 			ps.setInt(1, courseId);
+			
+			ps.executeUpdate();
+			ps.close();
+			
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void updateCourse(Course course) {
+		String updateCourse = "update Courses set course_name = ?, course_code = ?, last_modified = ? where course_id = ?";
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(updateCourse);
+			
+			ps.setString(1, course.getCourseName());
+			ps.setString(2, course.getCourseCode());
+			ps.setDate(3, date);
+			ps.setInt(4, course.getCourseId());
 			
 			ps.executeUpdate();
 			ps.close();
