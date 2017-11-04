@@ -24,22 +24,22 @@ public class CourseController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String option = request.getParameter("option");
+		int courseId = Integer.valueOf(request.getParameter("courseId"));
 		String courseName = request.getParameter("courseName");
 		String courseCode = request.getParameter("courseCode");
 		
 		Course course = new Course();
+		course.setCourseId(courseId);
 		course.setCourseName(courseName);
 		course.setCourseCode(courseCode);
 		
-		List<Course> allCourses = new ArrayList<Course>();
-		
 		if(option.equalsIgnoreCase("save")) {
-			allCourses = courseService.saveCourse(course);
-		}else {
-			allCourses = courseService.findAllCourses();
+			courseService.saveCourse(course);
+		}else if(option.equalsIgnoreCase("update")) {
+			courseService.updateCourse(course);
 		}
 		
-		request.setAttribute("allCourses", allCourses);
+		request.setAttribute("allCourses", courseService.findAllCourses());
 		getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 	}
 	
@@ -50,9 +50,15 @@ public class CourseController extends HttpServlet{
 		if(action.equalsIgnoreCase("delete")) {
 			int courseId = Integer.valueOf(request.getParameter("courseId"));
 			courseService.deleteCourseById(courseId);
+			request.setAttribute("allCourses", courseService.findAllCourses());
+			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
+		}else if(action.equalsIgnoreCase("edit")) {
+			int courseId = Integer.valueOf(request.getParameter("courseId"));
+			request.setAttribute("course", courseService.findCourseById(courseId));
+			getServletContext().getRequestDispatcher("/jsp/modify-pages/course-modified-page.jsp").forward(request, response);
+		}else {
+			request.setAttribute("allCourses", courseService.findAllCourses());
+			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 		}
-		
-		request.setAttribute("allCourses", courseService.findAllCourses());
-		getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 	}
 }
