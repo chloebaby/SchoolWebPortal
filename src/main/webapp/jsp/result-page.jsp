@@ -51,18 +51,46 @@
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
           </div> <!-- /.col-sm-2 -->
+          
           <div class="col-sm-10">
             <div class="tab-content">
               <div class="tab-pane text-style" id="tab3">
-                <h2>Stet clita</h2>
-                <p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
-                  iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla 
-                  facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit 
-                  augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,</p>
-                  <hr>
-                  <div class="col-xs-6 col-md-3">
-                    <img src="http://placehold.it/150x150" class="img-rounded pull-right">
+              
+                <div class="result-form">
+                  
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h2>Results Details</h2>
+                    </div> <!-- /.col-sm-12 -->
+                  </div> <!-- /.row -->
+                  
+                  <div class="row">
+                    <div class="col-sm-12">
+                      
+                      <form action="${pageContext.request.contextPath}/school/result" method="post">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      
+                    </div> <!-- /.col-sm-12 -->
+                  </div> <!-- /.row -->
+                
+                </div> <!-- /.result-form -->
+                
+                <div class="table-section">
+                  <div class="row">
+                    <div class="col-sm-12">
+                    
+                    </div>
+                  </div>
                 </div>
+                
+                
               </div> <!-- /.tab-pane .text-style -->
             </div> <!-- /.tab-content -->
           </div> <!-- /.col-sm-10 -->
