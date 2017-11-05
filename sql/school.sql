@@ -60,23 +60,26 @@ select * from Results;
 select * from Person;
 select * from Users;
 select * from UserRole;
+select * from Roles;
 
 #drop table Students;
 #drop table Courses;
 #drop table Semesters;
 #drop table Results;
 #drop table Users;
+#drop table UserRole;
+#drop table Roles;
 
-create table Users(
-	username varchar(15) not null primary key,
-    password varchar(15) not null
-);
+#create table Users(
+#	username varchar(15) not null primary key,
+#    password varchar(15) not null
+#);
 
-create table UserRole(
-	username varchar(15) not null,
-    rolename varchar(15) not null,
-    primary key(username, rolename)
-);
+#create table UserRole(
+#	username varchar(15) not null,
+#    rolename varchar(15) not null,
+#    primary key(username, rolename)
+#);
 
 insert into Users values("david.parr", "school1");
 insert into Users values("tomcat", "tomcat");
@@ -87,4 +90,41 @@ insert into UserRole values("tomcat", "manager-gui");
 insert into UserRole values("tomcat", "programmer");
 insert into UserRole values("tomcat", "service");
 insert into UserRole values("tomcat", "school-admin");
+commit;
+
+
+create table Users(
+	user_id		int unsigned not null auto_increment,
+    username 	varchar(15) not null,
+    password	varchar(15) not null,
+    constraint 	usr_usr_id_username_pk primary key (user_id, username),
+    constraint 	usr_username_uk unique (username)
+);
+
+create table UserRole(
+	userrole_id		int unsigned not null auto_increment,
+    username		varchar(15) not null,
+    rolename		varchar(15) not null,
+    constraint		usrr_usrr_id_username_rolename_pk primary key(userrole_id, username, rolename),
+    constraint		usrr_username_uk unique (username)
+);
+
+create table Roles(
+	role_id 	int unsigned not null auto_increment,
+    rolename	varchar(15) not null,
+    constraint	rol_rol_id_pk primary key(role_id),
+    constraint	rol_rolname_uk unique (rolename)
+);
+
+insert into Users values(null, "david.parr", "school1");
+insert into Users values(null, "tomcat", "tomcat");
+
+insert into UserRole values(null, "david.parr", "admin");
+insert into UserRole values(null, "tomcat", "school-admin");
+
+update UserRole set rolename="school-admin" where username="tomcat";
+
+insert into Roles values(null, "admin");
+insert into Roles values(null, "student");
+insert into Roles values(null, "school-admin");
 commit;
