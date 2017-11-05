@@ -9,12 +9,15 @@ drop table Person;
 
 create table Students(
 	student_id		int unsigned not null auto_increment,
+    user_id			int unsigned not null,
+    role_id			int unsigned not null,
     first_name		varchar(25) not null,
     last_name		varchar(25) not null,
-    email			varchar(100),
+    email			varchar(100) not null,
     last_modified 	date,
     constraint std_std_id_pk primary key (student_id),
-    constraint std_email_uk unique (email)
+    constraint std_user_id_fk foreign key (user_id) references Users (user_id),
+    constraint std_role_id_fk foreign key (role_id) references Roles (role_id)
 );
 
 create table Courses(
@@ -62,13 +65,13 @@ select * from Users;
 select * from UserRole;
 select * from Roles;
 
-#drop table Students;
-#drop table Courses;
-#drop table Semesters;
-#drop table Results;
-#drop table Users;
-#drop table UserRole;
-#drop table Roles;
+drop table Students;
+drop table Courses;
+drop table Semesters;
+drop table Results;
+drop table Users;
+drop table UserRole;
+drop table Roles;
 
 #create table Users(
 #	username varchar(15) not null primary key,
@@ -81,16 +84,16 @@ select * from Roles;
 #    primary key(username, rolename)
 #);
 
-insert into Users values("david.parr", "school1");
-insert into Users values("tomcat", "tomcat");
-insert into UserRole values("david.parr", "admin");
-insert into UserRole values("tomcat" , "admin");
-insert into UserRole values("tomcat", "admin-gui");
-insert into UserRole values("tomcat", "manager-gui");
-insert into UserRole values("tomcat", "programmer");
-insert into UserRole values("tomcat", "service");
-insert into UserRole values("tomcat", "school-admin");
-commit;
+#insert into Users values("david.parr", "school1");
+#insert into Users values("tomcat", "tomcat");
+#insert into UserRole values("david.parr", "admin");
+#insert into UserRole values("tomcat" , "admin");
+#insert into UserRole values("tomcat", "admin-gui");
+#insert into UserRole values("tomcat", "manager-gui");
+#insert into UserRole values("tomcat", "programmer");
+#insert into UserRole values("tomcat", "service");
+#insert into UserRole values("tomcat", "school-admin");
+#commit;
 
 
 create table Users(
@@ -101,6 +104,9 @@ create table Users(
     constraint 	usr_username_uk unique (username)
 );
 
+insert into Users values(null, "david.parr", "school1");
+insert into Users values(null, "tomcat", "tomcat");
+
 create table UserRole(
 	userrole_id		int unsigned not null auto_increment,
     username		varchar(15) not null,
@@ -109,6 +115,9 @@ create table UserRole(
     constraint		usrr_username_uk unique (username)
 );
 
+insert into UserRole values(null, "david.parr", "admin");
+insert into UserRole values(null, "tomcat", "school-admin");
+
 create table Roles(
 	role_id 	int unsigned not null auto_increment,
     rolename	varchar(15) not null,
@@ -116,15 +125,9 @@ create table Roles(
     constraint	rol_rolname_uk unique (rolename)
 );
 
-insert into Users values(null, "david.parr", "school1");
-insert into Users values(null, "tomcat", "tomcat");
-
-insert into UserRole values(null, "david.parr", "admin");
-insert into UserRole values(null, "tomcat", "school-admin");
-
-update UserRole set rolename="school-admin" where username="tomcat";
-
 insert into Roles values(null, "admin");
 insert into Roles values(null, "student");
 insert into Roles values(null, "school-admin");
 commit;
+
+
