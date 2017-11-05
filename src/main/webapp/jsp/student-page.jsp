@@ -87,10 +87,42 @@
 	                            <input type="email" name="email" class="form-control" id="studentEmail">
 	                          </div> <!-- /.form-group -->
 	                        </div> <!-- /.col-sm-6 -->
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="username">User Name</label>
+                              <input type="text" name="username" class="form-control" id="username">
+                            </div> <!-- /.form-group -->
+                          </div> <!-- /.col-sm-6 -->
 	                      </div> <!-- /.row -->
-	                      
-	                      <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
-	                    </form>
+                        
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="sel1">Role</label>
+                              <select name="rolename" class="form-control" id="sel1">
+                                <c:forEach var="role" items="${allRoles}">
+                                  <option>
+                                    <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
+                                  </option>
+                                </c:forEach>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="password">Password</label>
+                              <input type="password" name="password" class="form-control" id="password">
+                            </div>
+                          </div>
+                      </div>
+                        
+                      <div class="row">
+                         <div class="col-sm-12">
+                           <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
+                         </div>
+                      </div>
+	                    
+                      </form>
 	                  
 	                  </div> <!-- /.col-sm-12 -->
 	                </div> <!-- /.row -->
@@ -105,6 +137,8 @@
 				                  <tr>
 				                    <th>First Name</th>
 				                    <th>Last Name</th>
+                            <th>User Name</th>
+                            <th>Role Name</th>
                             <th>email</th>
 				                    <th>Edit</th>
 				                    <th>Delete</th>
@@ -116,9 +150,11 @@
 					                  <tr>
 					                    <td><c:out value="${student.firstName}"/></td>
 					                    <td><c:out value="${student.lastName}"/></td>
+                              <td><c:out value="${student.username}"/></td>
+                              <td><c:out value="${student.rolename }"/></td>
 					                    <td><c:out value="${student.email}"/></td>
-                              <td><a href=<c:url value="/school/student?action=edit&studentId=${student.studentId}"/>>Edit</a></td>
-	                            <td><a href=<c:url value="/school/student?action=delete&studentId=${student.studentId}"/>>Delete</a></td>
+                              <td><a href=<c:url value="/school/student?action=edit&studentId=${student.studentId}&userId=${student.userId}&roleId=${student.roleId}"/>>Edit</a></td>
+	                            <td><a href=<c:url value="/school/student?action=delete&studentId=${student.studentId}&userId=${student.userId}&roleId=${student.roleId}"/>>Delete</a></td>
 					                    <td><a href=<c:url value="/school/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
 					                  </tr>
 				                  </c:forEach>
