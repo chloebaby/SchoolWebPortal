@@ -1,11 +1,47 @@
-create schema School;
+#create schema School;
 
-create table Person(
-	person_id	int,
-    person_name varchar(25)
+#create table Person(
+#	person_id	int,
+#    person_name varchar(25)
+#);
+
+#drop table Person;
+
+create table Users(
+	user_id			int unsigned not null auto_increment,
+    username 		varchar(15) not null,
+    password		varchar(15) not null,
+    last_modified	date,
+    constraint 	usr_usr_id_username_pk primary key (user_id, username),
+    constraint 	usr_username_uk unique (username)
 );
 
-drop table Person;
+insert into Users values(null, "david.parr", "school1", curdate());
+insert into Users values(null, "tomcat", "tomcat", curdate());
+
+create table UserRoles(
+	userrole_id		int unsigned not null auto_increment,
+    username		varchar(15) not null,
+    rolename		varchar(15) not null,
+    last_modified	date,
+    constraint		usrr_usrr_id_username_rolename_pk primary key(userrole_id, username, rolename),
+    constraint		usrr_username_uk unique (username)
+);
+
+insert into UserRoles values(null, "david.parr", "admin", curdate());
+insert into UserRoles values(null, "tomcat", "school-admin", curdate());
+
+create table Roles(
+	role_id 		int unsigned not null auto_increment,
+    rolename		varchar(15) not null,
+    last_modified	date,
+    constraint	rol_rol_id_pk primary key(role_id),
+    constraint	rol_rolname_uk unique (rolename)
+);
+
+insert into Roles values(null, "admin", curdate());
+insert into Roles values(null, "student", curdate());
+insert into Roles values(null, "school-admin", curdate());
 
 create table Students(
 	student_id		int unsigned not null auto_increment,
@@ -32,14 +68,16 @@ create table Courses(
 create table Semesters(
 	semester_id		int unsigned not null,
     semester		varchar(10) not null,
+    last_modified	date,
     constraint sem_sem_id_pk primary key (semester_id),
     constraint sem_sem_id_ck check (semester_id >= 1 and semester_id <= 4)
 );
 
-insert into Semesters (semester_id, semester) values (1, "Summer");
-insert into Semesters (semester_id, semester) values (2, "Fall");
-insert into Semesters (semester_id, semester) values (3, "Winter");
-insert into Semesters (semester_id, semester) values (4, "Spring");
+
+insert into Semesters values (1, "Summer", curdate());
+insert into Semesters values (2, "Fall", curdate());
+insert into Semesters values (3, "Winter", curdate());
+insert into Semesters values (4, "Spring", curdate());
 
 
 create table Results(
@@ -56,78 +94,22 @@ create table Results(
     constraint rslt_marks_ck check (marks >= 0 and marks <= 100)
 );
 
-select * from Students;
-select * from Courses;
-select * from Semesters;
-select * from Results;
-select * from Person;
-select * from Users;
-select * from UserRole;
-select * from Roles;
+#drop table Results;
+#drop table Semesters;
+#drop table Courses;
+#drop table Students;
+#drop table Users;
+#drop table Roles;
+#drop table UserRoles;
 
-drop table Students;
-drop table Courses;
-drop table Semesters;
-drop table Results;
-drop table Users;
-drop table UserRole;
-drop table Roles;
-
-#create table Users(
-#	username varchar(15) not null primary key,
-#    password varchar(15) not null
-#);
-
-#create table UserRole(
-#	username varchar(15) not null,
-#    rolename varchar(15) not null,
-#    primary key(username, rolename)
-#);
-
-#insert into Users values("david.parr", "school1");
-#insert into Users values("tomcat", "tomcat");
-#insert into UserRole values("david.parr", "admin");
-#insert into UserRole values("tomcat" , "admin");
-#insert into UserRole values("tomcat", "admin-gui");
-#insert into UserRole values("tomcat", "manager-gui");
-#insert into UserRole values("tomcat", "programmer");
-#insert into UserRole values("tomcat", "service");
-#insert into UserRole values("tomcat", "school-admin");
-#commit;
-
-
-create table Users(
-	user_id		int unsigned not null auto_increment,
-    username 	varchar(15) not null,
-    password	varchar(15) not null,
-    constraint 	usr_usr_id_username_pk primary key (user_id, username),
-    constraint 	usr_username_uk unique (username)
-);
-
-insert into Users values(null, "david.parr", "school1");
-insert into Users values(null, "tomcat", "tomcat");
-
-create table UserRole(
-	userrole_id		int unsigned not null auto_increment,
-    username		varchar(15) not null,
-    rolename		varchar(15) not null,
-    constraint		usrr_usrr_id_username_rolename_pk primary key(userrole_id, username, rolename),
-    constraint		usrr_username_uk unique (username)
-);
-
-insert into UserRole values(null, "david.parr", "admin");
-insert into UserRole values(null, "tomcat", "school-admin");
-
-create table Roles(
-	role_id 	int unsigned not null auto_increment,
-    rolename	varchar(15) not null,
-    constraint	rol_rol_id_pk primary key(role_id),
-    constraint	rol_rolname_uk unique (rolename)
-);
-
-insert into Roles values(null, "admin");
-insert into Roles values(null, "student");
-insert into Roles values(null, "school-admin");
 commit;
 
+create view studentview as
+select std.student_id, usr.username, std.user_id, std.role_id, usr.password, rol.rolename, std.first_name, std.last_name, std.email 
+from Students std join Users usr
+on std.user_id = usr.user_id
+join Roles rol
+on std.role_id = rol.role_id;
+
+select * from studentview;
 
