@@ -45,9 +45,9 @@
         	<div class="col-sm-2">
             <nav class="nav-sidebar">
               <ul class="nav tabs">
-                <li class=""><a href="<c:url value="/login/student"/>" data-toggle="tab">Students</a></li>
-                <li class=""><a href="<c:url value="/login/course"/>" data-toggle="tab">Courses</a></li>
-                <li class="active"><a href="#tab3" data-toggle="tab">Results</a></li>
+                <li class=""><a href="<c:url value="/school/student?action=#"/>">Students</a></li>
+                <li class=""><a href="<c:url value="/school/course?action=#"/>">Courses</a></li>
+                <li class="active"><a href="<c:url value="/school/result?action=#"/>">Results</a></li>
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
           </div> <!-- /.col-sm-2 -->
