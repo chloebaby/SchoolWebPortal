@@ -58,4 +58,19 @@ public class DAOUserImplementation extends SQLConnection implements UserDAO{
 		
 		return userId;
 	}
+	
+	public void deleteUserById(int userId) {
+		String deleteUserById = "delete from Users where user_id = ?";
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(deleteUserById);
+			
+			ps.setInt(1, userId);
+			
+			ps.executeUpdate();
+			ps.close();
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
 }
