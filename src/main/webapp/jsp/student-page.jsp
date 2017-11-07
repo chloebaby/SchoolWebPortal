@@ -154,7 +154,7 @@
                               <td><c:out value="${student.rolename }"/></td>
 					                    <td><c:out value="${student.email}"/></td>
                               <td><a href=<c:url value="/school/student?action=edit&studentId=${student.studentId}&userId=${student.userId}&roleId=${student.roleId}"/>>Edit</a></td>
-	                            <td><a href=<c:url value="/school/student?action=delete&studentId=${student.studentId}&userId=${student.userId}&roleId=${student.roleId}"/>>Delete</a></td>
+	                            <td><a href=<c:url value="/school/student?action=delete&studentId=${student.studentId}&userId=${student.userId}&username=${student.username}"/>>Delete</a></td>
 					                    <td><a href=<c:url value="/school/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
 					                  </tr>
 				                  </c:forEach>
