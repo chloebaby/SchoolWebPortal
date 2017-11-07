@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Role;
 import model.Student;
+import model.User;
+import model.UserRole;
 import service.RoleService;
 import service.RoleServiceInterface;
 import service.StudentService;
@@ -18,8 +20,9 @@ import service.StudentServiceInterface;
 
 @SuppressWarnings("serial")
 public class StudentController extends HttpServlet{
-	private StudentServiceInterface<Student> studentService;
+	private StudentServiceInterface<Student, User, UserRole> studentService;
 	private RoleServiceInterface roleService;
+	private String action;
 	
 	public StudentController(){
 		super();
@@ -42,31 +45,34 @@ public class StudentController extends HttpServlet{
 		String roleName = roleDetails[1];
 		
 		Student student = new Student();
+		User user = new User();
+		UserRole userRole = new UserRole();
+		
 		student.setFirstName(firstName);
 		student.setLastName(lastName);
 		student.setEmail(email);
 		student.setRoleId(roleId);
-		student.setRolename(roleName);
-		student.setUsername(username);
-		student.setPassword(password);
 		
-		//TODO: need to insert the new student into the database
+		user.setPassword(password);
+		user.setUsername(username);
+		
+		userRole.setRolename(roleName);
+		userRole.setUsername(username);
+		
 		
 		List<Student> allStudents = new ArrayList<Student>();
 		
 		if(option.equalsIgnoreCase("save")) {
-			allStudents = studentService.saveStudent(student);
+			studentService.saveStudent(student, user, userRole);
+			allStudents = studentService.findAllStudents();
 		}else if(option.equalsIgnoreCase("update")) {
 			student.setStudentId(Integer.valueOf(request.getParameter("studentId")));
 			studentService.updateStudent(student);
 			allStudents = studentService.findAllStudents();
-		}else if(option.equalsIgnoreCase("cancel")){
-			allStudents = studentService.findAllStudents();
-		}else {
-			allStudents = studentService.findAllStudents();
 		}
 		
-		request.setAttribute("allStudents", allStudents);
+		request.setAttribute("allStudents", studentService.findAllStudents());
+		request.setAttribute("allRoles", roleService.findAllRoles());
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
 		
