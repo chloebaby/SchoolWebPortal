@@ -18,11 +18,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Student;
+import model.User;
+import model.UserRole;
 import service.StudentService;
 import service.StudentServiceInterface;
 
 public class EmailController extends HttpServlet{
-	private StudentServiceInterface<Student> studentService;
+	private StudentServiceInterface<Student, User, UserRole> studentService;
 	
 	public EmailController(){
 		super();
