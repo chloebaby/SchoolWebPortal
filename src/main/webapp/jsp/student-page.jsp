@@ -105,22 +105,22 @@
                                     <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
                                   </option>
                                 </c:forEach>
-                              </select>
-                            </div>
-                          </div>
+                              </select> <!-- /.form-control -->
+                            </div> <!-- /.form-group -->
+                          </div> <!-- /.col-sm-6 -->
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="password">Password</label>
                               <input type="password" name="password" class="form-control" id="password">
-                            </div>
-                          </div>
-                      </div>
+                            </div> <!-- /.form-group -->
+                          </div> <!-- /.col-sm-6 -->
+                        </div> <!-- /.row -->
                         
-                      <div class="row">
-                         <div class="col-sm-12">
-                           <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
-                         </div>
-                      </div>
+                        <div class="row">
+                           <div class="col-sm-12">
+                             <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
+                           </div> <!-- /.col-sm-12 -->
+                        </div> <!-- /.row -->
 	                    
                       </form>
 	                  
