@@ -84,7 +84,9 @@ public class StudentController extends HttpServlet{
 			
 		if(action.equalsIgnoreCase("delete")) {
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
-			studentService.deleteStudentById(studentId);
+			int userId = Integer.valueOf(request.getParameter("userId"));
+			String username = request.getParameter("username");
+			studentService.deleteStudentById(studentId, userId, username);
 			request.setAttribute("allStudents", studentService.findAllStudents());
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
