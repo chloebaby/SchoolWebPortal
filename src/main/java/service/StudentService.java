@@ -43,8 +43,10 @@ public class StudentService implements StudentServiceInterface<Student, User, Us
 	}
 	
 	@Override
-	public void deleteStudentById(int studentId) {
+	public void deleteStudentById(int studentId, int userId, String username) {
 		daoStudentImplementation.deleteStudent(studentId);
+		doaUserImplementation.deleteUserById(userId);
+		daoUserRoleImplementation.deletUserRoleByUsername(username);
 	}
 	
 	@Override
