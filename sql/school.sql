@@ -102,6 +102,10 @@ create table Results(
 #drop table Roles;
 #drop table UserRoles;
 
+select * from Students;
+select * from Users;
+select * from UserRoles;
+
 commit;
 
 create view studentview as
