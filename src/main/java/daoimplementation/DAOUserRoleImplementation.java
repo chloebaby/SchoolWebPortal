@@ -34,4 +34,19 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 			sqle.printStackTrace();
 		}
 	}
+	
+	public void deletUserRoleByUsername(String username) {
+		String deleteUserRoleByUsername = "delete from UserRoles where username like ?";
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(deleteUserRoleByUsername);
+			
+			ps.setString(1, username);
+			
+			ps.executeUpdate();
+			ps.close();
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
 }
