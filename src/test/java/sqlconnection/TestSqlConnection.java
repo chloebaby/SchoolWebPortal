@@ -21,20 +21,12 @@ public class TestSqlConnection extends TestCase {
 	protected void tearDown() {
 	}
 	
-	public void testConnectionIsOpen() {
-		try {
-			assertFalse(connection.isClosed());
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
+	public void testConnectionIsOpen() throws Throwable {
+		assertFalse(connection.isClosed());
 	}
 	
-	public void testConnectionIsClosed() {
-		try {
-			connection.close();
-			assertTrue(connection.isClosed());
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
+	public void testConnectionIsClosed() throws Throwable {
+		connection.close();
+		assertTrue(connection.isClosed());
 	}
 }
