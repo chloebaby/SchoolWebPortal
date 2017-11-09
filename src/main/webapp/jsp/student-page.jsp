@@ -37,6 +37,7 @@
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><c:out value="${user}"/></a></li>
+            <li><a href="<c:url value="/logout.jsp"/>">Sign Out</a></li>
           </ul> <!-- /.nav .navbar-nav .navbar-right -->
         </div> <!-- /.navbar-collapse -->
       </div> <!-- /.container-fluid -->

@@ -53,6 +53,7 @@
       <url-pattern>/img/*</url-pattern>
       <url-pattern>/js/*</url-pattern>
       <url-pattern>/fonts/*</url-pattern>
+      <url-pattern>/logout.jsp</url-pattern>
     </web-resource-collection>
   </security-constraint>
   
