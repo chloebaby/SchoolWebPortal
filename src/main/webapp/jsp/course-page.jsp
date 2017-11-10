@@ -68,7 +68,7 @@
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for=courseCode">Course Code</label>
+                              <label for="courseCode">Course Code</label>
                               <input type="text" name="courseCode" class="form-control" id="courseCode">
                             </div>
                           </div>

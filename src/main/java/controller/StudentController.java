@@ -22,7 +22,6 @@ import service.StudentServiceInterface;
 public class StudentController extends HttpServlet{
 	private StudentServiceInterface<Student, User, UserRole> studentService;
 	private RoleServiceInterface roleService;
-	private String action;
 	
 	public StudentController(){
 		super();
@@ -59,16 +58,11 @@ public class StudentController extends HttpServlet{
 		userRole.setRolename(roleName);
 		userRole.setUsername(username);
 		
-		
-		List<Student> allStudents = new ArrayList<Student>();
-		
 		if(option.equalsIgnoreCase("save")) {
 			studentService.saveStudent(student, user, userRole);
-			allStudents = studentService.findAllStudents();
 		}else if(option.equalsIgnoreCase("update")) {
 			student.setStudentId(Integer.valueOf(request.getParameter("studentId")));
 			studentService.updateStudent(student);
-			allStudents = studentService.findAllStudents();
 		}
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
