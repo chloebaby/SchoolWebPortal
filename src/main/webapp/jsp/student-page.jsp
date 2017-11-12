@@ -103,7 +103,7 @@
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="sel1">Role</label>
-                              <select name="studentRolename" class="form-control" id="sel1">
+                              <select name="rolename" class="form-control" id="sel1">
                                 <c:forEach var="role" items="${allRoles}">
                                   <option>
                                     <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
