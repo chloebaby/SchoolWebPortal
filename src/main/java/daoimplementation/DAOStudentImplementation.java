@@ -54,7 +54,7 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 	public Student selectById(int id){
 		Student student = new Student();
 		
-		String selectStudentsById = "select * from Students where student_id = ?";
+		String selectStudentsById = "select * from studentview where student_id = ?";
 		
 		try(Connection connection = getConnection()){
 			PreparedStatement ps = connection.prepareStatement(selectStudentsById);
@@ -65,10 +65,14 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 			
 			while(rs.next()) {
 				student.setStudentId(rs.getInt("student_id"));
+				student.setUsername(rs.getString("username"));
+				student.setUserId(rs.getInt("user_id"));
+				student.setRoleId(rs.getInt("role_id"));
+				student.setPassword(rs.getString("password"));
+				student.setRolename(rs.getString("rolename"));
 				student.setFirstName(rs.getString("first_name"));
 				student.setLastName(rs.getString("last_name"));
 				student.setEmail(rs.getString("email"));
-				student.setLastModified(rs.getDate("last_modified"));
 			}
 			
 			rs.close();
@@ -121,7 +125,7 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 	}
 	
 	public void updateStudent(Student student) {
-		String updatePerson = "update Students set first_name = ?, last_name = ?, email = ?, last_modified = ? where student_id = ?";
+		String updatePerson = "update Students set first_name = ?, last_name = ?, email = ?, role_id = ?, last_modified = ? where student_id = ?";
 		
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
@@ -132,8 +136,9 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 			ps.setString(1, student.getFirstName());
 			ps.setString(2, student.getLastName());
 			ps.setString(3, student.getEmail());
-			ps.setDate(4, date);
-			ps.setInt(5, student.getStudentId());
+			ps.setInt(4, student.getRoleId());
+			ps.setDate(5, date);
+			ps.setInt(6, student.getStudentId());
 			
 			ps.executeUpdate();
 			ps.close();
