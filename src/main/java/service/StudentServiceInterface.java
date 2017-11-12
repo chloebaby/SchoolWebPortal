@@ -7,5 +7,5 @@ public interface StudentServiceInterface<T, U, V> {
 	public void saveStudent(T entity1, U entity2, V entity3);
 	public void deleteStudentById(int studentId, int userId, String username);
 	public T findStudentById(int studentId);
-	public void updateStudent(T entity);
+	public void updateStudent(T entity1, U entity2, V entity3);
 }
