@@ -17,6 +17,9 @@
     <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/css/sidebar-stylesheet.css" />" rel="stylesheet">
     <link href="<c:url value="/css/course-stylesheet.css" />" rel="stylesheet">
+    
+    <script src="<c:url value="/js/course-page.js" />"></script>
+    
   </head>
   <body>
     
@@ -34,7 +37,7 @@
         <div class="update-course-form">
           <div class="row">
             <div class="col-sm-12">
-              <form action="${pageContext.request.contextPath}/school/course" method="post">
+              <form action="${pageContext.request.contextPath}/school/course" onsubmit="return validateCourseForm()" method="post">
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="form-group">
