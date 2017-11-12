@@ -62,13 +62,12 @@ public class StudentController extends HttpServlet{
 			studentService.saveStudent(student, user, userRole);
 		}else if(option.equalsIgnoreCase("update")) {
 			student.setStudentId(Integer.valueOf(request.getParameter("studentId")));
-			studentService.updateStudent(student);
+			studentService.updateStudent(student, user, userRole);
 		}
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
 		request.setAttribute("allRoles", roleService.findAllRoles());
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
-		
 		
 	}
 	
@@ -87,6 +86,7 @@ public class StudentController extends HttpServlet{
 		}else if(action.equalsIgnoreCase("edit")) {
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
 			request.setAttribute("student", studentService.findStudentById(studentId));
+			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
 		}else {
 			request.setAttribute("allStudents", studentService.findAllStudents());
