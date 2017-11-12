@@ -73,4 +73,23 @@ public class DAOUserImplementation extends SQLConnection implements UserDAO{
 			sqle.printStackTrace();
 		}
 	}
+	
+	public void updateUser(User user) {
+		String updateUser = "update Users set username = ?, password = ?, last_modified = ? where user_id = ?";
+		
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(updateUser);
+			
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+			ps.setDate(3, date);
+			ps.setInt(4, user.getUserId());
+			
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
 }
