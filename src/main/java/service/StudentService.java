@@ -46,7 +46,7 @@ public class StudentService implements StudentServiceInterface<Student, User, Us
 	public void deleteStudentById(int studentId, int userId, String username) {
 		daoStudentImplementation.deleteStudent(studentId);
 		doaUserImplementation.deleteUserById(userId);
-		daoUserRoleImplementation.deletUserRoleByUsername(username);
+		daoUserRoleImplementation.deleteUserRoleByUsername(username);
 	}
 	
 	@Override
@@ -55,7 +55,9 @@ public class StudentService implements StudentServiceInterface<Student, User, Us
 	}
 	
 	@Override
-	public void updateStudent(Student entity) {
-		daoStudentImplementation.updateStudent(entity);
+	public void updateStudent(Student student, User user, UserRole userRole) {
+		daoStudentImplementation.updateStudent(student);
+		doaUserImplementation.updateUser(user);
+		daoUserRoleImplementation.updateUserRole(userRole);
 	}
 }
