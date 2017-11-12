@@ -35,7 +35,7 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 		}
 	}
 	
-	public void deletUserRoleByUsername(String username) {
+	public void deleteUserRoleByUsername(String username) {
 		String deleteUserRoleByUsername = "delete from UserRoles where username like ?";
 		
 		try(Connection connection = getConnection()){
@@ -45,6 +45,26 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 			
 			ps.executeUpdate();
 			ps.close();
+		}catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void updateUserRole(UserRole userRole) {
+		String updateUserRole = "update UserRoles set rolename = ?, last_modified = ? where username like ?";
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
+		
+		try(Connection connection = getConnection()){
+			PreparedStatement ps = connection.prepareStatement(updateUserRole);
+			
+			ps.setString(1, userRole.getRolename());
+			ps.setDate(2, date);
+			ps.setString(3, userRole.getUsername());
+			
+			ps.executeUpdate();
+			ps.close();
+			
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
