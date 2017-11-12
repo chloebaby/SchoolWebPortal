@@ -63,9 +63,49 @@
                     <input type="email" name="email" class="form-control" id="studentEmail" value="${student.email}">
                   </div> <!-- /.form-group --> 
                 </div> <!-- /.col-sm-6 -->
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="studentUsername">User Name</label>
+                    <input type="text" name="username" class="form-control" id="studentUsername" value="${student.username}" disabled>
+                    <input type="hidden" name="username" class="form-control" id="studentUsername" value="${student.username}">
+                  </div> <!-- /.form-group -->
+                </div> <!-- /.col-sm-6 -->
               </div> <!-- .row -->
-              <button type="submit" name="option" value="update" class="btn btn-primary">Submit</button>
-              <button type="submit" name="option" value="cancel" class="btn btn-danger">Cancel</button>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="sel1">Role</label>
+                    <select name="rolename" class="form-control" id="sel1">
+                      <c:forEach var="role" items="${allRoles}">
+                        <c:choose>
+                          <c:when test="${role.rolename eq student.rolename}">
+                            <option selected>
+                              <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
+                            </option>
+                          </c:when>
+                          <c:otherwise>
+                            <option>
+                              <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
+                            </option>
+                          </c:otherwise>
+                        </c:choose>
+                      </c:forEach>
+                    </select> <!-- /.form-control -->
+                  </div> <!-- /.form-group -->
+                </div> <!-- /.col-sm-6 -->
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="studentPassword">Password</label>
+                    <input type="password" name="password" class="form-control" id="studentPassword" value="${student.password}">
+                  </div> <!-- /.form-group -->
+                </div> <!-- /.col-sm-6 -->
+              </div> <!-- /.row -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <button type="submit" name="option" value="update" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="option" value="cancel" class="btn btn-danger">Cancel</button>
+                </div>
+              </div>
             </form>
           </div> <!-- /.col-sm-12 -->
         </div> <!-- /.row -->
