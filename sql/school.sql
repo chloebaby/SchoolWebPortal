@@ -105,6 +105,7 @@ create table Results(
 select * from Students;
 select * from Users;
 select * from UserRoles;
+select * from Roles;
 
 commit;
 
@@ -114,6 +115,8 @@ from Students std join Users usr
 on std.user_id = usr.user_id
 join Roles rol
 on std.role_id = rol.role_id;
+
+
 
 select * from studentview;
 
