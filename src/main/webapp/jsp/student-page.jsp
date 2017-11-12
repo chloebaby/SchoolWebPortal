@@ -93,8 +93,8 @@
 	                        </div> <!-- /.col-sm-6 -->
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="username">User Name</label>
-                              <input type="text" name="username" class="form-control" id="username">
+                              <label for="studentUsername">User Name</label>
+                              <input type="text" name="username" class="form-control" id="studentUsername">
                             </div> <!-- /.form-group -->
                           </div> <!-- /.col-sm-6 -->
 	                      </div> <!-- /.row -->
@@ -103,7 +103,7 @@
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="sel1">Role</label>
-                              <select name="rolename" class="form-control" id="sel1">
+                              <select name="studentRolename" class="form-control" id="sel1">
                                 <c:forEach var="role" items="${allRoles}">
                                   <option>
                                     <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
@@ -114,8 +114,8 @@
                           </div> <!-- /.col-sm-6 -->
                           <div class="col-sm-6">
                             <div class="form-group">
-                              <label for="password">Password</label>
-                              <input type="password" name="password" class="form-control" id="password">
+                              <label for="studentPassword">Password</label>
+                              <input type="password" name="password" class="form-control" id="studentPassword">
                             </div> <!-- /.form-group -->
                           </div> <!-- /.col-sm-6 -->
                         </div> <!-- /.row -->

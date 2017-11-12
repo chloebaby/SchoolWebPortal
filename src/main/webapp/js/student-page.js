@@ -4,8 +4,8 @@ function validateStudentForm(){
 	var studentFirstName = document.getElementById("studentFirstName").value;
 	var studentLastName = document.getElementById("studentLastName").value;
 	var studentEmail = document.getElementById("studentEmail").value;
-	var username = document.getElementById("username").value;
-	var password = document.getElementById("password").value;
+	var username = document.getElementById("studentUsername").value;
+	var password = document.getElementById("studentPassword").value;
 	
 	if(studentFirstName == "" || studentLastName == "" || studentEmail == "" || username == "" || password == ""){
 		alert("Enter in all required fields");
