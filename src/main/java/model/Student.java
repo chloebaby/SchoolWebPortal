@@ -2,40 +2,50 @@ package model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "STUDENTS")
 public class Student {
+	
+	@Id
+	@Column(name = "student_id")
 	private int studentId;
-	private int userId;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	@Column(name = "role_id")
 	private int roleId;
-	private String password;
-	private String username;
-	private String rolename;
+	
+	@Column(name = "first_name")
 	private String firstName;
+	
+	@Column(name = "last_name")
 	private String lastName;
+	
+	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "last_modified")
 	private Date lastModified;
 	
 	public Student() {}
 	
 
-	public String getPassword() {
-		return password;
+	public User getUser() {
+		return user;
 	}
 
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-
-	public int getUserId() {
-		return userId;
-	}
-
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
 
 	public int getRoleId() {
 		return roleId;
@@ -44,23 +54,6 @@ public class Student {
 
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
-	}
-
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getRolename() {
-		return rolename;
-	}
-
-	public void setRolename(String rolename) {
-		this.rolename = rolename;
 	}
 	
 	public int getStudentId() {
