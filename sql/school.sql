@@ -9,3 +9,14 @@ on std.role_id = rol.role_id;
 
 select * from studentview;
 
+select * from Person;
+
+drop table Person;
+
+create table Person(
+	person_id		int,
+    first_name		varchar(15),
+    last_name		varchar(15),
+    salary			int
+);
+
