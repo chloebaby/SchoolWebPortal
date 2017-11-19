@@ -1,56 +1,49 @@
 package daoimplementation;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import dao.SchoolDAO;
+import org.hibernate.query.Query;
+
 import dao.StudentDAO;
 import sqlconnection.SQLConnection;
 import model.Student;
 
-public class DAOStudentImplementation extends SQLConnection implements SchoolDAO<Student>, StudentDAO {
-
+public class DAOStudentImplementation extends SQLConnection implements StudentDAO {
+	
 	public DAOStudentImplementation() {
 		super();
 	}
 	
 	public List<Student> select(){
-		List<Student> allStudents = new ArrayList<Student>();
 		
-		String selectAllStudents = "select * from studentview";
+		Query query = getCurrentSession().createQuery("FROM Students");
+		List<Student> allStudents = query.list();
 		
-		try(Connection connection = getConnection()){
-			PreparedStatement ps = connection.prepareStatement(selectAllStudents);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				Student student = new Student();
-				student.setStudentId(rs.getInt("student_id"));
-				student.setUsername(rs.getString("username"));
-				student.setUserId(rs.getInt("user_id"));
-				student.setRoleId(rs.getInt("role_id"));
-				student.setPassword(rs.getString("password"));
-				student.setRolename(rs.getString("rolename"));
-				student.setFirstName(rs.getString("first_name"));
-				student.setLastName(rs.getString("last_name"));
-				student.setEmail(rs.getString("email"));
-				allStudents.add(student);
-			}
-			
-			rs.close();
-			ps.close();
-			
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
 		return allStudents;
 	}
 	
+	public void openSession() {
+		openCurrentSession();
+	}
+	
+	public void openTransaction() {
+		openCurrentTransaction();
+	}
+	
+	public void closeSession() {
+		closeCurrentSession();
+	}
+	
+	public void closeTransaction() {
+		closeCurrentSession();
+		commitTransaction();
+	}
+	
+	public void close() {
+		closeSessionFactory();
+	}
+	
+/*	
 	public Student selectById(int id){
 		Student student = new Student();
 		
@@ -146,6 +139,6 @@ public class DAOStudentImplementation extends SQLConnection implements SchoolDAO
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
-	}
+	}*/
 	
 }
