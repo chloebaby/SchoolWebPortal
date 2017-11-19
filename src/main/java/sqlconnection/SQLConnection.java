@@ -4,32 +4,51 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import util.HibernateUtil;
+
 public class SQLConnection {
-	private Connection connection = null;
-	private String url;
-	private String username;
-	private String password;
+	private Session currentSession;
+	private Transaction currentTransaction;
+	private static SessionFactory sessionFactory;
 	
-	public SQLConnection() {
-		url = "jdbc:mysql://localhost:3306/School";
-		username = "schooluser";
-		password = "mysql";
+	protected void openCurrentSession() {
+		currentSession = SQLConnection.getSessionFactory().openSession();
 	}
 	
-	public Connection getConnection() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection(url, username, password);
-			connection.setAutoCommit(true);
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}catch(ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
-		}
-		
-		return connection;
+	protected void openCurrentTransaction() {
+		currentTransaction = currentSession.beginTransaction();
 	}
 	
+	protected Session getCurrentSession() {
+		return currentSession;
+	}
+	
+	protected Transaction getCurrentTransaction() {
+		return currentTransaction;
+	}
+	
+	protected void closeCurrentSession() {
+		currentSession.close();
+	}
+	
+	protected void commitTransaction() {
+		currentTransaction.commit();
+	}
+	
+	protected void closeSessionFactory() {
+		sessionFactory.close();
+	}
+	
+	
+	private static SessionFactory getSessionFactory() {
+		sessionFactory = HibernateUtil.getSessionFactory();
+		return sessionFactory;
+	}
 	/*
 	public void closeConnection() {
 		if(connection != null) {
