@@ -20,7 +20,7 @@ import service.StudentServiceInterface;
 
 @SuppressWarnings("serial")
 public class StudentController extends HttpServlet{
-	private StudentServiceInterface<Student, User, UserRole> studentService;
+	private StudentServiceInterface studentService;
 	private RoleServiceInterface roleService;
 	
 	public StudentController(){
@@ -66,6 +66,7 @@ public class StudentController extends HttpServlet{
 		}
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
+		studentService.close();
 		request.setAttribute("allRoles", roleService.findAllRoles());
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
@@ -81,6 +82,7 @@ public class StudentController extends HttpServlet{
 			String username = request.getParameter("username");
 			studentService.deleteStudentById(studentId, userId, username);
 			request.setAttribute("allStudents", studentService.findAllStudents());
+			studentService.close();
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		}else if(action.equalsIgnoreCase("edit")) {
@@ -90,6 +92,7 @@ public class StudentController extends HttpServlet{
 			getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
 		}else {
 			request.setAttribute("allStudents", studentService.findAllStudents());
+			studentService.close();
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		}
