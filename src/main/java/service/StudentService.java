@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+
 import dao.SchoolDAO;
 import dao.StudentDAO;
 import dao.UserDAO;
@@ -13,26 +15,33 @@ import model.Student;
 import model.User;
 import model.UserRole;
 
-public class StudentService implements StudentServiceInterface<Student, User, UserRole> {
-	private SchoolDAO<Student> daoSchoolImplementation;
+public class StudentService implements StudentServiceInterface{
+	//private SchoolDAO<Student> daoSchoolImplementation;
 	private StudentDAO daoStudentImplementation;
-	private UserDAO doaUserImplementation;
-	private UserRoleDAO daoUserRoleImplementation;
-	
+	//private UserDAO doaUserImplementation;
+	//private UserRoleDAO daoUserRoleImplementation;
 	
 	public StudentService() {
-		daoSchoolImplementation = new DAOStudentImplementation();
+		//daoSchoolImplementation = new DAOStudentImplementation();
 		daoStudentImplementation = new DAOStudentImplementation();
-		doaUserImplementation = new DAOUserImplementation();
-		daoUserRoleImplementation = new DAOUserRoleImplementation();
+		//doaUserImplementation = new DAOUserImplementation();
+		//daoUserRoleImplementation = new DAOUserRoleImplementation();
 	}
 	
 	@Override
 	public List<Student> findAllStudents(){
-		return daoSchoolImplementation.select();
+		daoStudentImplementation.openSession();
+		List<Student> allStudents = daoStudentImplementation.select();
+		daoStudentImplementation.closeSession();
+		return allStudents;
 	}
 	
 	@Override
+	public void close() {
+		daoStudentImplementation.close();
+	}
+	
+/*	@Override
 	public void saveStudent(Student student, User user, UserRole userRole){
 		doaUserImplementation.insertUser(user);
 		daoUserRoleImplementation.insertUserRole(userRole);
@@ -59,5 +68,5 @@ public class StudentService implements StudentServiceInterface<Student, User, Us
 		daoStudentImplementation.updateStudent(student);
 		doaUserImplementation.updateUser(user);
 		daoUserRoleImplementation.updateUserRole(userRole);
-	}
+	}*/
 }
