@@ -1,8 +1,25 @@
 package model;
 
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ROLES")
 public class Role {
+	
+	@Id
+	@Column(name = "role_id")
 	private int roleId;
+	
+	@Column(name = "role_name")
 	private String rolename;
+	
+	@Column(name = "last_modified")
+	private Date lastModified;
 	
 	public Role() {}
 	
