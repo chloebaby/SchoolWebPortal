@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,6 +20,9 @@ public class User {
 	
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "last_modified")
+	private Date lastModified;
 	
 	public User() {}
 	
@@ -43,6 +48,14 @@ public class User {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
 	}
 	
 }
