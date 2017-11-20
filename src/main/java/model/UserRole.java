@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,6 +19,9 @@ public class UserRole {
 	
 	@Column(name = "rolename")
 	private String rolename;
+	
+	@Column(name = "last_modified")
+	private Date lastModified;
 	
 	public UserRole() {}
 	
@@ -42,5 +47,13 @@ public class UserRole {
 	
 	public void setRolename(String rolename) {
 		this.rolename = rolename;
+	}
+
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
 	}
 }
