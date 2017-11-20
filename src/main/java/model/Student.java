@@ -21,8 +21,9 @@ public class Student {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@Column(name = "role_id")
-	private int roleId;
+	@OneToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -46,16 +47,17 @@ public class Student {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public int getRoleId() {
-		return roleId;
-	}
-
-
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
 	
+	public Role getRole() {
+		return role;
+	}
+
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+
 	public int getStudentId() {
 		return studentId;
 	}
