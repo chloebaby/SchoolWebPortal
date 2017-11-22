@@ -23,6 +23,14 @@ public class DAOStudentImplementation extends SQLConnection implements StudentDA
 		return allStudents;
 	}
 	
+	public void insertStudent(Student student){
+		openCurrentSession();
+		openCurrentTransaction();
+		getCurrentSession().save(student);
+		commitTransaction();
+		closeCurrentSession();
+	}
+	
 /*	
 	public Student selectById(int id){
 		Student student = new Student();
