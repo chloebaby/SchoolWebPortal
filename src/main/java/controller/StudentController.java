@@ -76,7 +76,7 @@ public class StudentController extends HttpServlet{
 		String action = request.getParameter("action");
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
-		//request.setAttribute("allRoles", roleService.findAllRoles());
+		request.setAttribute("allRoles", roleService.findAllRoles());
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
 			
