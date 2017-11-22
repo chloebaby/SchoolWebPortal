@@ -21,6 +21,6 @@
     <mapping class="model.User" />
     <mapping class="model.Student" />
     <mapping class="model.UserRole" />
-    <mapping class="mode.Role" />
+    <mapping class="model.Role" />
   </session-factory>
 </hibernate-configuration>
