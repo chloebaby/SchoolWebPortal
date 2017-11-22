@@ -66,7 +66,6 @@ public class StudentController extends HttpServlet{
 		}
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
-		studentService.close();
 		request.setAttribute("allRoles", roleService.findAllRoles());
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		
@@ -75,14 +74,18 @@ public class StudentController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String action = request.getParameter("action");
+		
+		request.setAttribute("allStudents", studentService.findAllStudents());
+		//request.setAttribute("allRoles", roleService.findAllRoles());
+		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
+		
 			
-		if(action.equalsIgnoreCase("delete")) {
+/*		if(action.equalsIgnoreCase("delete")) {
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
 			int userId = Integer.valueOf(request.getParameter("userId"));
 			String username = request.getParameter("username");
 			studentService.deleteStudentById(studentId, userId, username);
 			request.setAttribute("allStudents", studentService.findAllStudents());
-			studentService.close();
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		}else if(action.equalsIgnoreCase("edit")) {
@@ -92,10 +95,9 @@ public class StudentController extends HttpServlet{
 			getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
 		}else {
 			request.setAttribute("allStudents", studentService.findAllStudents());
-			studentService.close();
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
-		}
+		}*/
 		
 	}
 }
