@@ -16,7 +16,7 @@ public class DAOStudentImplementation extends SQLConnection implements StudentDA
 	
 	public List<Student> select(){
 		openCurrentSession();
-		Query query = getCurrentSession().createQuery("FROM Students");
+		Query query = getCurrentSession().createQuery("FROM Student");
 		List<Student> allStudents = query.list();
 		closeCurrentSession();
 		
