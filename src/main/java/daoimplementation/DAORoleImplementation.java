@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.query.Query;
+
 import dao.RoleDAO;
 import model.Role;
+import model.Student;
 import sqlconnection.SQLConnection;
 
 public class DAORoleImplementation extends SQLConnection implements RoleDAO {
@@ -18,25 +21,10 @@ public class DAORoleImplementation extends SQLConnection implements RoleDAO {
 	}
 	
 	public List<Role> selectRoles(){
-		List<Role> allRoles = new ArrayList<Role>();
-		
-		String selectAllRoles = "select * from Roles";
-		
-		try(Connection connection = getConnection()){
-			PreparedStatement ps = connection.prepareStatement(selectAllRoles);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				Role role = new Role();
-				role.setRoleId(rs.getInt("role_id"));
-				role.setRolename(rs.getString("rolename"));
-				allRoles.add(role);
-			}
-			
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
+		openCurrentSession();
+		Query query = getCurrentSession().createQuery("FROM Role");
+		List<Role> allRoles = query.list();
+		closeCurrentSession();
 		
 		return allRoles;
 	}
