@@ -44,20 +44,8 @@ public class SQLConnection {
 		sessionFactory.close();
 	}
 	
-	
 	private static SessionFactory getSessionFactory() {
 		sessionFactory = HibernateUtil.getSessionFactory();
 		return sessionFactory;
 	}
-	/*
-	public void closeConnection() {
-		if(connection != null) {
-			try {
-				connection.close();
-			}catch(SQLException sqle) {
-				sqle.printStackTrace();
-			}
-		}
-	}
-	*/
 }
