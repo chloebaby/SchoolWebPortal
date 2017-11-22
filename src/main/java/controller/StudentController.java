@@ -59,7 +59,7 @@ public class StudentController extends HttpServlet{
 		userRole.setUsername(username);
 		
 		if(option.equalsIgnoreCase("save")) {
-			studentService.saveStudent(student, user, userRole);
+			studentService.saveStudent(student);
 		}else if(option.equalsIgnoreCase("update")) {
 			student.setStudentId(Integer.valueOf(request.getParameter("studentId")));
 			studentService.updateStudent(student, user, userRole);
