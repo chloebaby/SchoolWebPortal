@@ -15,32 +15,12 @@ public class DAOStudentImplementation extends SQLConnection implements StudentDA
 	}
 	
 	public List<Student> select(){
-		
+		openCurrentSession();
 		Query query = getCurrentSession().createQuery("FROM Students");
 		List<Student> allStudents = query.list();
+		closeCurrentSession();
 		
 		return allStudents;
-	}
-	
-	public void openSession() {
-		openCurrentSession();
-	}
-	
-	public void openTransaction() {
-		openCurrentTransaction();
-	}
-	
-	public void closeSession() {
-		closeCurrentSession();
-	}
-	
-	public void closeTransaction() {
-		closeCurrentSession();
-		commitTransaction();
-	}
-	
-	public void close() {
-		closeSessionFactory();
 	}
 	
 /*	
