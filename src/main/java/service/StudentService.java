@@ -34,6 +34,11 @@ public class StudentService implements StudentServiceInterface{
 		return allStudents;
 	}
 	
+	@Override
+	public void saveStudent(Student student) {
+		daoStudentImplementation.insertStudent(student);
+	}
+	
 /*	@Override
 	public void saveStudent(Student student, User user, UserRole userRole){
 		doaUserImplementation.insertUser(user);
