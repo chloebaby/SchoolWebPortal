@@ -30,15 +30,8 @@ public class StudentService implements StudentServiceInterface{
 	
 	@Override
 	public List<Student> findAllStudents(){
-		daoStudentImplementation.openSession();
 		List<Student> allStudents = daoStudentImplementation.select();
-		daoStudentImplementation.closeSession();
 		return allStudents;
-	}
-	
-	@Override
-	public void close() {
-		daoStudentImplementation.close();
 	}
 	
 /*	@Override
