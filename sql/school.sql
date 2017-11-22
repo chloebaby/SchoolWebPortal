@@ -20,3 +20,7 @@ create table Person(
     salary			int
 );
 
+select * from users;
+select * from userroles;
+select * from roles;
+
