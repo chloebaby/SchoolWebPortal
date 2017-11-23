@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,16 +18,20 @@ import service.RoleService;
 import service.RoleServiceInterface;
 import service.StudentService;
 import service.StudentServiceInterface;
+import service.UserRoleService;
+import service.UserRoleServiceInterface;
 
 @SuppressWarnings("serial")
 public class StudentController extends HttpServlet{
 	private StudentServiceInterface studentService;
 	private RoleServiceInterface roleService;
+	private UserRoleServiceInterface userRoleService;
 	
 	public StudentController(){
 		super();
 		studentService = new StudentService();
 		roleService = new RoleService();
+		userRoleService = new UserRoleService();
 	}
 	
 	@Override
@@ -35,34 +40,48 @@ public class StudentController extends HttpServlet{
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
-		String role = request.getParameter("rolename");
+		String roleReq = request.getParameter("rolename");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		String[] roleDetails = role.split(Character.toString((char)194) + Character.toString((char)160));
-		int roleId = Integer.valueOf(roleDetails[0]);
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
+		
+		String[] roleDetails = roleReq.split(Character.toString((char)194) + Character.toString((char)160));
+		UUID roleId = UUID.fromString(roleDetails[0]);
 		String roleName = roleDetails[1];
 		
 		Student student = new Student();
 		User user = new User();
 		UserRole userRole = new UserRole();
+		Role role = new Role();
+		
+		role.setRolename(roleName);
+		role.setRoleId(roleId);
+		
+		user.setPassword(password);
+		user.setUsername(username);
+		user.setLastModified(date);
+		
+		userRole.setRolename(roleName);
+		userRole.setUsername(username);
+		userRole.setLastModified(date);
 		
 		student.setFirstName(firstName);
 		student.setLastName(lastName);
 		student.setEmail(email);
-		student.setRoleId(roleId);
+		student.setUser(user);
+		student.setRole(role);
+		student.setLastModified(date);
 		
-		user.setPassword(password);
-		user.setUsername(username);
-		
-		userRole.setRolename(roleName);
-		userRole.setUsername(username);
 		
 		if(option.equalsIgnoreCase("save")) {
 			studentService.saveStudent(student);
+			userRoleService.saveUserRole(userRole);
+			
 		}else if(option.equalsIgnoreCase("update")) {
-			student.setStudentId(Integer.valueOf(request.getParameter("studentId")));
-			studentService.updateStudent(student, user, userRole);
+			//student.setStudentId(UUID.fromString(request.getParameter("studentId")));
+			//studentService.updateStudent(student, user, userRole);
 		}
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
