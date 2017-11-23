@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,14 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "ROLES")
 public class Role {
 	
 	@Id
-	@GeneratedValue
-	@Column(name = "role_id")
-	private int roleId;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "role_id", updatable = false, nullable = false)
+	private UUID roleId;
 	
 	@Column(name = "role_name", length = 15)
 	private String rolename;
@@ -25,11 +29,11 @@ public class Role {
 	
 	public Role() {}
 	
-	public int getRoleId() {
+	public UUID getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(int roleId) {
+	public void setRoleId(UUID roleId) {
 		this.roleId = roleId;
 	}
 	

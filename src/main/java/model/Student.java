@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +12,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "STUDENTS")
 public class Student {
 	
 	@Id
-	@GeneratedValue
-	@Column(name = "student_id")
-	private int studentId;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "student_id", updatable = false, nullable = false)
+	private UUID studentId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -61,11 +65,11 @@ public class Student {
 	}
 
 
-	public int getStudentId() {
+	public UUID getStudentId() {
 		return studentId;
 	}
 	
-	public void setStudentId(int studentId) {
+	public void setStudentId(UUID studentId) {
 		this.studentId = studentId;
 	}
 	
