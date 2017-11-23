@@ -15,6 +15,14 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 	}
 	
 	public void insertUserRole(UserRole userRole) {
+		openCurrentSession();
+		openCurrentTransaction();
+		getCurrentSession().save(userRole);
+		commitTransaction();
+		closeCurrentSession();
+	}
+	
+/*	public void insertUserRole(UserRole userRole) {
 		String insertUserRole = "insert into UserRoles (userrole_id, username, rolename, last_modified) values (?, ?, ?, ?)";
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
@@ -68,5 +76,5 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
-	}
+	}*/
 }
