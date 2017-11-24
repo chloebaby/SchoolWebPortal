@@ -154,11 +154,11 @@
 					                  <tr>
 					                    <td><c:out value="${student.firstName}"/></td>
 					                    <td><c:out value="${student.lastName}"/></td>
-                              <td><c:out value="${student.username}"/></td>
-                              <td><c:out value="${student.rolename }"/></td>
+                              <td><c:out value="${student.user.username}"/></td>
+                              <td><c:out value="${student.role.rolename }"/></td>
 					                    <td><c:out value="${student.email}"/></td>
                               <td><a href=<c:url value="/school/student?action=edit&studentId=${student.studentId}"/>>Edit</a></td>
-	                            <td><a onclick="return confirmStudentDelete()" href=<c:url value="/school/student?action=delete&studentId=${student.studentId}&userId=${student.userId}&username=${student.username}"/>>Delete</a></td>
+	                            <td><a onclick="return confirmStudentDelete()" href=<c:url value="/school/student?action=delete&studentId=${student.studentId}&userId=${student.user.userId}&username=${student.user.username}"/>>Delete</a></td>
 					                    <td><a href=<c:url value="/school/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
 					                  </tr>
 				                  </c:forEach>
