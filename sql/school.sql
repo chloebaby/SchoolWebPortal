@@ -20,7 +20,14 @@ create table Person(
     salary			int
 );
 
+select * from students;
+
 select * from users;
 select * from userroles;
 select * from roles;
+
+select UUID() from roles;
+describe roles;
+
+select * from hiberante_sequence;
 
