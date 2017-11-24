@@ -10,13 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "USERROLES")
+@Table(name = "UserRoles")
 public class UserRole {
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
+	@Type(type = "uuid-char")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "userrole_id", updatable = false, nullable = false)
 	private UUID userRoleId;

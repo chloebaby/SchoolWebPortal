@@ -14,13 +14,15 @@ import javax.persistence.Table;
 import javax.persistence.CascadeType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "STUDENTS")
+@Table(name = "Students")
 public class Student {
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
+	@Type(type = "uuid-char")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "student_id", updatable = false, nullable = false)
 	private UUID studentId;
