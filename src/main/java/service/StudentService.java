@@ -30,13 +30,18 @@ public class StudentService implements StudentServiceInterface{
 	
 	@Override
 	public List<Student> findAllStudents(){
-		List<Student> allStudents = daoStudentImplementation.select();
+		List<Student> allStudents = daoStudentImplementation.selectAllStudents();
 		return allStudents;
 	}
 	
 	@Override
 	public void saveStudent(Student student) {
 		daoStudentImplementation.insertStudent(student);
+	}
+	
+	@Override
+	public Student findStudentById(UUID studentId) {
+		return daoStudentImplementation.selectStudentById(studentId);
 	}
 	
 /*	@Override
