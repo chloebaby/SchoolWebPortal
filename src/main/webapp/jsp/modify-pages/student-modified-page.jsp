@@ -68,8 +68,8 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="studentUsername">User Name</label>
-                    <input type="text" name="username" class="form-control" id="studentUsername" value="${student.username}" disabled>
-                    <input type="hidden" name="username" class="form-control" id="studentUsername" value="${student.username}">
+                    <input type="text" name="username" class="form-control" id="studentUsername" value="${student.user.username}" disabled>
+                    <input type="hidden" name="username" class="form-control" id="studentUsername" value="${student.user.username}">
                   </div> <!-- /.form-group -->
                 </div> <!-- /.col-sm-6 -->
               </div> <!-- .row -->
@@ -80,7 +80,7 @@
                     <select name="rolename" class="form-control" id="sel1">
                       <c:forEach var="role" items="${allRoles}">
                         <c:choose>
-                          <c:when test="${role.rolename eq student.rolename}">
+                          <c:when test="${role.rolename eq student.role.rolename}">
                             <option selected>
                               <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
                             </option>
@@ -98,7 +98,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="studentPassword">Password</label>
-                    <input type="password" name="password" class="form-control" id="studentPassword" value="${student.password}">
+                    <input type="password" name="password" class="form-control" id="studentPassword" value="${student.user.password}">
                   </div> <!-- /.form-group -->
                 </div> <!-- /.col-sm-6 -->
               </div> <!-- /.row -->
