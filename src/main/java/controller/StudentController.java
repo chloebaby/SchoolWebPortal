@@ -94,12 +94,12 @@ public class StudentController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String action = request.getParameter("action");
 		
-		request.setAttribute("allStudents", studentService.findAllStudents());
+/*		request.setAttribute("allStudents", studentService.findAllStudents());
 		request.setAttribute("allRoles", roleService.findAllRoles());
-		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);*/
 		
 			
-/*		if(action.equalsIgnoreCase("delete")) {
+		if(action.equalsIgnoreCase("delete")) {
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
 			int userId = Integer.valueOf(request.getParameter("userId"));
 			String username = request.getParameter("username");
@@ -116,7 +116,7 @@ public class StudentController extends HttpServlet{
 			request.setAttribute("allStudents", studentService.findAllStudents());
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
-		}*/
+		}
 		
 	}
 }
