@@ -14,7 +14,8 @@ public class DAOStudentImplementation extends SQLConnection implements StudentDA
 		super();
 	}
 	
-	public List<Student> select(){
+	@Override
+	public List<Student> selectAllStudents(){
 		openCurrentSession();
 		Query query = getCurrentSession().createQuery("FROM Student");
 		List<Student> allStudents = query.list();
@@ -23,12 +24,18 @@ public class DAOStudentImplementation extends SQLConnection implements StudentDA
 		return allStudents;
 	}
 	
+	@Override
 	public void insertStudent(Student student){
 		openCurrentSession();
 		openCurrentTransaction();
 		getCurrentSession().save(student);
 		commitTransaction();
 		closeCurrentSession();
+	}
+	
+	@Override
+	public Student selectStudentById(UUID studentId) {
+		
 	}
 	
 /*	
