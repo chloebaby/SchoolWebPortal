@@ -8,6 +8,6 @@ public interface StudentDAO {
 	public void insertStudent(Student student);
 	//public void deleteStudent(int studentId);
 	//public void updateStudent(Student student);
-	public List<Student> select();
-	//public Student selectById(int id);
+	public List<Student> selectAllStudents();
+	public Student selectStudentById(UUID studentId);
 }
