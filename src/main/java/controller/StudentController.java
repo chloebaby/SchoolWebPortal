@@ -74,14 +74,15 @@ public class StudentController extends HttpServlet{
 		student.setRole(role);
 		student.setLastModified(date);
 		
-		
 		if(option.equalsIgnoreCase("save")) {
 			studentService.saveStudent(student);
 			userRoleService.saveUserRole(userRole);
 			
 		}else if(option.equalsIgnoreCase("update")) {
-			//student.setStudentId(UUID.fromString(request.getParameter("studentId")));
-			//studentService.updateStudent(student, user, userRole);
+			String studentId = request.getParameter("studentId");
+			student.setStudentId(UUID.fromString(studentId));
+			studentService.updateStudent(student);
+			userRoleService.updateUserRoleByUsername(userRole);
 		}
 		
 		request.setAttribute("allStudents", studentService.findAllStudents());
@@ -103,12 +104,12 @@ public class StudentController extends HttpServlet{
 			int studentId = Integer.valueOf(request.getParameter("studentId"));
 			int userId = Integer.valueOf(request.getParameter("userId"));
 			String username = request.getParameter("username");
-			studentService.deleteStudentById(studentId, userId, username);
+			//studentService.deleteStudentById(studentId, userId, username);
 			request.setAttribute("allStudents", studentService.findAllStudents());
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
 		}else if(action.equalsIgnoreCase("edit")) {
-			int studentId = Integer.valueOf(request.getParameter("studentId"));
+			UUID studentId = UUID.fromString(request.getParameter("studentId"));
 			request.setAttribute("student", studentService.findStudentById(studentId));
 			request.setAttribute("allRoles", roleService.findAllRoles());
 			getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
