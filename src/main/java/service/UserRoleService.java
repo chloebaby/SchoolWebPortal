@@ -15,4 +15,8 @@ public class UserRoleService implements UserRoleServiceInterface{
 	public void saveUserRole(UserRole userRole) {
 		daoUserImplementation.insertUserRole(userRole);
 	}
+	
+	public void updateUserRoleByUsername(UserRole userRole) {
+		daoUserImplementation.updateUserRoleByUsername(userRole);
+	}
 }
