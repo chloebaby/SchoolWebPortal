@@ -7,7 +7,7 @@ import model.Student;
 
 public interface StudentDAO {
 	public void insertStudent(Student student);
-	//public void deleteStudent(int studentId);
+	public void deleteStudent(Student student);
 	public void updateStudent(Student student);
 	public List<Student> selectAllStudents();
 	public Student selectStudentById(UUID studentId);
