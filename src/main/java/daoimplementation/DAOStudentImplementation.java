@@ -1,6 +1,7 @@
 package daoimplementation;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.query.Query;
 
@@ -35,7 +36,19 @@ public class DAOStudentImplementation extends SQLConnection implements StudentDA
 	
 	@Override
 	public Student selectStudentById(UUID studentId) {
-		
+		openCurrentSession();
+		Student student = getCurrentSession().get(Student.class, studentId);
+		closeCurrentSession();
+		return student;
+	}
+	
+	@Override
+	public void updateStudent(Student student) {
+		openCurrentSession();
+		openCurrentTransaction();
+		getCurrentSession().update(student);
+		commitTransaction();
+		closeCurrentSession();
 	}
 	
 /*	
