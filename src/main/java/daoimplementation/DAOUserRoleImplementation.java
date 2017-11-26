@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.persistence.Query;
+
 import dao.UserRoleDAO;
 import model.UserRole;
 import sqlconnection.SQLConnection;
@@ -18,6 +20,20 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 		openCurrentSession();
 		openCurrentTransaction();
 		getCurrentSession().save(userRole);
+		commitTransaction();
+		closeCurrentSession();
+	}
+	
+	public void updateUserRoleByUsername(UserRole userRole) {
+		String hql = "update UserRole set rolename = :rolename, lastModified = :lastModified where username = :username";
+		openCurrentSession();
+		openCurrentTransaction();
+		//getCurrentSession().update(userRole);
+		Query query = getCurrentSession().createQuery(hql);
+		query.setParameter("rolename", userRole.getRolename());
+		query.setParameter("lastModified", userRole.getLastModified());
+		query.setParameter("username", userRole.getUsername());
+		int result = query.executeUpdate();
 		commitTransaction();
 		closeCurrentSession();
 	}
