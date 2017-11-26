@@ -17,16 +17,10 @@ import model.User;
 import model.UserRole;
 
 public class StudentService implements StudentServiceInterface{
-	//private SchoolDAO<Student> daoSchoolImplementation;
 	private StudentDAO daoStudentImplementation;
-	//private UserDAO doaUserImplementation;
-	//private UserRoleDAO daoUserRoleImplementation;
 	
 	public StudentService() {
-		//daoSchoolImplementation = new DAOStudentImplementation();
 		daoStudentImplementation = new DAOStudentImplementation();
-		//doaUserImplementation = new DAOUserImplementation();
-		//daoUserRoleImplementation = new DAOUserRoleImplementation();
 	}
 	
 	@Override
@@ -50,32 +44,9 @@ public class StudentService implements StudentServiceInterface{
 		daoStudentImplementation.updateStudent(student);
 	}
 	
-/*	@Override
-	public void saveStudent(Student student, User user, UserRole userRole){
-		doaUserImplementation.insertUser(user);
-		daoUserRoleImplementation.insertUserRole(userRole);
-		
-		student.setUserId(doaUserImplementation.selectUserIdByName(user));
-		
-		daoStudentImplementation.insertStudent(student);
-	}
-	
 	@Override
-	public void deleteStudentById(int studentId, int userId, String username) {
-		daoStudentImplementation.deleteStudent(studentId);
-		doaUserImplementation.deleteUserById(userId);
-		daoUserRoleImplementation.deleteUserRoleByUsername(username);
+	public void deleteStudentById(UUID studentId) {
+		Student studentToDelete = daoStudentImplementation.selectStudentById(studentId);
+		daoStudentImplementation.deleteStudent(studentToDelete);
 	}
-	
-	@Override
-	public Student findStudentById(int studentId) {
-		return daoSchoolImplementation.selectById(studentId);
-	}
-	
-	@Override
-	public void updateStudent(Student student, User user, UserRole userRole) {
-		daoStudentImplementation.updateStudent(student);
-		doaUserImplementation.updateUser(user);
-		daoUserRoleImplementation.updateUserRole(userRole);
-	}*/
 }
