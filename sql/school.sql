@@ -22,9 +22,9 @@ create table Person(
 
 select * from students;
 
-select * from users;
-select * from userroles;
-select * from roles;
+select * from Users;
+select * from UserRoles;
+select * from Roles;
 
 select UUID() from roles;
 describe roles;
