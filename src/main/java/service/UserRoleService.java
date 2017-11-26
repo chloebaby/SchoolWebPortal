@@ -19,4 +19,8 @@ public class UserRoleService implements UserRoleServiceInterface{
 	public void updateUserRoleByUsername(UserRole userRole) {
 		daoUserImplementation.updateUserRoleByUsername(userRole);
 	}
+	
+	public void deleteUserRolebyUsername(String username) {
+		daoUserImplementation.deleteUserRoleByUsername(username);
+	}
 }
