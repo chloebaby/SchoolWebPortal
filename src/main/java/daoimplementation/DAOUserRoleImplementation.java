@@ -16,6 +16,7 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 		super();
 	}
 	
+	@Override
 	public void insertUserRole(UserRole userRole) {
 		openCurrentSession();
 		openCurrentTransaction();
@@ -24,16 +25,27 @@ public class DAOUserRoleImplementation extends SQLConnection implements UserRole
 		closeCurrentSession();
 	}
 	
+	@Override
 	public void updateUserRoleByUsername(UserRole userRole) {
 		String hql = "update UserRole set rolename = :rolename, lastModified = :lastModified where username = :username";
 		openCurrentSession();
 		openCurrentTransaction();
-		//getCurrentSession().update(userRole);
 		Query query = getCurrentSession().createQuery(hql);
 		query.setParameter("rolename", userRole.getRolename());
 		query.setParameter("lastModified", userRole.getLastModified());
 		query.setParameter("username", userRole.getUsername());
 		int result = query.executeUpdate();
+		commitTransaction();
+		closeCurrentSession();
+	}
+	
+	public void deleteUserRoleByUsername(String username) {
+		String hql = "delete from UserRole where username = :username";
+		openCurrentSession();
+		openCurrentTransaction();
+		Query query = getCurrentSession().createQuery(hql);
+		query.setParameter("username", username);
+		query.executeUpdate();
 		commitTransaction();
 		closeCurrentSession();
 	}
