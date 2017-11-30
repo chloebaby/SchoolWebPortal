@@ -1,39 +1,42 @@
 package model;
 
 import java.sql.Date;
+import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+@Entity
+@Table(name = "Results")
 public class Result {
-	int resultId;
-	Student student;
-	Course course;
+	
+	@Id
+	@GeneratedValue(generator = "UUID")
+	@Type(type = "uuid-char")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "result_id", updatable = false, nullable = false)
+	UUID resultId;
+	
+	@Column(name = "marks")
 	int marks;
-	Semester semester;
+	
+	@Column(name = "last_modified")
 	Date lastModified;
 	
 	public Result() {}
 	
-	public int getResultId() {
+	public UUID getResultId() {
 		return resultId;
 	}
 	
-	public void setResultId(int resultId) {
+	public void setResultId(UUID resultId) {
 		this.resultId = resultId;
-	}
-	
-	public Student getStudent() {
-		return student;
-	}
-	
-	public void setStudent(Student student) {
-		this.student = student;
-	}
-	
-	public Course getCourse() {
-		return course;
-	}
-	
-	public void setCourse(Course course) {
-		this.course = course;
 	}
 	
 	public int getMarks() {
@@ -42,14 +45,6 @@ public class Result {
 	
 	public void setMarks(int marks) {
 		this.marks = marks;
-	}
-	
-	public Semester getSemester() {
-		return semester;
-	}
-	
-	public void setSemester(Semester semester) {
-		this.semester = semester;
 	}
 	
 	public Date getLastModified() {
