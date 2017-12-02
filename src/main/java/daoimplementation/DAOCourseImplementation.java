@@ -10,123 +10,58 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import org.hibernate.query.Query;
 
 import dao.CourseDAO;
 import model.Course;
+import model.Student;
 
-public class DAOCourseImplementation extends SQLConnection implements SchoolDAO<Course>, CourseDAO{
+public class DAOCourseImplementation extends SQLConnection implements CourseDAO{
 	
 	public DAOCourseImplementation() {
 		super();
 	}
 	
-	public List<Course> select(){
-		List<Course> allCourses = new ArrayList<Course>();
-		
-		String selectAllCourses = "select * from Courses";
-		
-		try(Connection connection = getConnection()){
-			PreparedStatement ps = connection.prepareStatement(selectAllCourses);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				Course course = new Course();
-				course.setCourseId(rs.getInt("course_id"));
-				course.setCourseName(rs.getString("course_name"));
-				course.setCourseCode(rs.getString("course_code"));
-				allCourses.add(course);
-			}
-			
-			rs.close();
-			ps.close();
-			
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
+	@Override
+	public List<Course> selectAllCourses(){
+		openCurrentSession();
+		Query query = getCurrentSession().createQuery("FROM Course");
+		List<Course> allCourses = query.list();
+		closeCurrentSession();
 		
 		return allCourses;
 	}
 	
-	public Course selectById(int id){
-		Course course = new Course();
-		
-		String selectCourseById = "select * from Courses where course_id = ?";
-		
-		try(Connection connection = getConnection()){
-			PreparedStatement ps = connection.prepareStatement(selectCourseById);
-			
-			ps.setInt(1, (int)id);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				course.setCourseId(rs.getInt("course_id"));
-				course.setCourseCode(rs.getString("course_code"));
-				course.setCourseName(rs.getString("course_name"));
-			}
-			
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
-		
+	public Course selectCourseById(UUID courseId){
+		openCurrentSession();
+		Course course = getCurrentSession().get(Course.class, courseId);
+		closeCurrentSession();
 		return course;
 	}
 	
 	public void insertCourse(Course course) {
-		String insertCourse = "insert into Courses(course_id, course_name, course_code, last_modified) values (?, ?, ?, ?)";
-		java.util.Date today = new java.util.Date();
-		java.sql.Date date = new java.sql.Date(today.getTime());
-		
-		try(Connection connection = getConnection()){
-			PreparedStatement ps = connection.prepareStatement(insertCourse);
-			
-			ps.setNull(1, java.sql.Types.INTEGER);
-			ps.setString(2, course.getCourseName());
-			ps.setString(3, course.getCourseCode());
-			ps.setDate(4, date);
-			
-			ps.executeUpdate();
-			ps.close();
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
+		openCurrentSession();
+		openCurrentTransaction();
+		getCurrentSession().save(course);
+		commitTransaction();
+		closeCurrentSession();
 	}
 	
-	public void deleteCourse(int courseId) {
-		String deleteCourse = "delete from Courses where course_id = ?";
-		
-		try(Connection connection = getConnection()){
-			PreparedStatement ps = connection.prepareStatement(deleteCourse);
-			
-			ps.setInt(1, courseId);
-			
-			ps.executeUpdate();
-			ps.close();
-			
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
+	public void deleteCourse(Course course) {
+		openCurrentSession();
+		openCurrentTransaction();
+		getCurrentSession().update(course);
+		commitTransaction();
+		closeCurrentSession();
 	}
 	
 	public void updateCourse(Course course) {
-		String updateCourse = "update Courses set course_name = ?, course_code = ?, last_modified = ? where course_id = ?";
-		java.util.Date today = new java.util.Date();
-		java.sql.Date date = new java.sql.Date(today.getTime());
-		
-		try(Connection connection = getConnection()){
-			PreparedStatement ps = connection.prepareStatement(updateCourse);
-			
-			ps.setString(1, course.getCourseName());
-			ps.setString(2, course.getCourseCode());
-			ps.setDate(3, date);
-			ps.setInt(4, course.getCourseId());
-			
-			ps.executeUpdate();
-			ps.close();
-			
-		}catch(SQLException sqle) {
-			sqle.printStackTrace();
-		}
+		openCurrentSession();
+		openCurrentTransaction();
+		getCurrentSession().update(course);
+		commitTransaction();
+		closeCurrentSession();
 	}
 }
