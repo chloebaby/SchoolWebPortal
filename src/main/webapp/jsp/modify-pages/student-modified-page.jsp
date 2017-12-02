@@ -82,12 +82,12 @@
                         <c:choose>
                           <c:when test="${role.rolename eq student.role.rolename}">
                             <option selected>
-                              <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
+                              <c:out value="${role.rolename}"/>
                             </option>
                           </c:when>
                           <c:otherwise>
                             <option>
-                              <c:out value="${role.roleId}"/>&nbsp;<c:out value="${role.rolename}"/>
+                              <c:out value="${role.rolename}"/>
                             </option>
                           </c:otherwise>
                         </c:choose>
