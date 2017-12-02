@@ -27,9 +27,14 @@ public class CourseController extends HttpServlet{
 		String courseName = request.getParameter("courseName");
 		String courseCode = request.getParameter("courseCode");
 		
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
+		
 		Course course = new Course();
 		course.setCourseName(courseName);
 		course.setCourseCode(courseCode);
+		course.setLastModified(date);
+		
 		
 		if(option.equalsIgnoreCase("save")) {
 			courseService.saveCourse(course);
