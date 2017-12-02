@@ -40,30 +40,29 @@ public class StudentController extends HttpServlet{
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
-		String roleReq = request.getParameter("rolename");
+		String rolename = request.getParameter("rolename");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
 		
-		String[] roleDetails = roleReq.split(Character.toString((char)194) + Character.toString((char)160));
-		UUID roleId = UUID.fromString(roleDetails[0]);
-		String roleName = roleDetails[1];
-		
 		Student student = new Student();
 		User user = new User();
 		UserRole userRole = new UserRole();
 		Role role = new Role();
 		
-		role.setRolename(roleName);
+		role.setRolename(rolename);
+		
+		UUID roleId = roleService.findUUIDByRolename(rolename);
+		
 		role.setRoleId(roleId);
 		
 		user.setPassword(password);
 		user.setUsername(username);
 		user.setLastModified(date);
 		
-		userRole.setRolename(roleName);
+		userRole.setRolename(rolename);
 		userRole.setUsername(username);
 		userRole.setLastModified(date);
 		
