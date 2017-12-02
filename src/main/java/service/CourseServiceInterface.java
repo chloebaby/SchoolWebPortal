@@ -1,11 +1,14 @@
 package service;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface CourseServiceInterface<T> {
-	public List<T> findAllCourses();
-	public void saveCourse(T entity);
-	public void deleteCourseById(int courseId);
-	public T findCourseById(int courseId);
-	public void updateCourse(T entity);
+import model.Course;
+
+public interface CourseServiceInterface {
+	public List<Course> findAllCourses();
+	public void saveCourse(Course course);
+	public void deleteCourseById(UUID course);
+	public Course findCourseById(UUID courseId);
+	public void updateCourse(Course course);
 }

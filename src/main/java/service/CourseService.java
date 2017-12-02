@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.UUID;
 
 import dao.CourseDAO;
 import dao.SchoolDAO;
@@ -8,29 +9,28 @@ import daoimplementation.DAOCourseImplementation;
 import daoimplementation.DAOStudentImplementation;
 import model.Course;
 
-public class CourseService implements CourseServiceInterface<Course>{
-	private SchoolDAO<Course> daoSchoolImplementation;
+public class CourseService implements CourseServiceInterface{
 	private CourseDAO daoCourseImplementation;
 	
 	public CourseService() {
-		daoSchoolImplementation = new DAOCourseImplementation();
 		daoCourseImplementation = new DAOCourseImplementation();
 	}
 	
 	public List<Course> findAllCourses(){
-		return daoSchoolImplementation.select();
+		return daoCourseImplementation.selectAllCourses();
 	}
 	
 	public void saveCourse(Course course){
 		daoCourseImplementation.insertCourse(course);
 	}
 	
-	public void deleteCourseById(int courseId) {
-		daoCourseImplementation.deleteCourse(courseId);
+	public void deleteCourseById(UUID courseId) {
+		Course course = daoCourseImplementation.selectCourseById(courseId);
+		daoCourseImplementation.deleteCourse(course);
 	}
 	
-	public Course findCourseById(int courseId) {
-		return daoSchoolImplementation.selectById(courseId);
+	public Course findCourseById(UUID courseId) {
+		return daoCourseImplementation.selectCourseById(courseId);
 	}
 	
 	public void updateCourse(Course course) {
