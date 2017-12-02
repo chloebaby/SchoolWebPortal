@@ -52,7 +52,7 @@ public class DAOCourseImplementation extends SQLConnection implements CourseDAO{
 	public void deleteCourse(Course course) {
 		openCurrentSession();
 		openCurrentTransaction();
-		getCurrentSession().update(course);
+		getCurrentSession().delete(course);
 		commitTransaction();
 		closeCurrentSession();
 	}
