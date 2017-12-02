@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import service.CourseServiceInterface;
 import model.Course;
 
 public class CourseController extends HttpServlet{
-	private CourseServiceInterface<Course> courseService;
+	private CourseServiceInterface courseService;
 	
 	public CourseController() {
 		super();
@@ -39,7 +40,7 @@ public class CourseController extends HttpServlet{
 		if(option.equalsIgnoreCase("save")) {
 			courseService.saveCourse(course);
 		}else if(option.equalsIgnoreCase("update")) {
-			course.setCourseId(Integer.valueOf(request.getParameter("courseId")));
+			course.setCourseId(UUID.fromString(request.getParameter("courseId")));
 			courseService.updateCourse(course);
 		}
 		
@@ -52,12 +53,12 @@ public class CourseController extends HttpServlet{
 		String action = request.getParameter("action");
 		
 		if(action.equalsIgnoreCase("delete")) {
-			int courseId = Integer.valueOf(request.getParameter("courseId"));
+			UUID courseId = UUID.fromString(request.getParameter("courseId"));
 			courseService.deleteCourseById(courseId);
 			request.setAttribute("allCourses", courseService.findAllCourses());
 			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 		}else if(action.equalsIgnoreCase("edit")) {
-			int courseId = Integer.valueOf(request.getParameter("courseId"));
+			UUID courseId = UUID.fromString(request.getParameter("courseId"));
 			request.setAttribute("course", courseService.findCourseById(courseId));
 			getServletContext().getRequestDispatcher("/jsp/modify-pages/course-modified-page.jsp").forward(request, response);
 		}else {
