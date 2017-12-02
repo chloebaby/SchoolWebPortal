@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.UUID;
 
 import dao.RoleDAO;
 import daoimplementation.DAORoleImplementation;
@@ -15,6 +16,10 @@ public class RoleService implements RoleServiceInterface{
 	
 	public List<Role> findAllRoles(){
 		return daoRoleImplementation.selectRoles();
+	}
+	
+	public UUID findUUIDByRolename(String rolename) {
+		return daoRoleImplementation.selectUUIDByRoleName(rolename);
 	}
 
 }
