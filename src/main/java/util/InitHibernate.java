@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import model.Role;
+import model.Semester;
 import model.User;
 import model.UserRole;
 
@@ -19,6 +20,10 @@ public class InitHibernate {
 		
 		Role roleSchoolAdmin = new Role();
 		Role roleStudent = new Role();
+	
+		Semester semesterSummer = new Semester();
+		Semester semesterFall = new Semester();
+		Semester semesterWinter = new Semester();
 		
 		roleSchoolAdmin.setRolename("school-admin");
 		roleSchoolAdmin.setLastModified(date);
@@ -33,6 +38,10 @@ public class InitHibernate {
 		userRole.setUsername("tomcat");
 		userRole.setRolename("school-admin");
 		userRole.setLastModified(date);
+		
+		semesterSummer.setSemester("Summer");
+		semesterFall.setSemester("Fall");
+		semesterWinter.setSemester("Winter");
 		
 		sessionFactory = HibernateUtil.getSessionFactory();
 		
@@ -55,6 +64,15 @@ public class InitHibernate {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(user);
+		session.getTransaction().commit();
+		session.close();
+		
+		//Insert the semesters
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(semesterSummer);
+		session.save(semesterFall);
+		session.save(semesterWinter);
 		session.getTransaction().commit();
 		session.close();
 		
