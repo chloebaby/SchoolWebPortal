@@ -24,5 +24,6 @@
     <mapping class="model.Role" />
     <mapping class="model.Result" />
     <mapping class="model.Course" />
+    <mapping class="model.Semester" />
   </session-factory>
 </hibernate-configuration>
