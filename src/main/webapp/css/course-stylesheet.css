@@ -6,3 +6,8 @@
     display: block;
     margin: 0 auto;
 }
+
+.select-arrows{
+    display: block;
+    padding-top: 35px;
+}
