@@ -12,14 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.CourseService;
 import service.CourseServiceInterface;
+import service.SemesterService;
+import service.SemesterServiceInterface;
+import service.StudentService;
+import service.StudentServiceInterface;
 import model.Course;
 
 public class CourseController extends HttpServlet{
 	private CourseServiceInterface courseService;
+	private StudentServiceInterface studentService;
+	private SemesterServiceInterface semesterService;
 	
 	public CourseController() {
 		super();
 		courseService = new CourseService();
+		studentService = new StudentService();
+		semesterService = new SemesterService();
 	}
 	
 	@Override
@@ -61,8 +69,15 @@ public class CourseController extends HttpServlet{
 			UUID courseId = UUID.fromString(request.getParameter("courseId"));
 			request.setAttribute("course", courseService.findCourseById(courseId));
 			getServletContext().getRequestDispatcher("/jsp/modify-pages/course-modified-page.jsp").forward(request, response);
+		}else if(action.equalsIgnoreCase("assign")) {
+			UUID courseId = UUID.fromString(request.getParameter("courseId"));
+			request.setAttribute("course", courseService.findCourseById(courseId));
+			request.setAttribute("allStudents", studentService.findAllStudents());
+			request.setAttribute("allSemesters", semesterService.findAllSemesters());
+			getServletContext().getRequestDispatcher("/jsp/assignment-pages/course-assign-page.jsp").forward(request, response);
 		}else {
 			request.setAttribute("allCourses", courseService.findAllCourses());
+			request.setAttribute("allSemesters", semesterService.findAllSemesters());
 			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 		}
 	}
