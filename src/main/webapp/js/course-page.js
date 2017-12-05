@@ -12,6 +12,13 @@ function validateCourseForm(){
 	}
 }
 
+function selectRightBox(){
+	var rightBox = document.getElementById("sel1").value;
+	
+	var strUser = rightBox.options[rightBox.selectedIndex].text;
+	
+}
+
 function confirmCourseDelete(){
 	var doDelete = confirm("Are your sure you want to delete this course?");
 	
@@ -20,4 +27,55 @@ function confirmCourseDelete(){
 	}else{
 		return false;
 	}
+}
+
+function rightBox() {
+
+    var selectOne = document.getElementById("sel1");
+    var selectTwo = document.getElementById("sel2");
+    var option;
+
+    for(var i = 0; i < selectOne.options.length; i++){
+        if(selectOne.options[i].selected){
+            option = document.createElement("option");
+            option.text = selectOne.options[i].text
+            selectTwo.add(option);
+        }
+    }
+
+    var i = 0;
+
+    while(i < selectOne.options.length){
+        if(selectOne.options[i].selected){
+            selectOne.remove(selectOne.selectedIndex);
+            i = 0;
+        }else{
+            i++;
+        }
+    }
+}
+
+function leftBox(){
+    var selectOne = document.getElementById("sel1");
+    var selectTwo = document.getElementById("sel2");
+    var option;
+
+    for(var i = 0; i < selectTwo.options.length; i++){
+	    if(selectTwo.options[i].selected){
+	        option = document.createElement("option");
+	        option.text = selectTwo.options[i].text
+	        selectOne.add(option);
+	    }
+    }
+
+    var i = 0;
+
+    while(i < selectTwo.options.length){
+        if(selectTwo.options[i].selected){
+            selectTwo.remove(selectTwo.selectedIndex);
+            i = 0;
+        }else{
+            i++;
+        }
+    }
 }
