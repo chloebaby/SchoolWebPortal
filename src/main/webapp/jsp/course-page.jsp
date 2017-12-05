@@ -82,6 +82,35 @@
                             </div>
                           </div>
                         </div>
+                        
+                        <div class="row">
+                          <div class="col-sm-5">
+                            <div class="form-group">
+                              <label for="sel1">Available Semesters (hold shift to select more than one)</label>
+                              <select multiple  name="students" class="form-control" id="sel1">
+                                <c:forEach var="sem" items="${allSemesters}">
+                                  <option onselect="selectRightBox()">
+                                    <c:out value="${sem.semester}"/>
+                                  </option>
+                                </c:forEach>
+                              </select>
+                            </div>  <!-- /.form-group -->
+                          </div> <!-- /.col-sm-5 -->
+                          <div class="col-sm-2">
+                            <div class="select-arrows">
+                              <button type="button" onclick="rightBox()" name="right" value=right class="btn btn-default"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
+                              <button type="button" onclick="leftBox()" name="left" value="left" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
+                            </div>
+                          </div> <!-- /.col-sm-2 -->
+                          <div class="col-sm-5">
+                            <div class="form-group">
+                              <label for="sel2">Active Semesters (hold shift to select more than one)</label>
+                              <select multiple name="students" class="form-control" id="sel2">
+                              </select>
+                            </div>  <!-- /.form-group -->
+                          </div> <!-- /.col-sm-5 -->
+                        </div> <!-- /.row -->
+                        
                         <div class="row">
                           <div class="col-sm-12">
                             <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
@@ -99,6 +128,7 @@
                                   <th>Course Code</th>
                                   <th>Course Name</th>
                                   <th>Edit</th>
+                                  <th>Assign Students</th>
                                   <th>Delete</th>
                                 </tr>
                               </thead>
@@ -108,6 +138,7 @@
 	                                  <td><c:out value="${course.courseCode}" /></td>
 	                                  <td><c:out value="${course.courseName}"/></td>
                                     <td><a href=<c:url value="/school/course?action=edit&courseId=${course.courseId}"/>>Edit</a></td>
+                                    <td><a href=<c:url value="/school/course?action=assign&courseId=${course.courseId}"/>>Assign</a></td>
                                     <td><a onclick="return confirmCourseDelete()" href=<c:url value="/school/course?action=delete&courseId=${course.courseId}"/>>Delete</a></td>
                                   </tr>
                                 </c:forEach>
