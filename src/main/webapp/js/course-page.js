@@ -38,7 +38,8 @@ function rightBox() {
     for(var i = 0; i < selectOne.options.length; i++){
         if(selectOne.options[i].selected){
             option = document.createElement("option");
-            option.text = selectOne.options[i].text
+            option.text = option.value = selectOne.options[i].text;
+            option.selected = true;
             selectTwo.add(option);
         }
     }
@@ -63,7 +64,7 @@ function leftBox(){
     for(var i = 0; i < selectTwo.options.length; i++){
 	    if(selectTwo.options[i].selected){
 	        option = document.createElement("option");
-	        option.text = selectTwo.options[i].text
+	        option.text = option.value = selectTwo.options[i].text
 	        selectOne.add(option);
 	    }
     }
