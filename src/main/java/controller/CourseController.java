@@ -35,6 +35,7 @@ public class CourseController extends HttpServlet{
 		String option = request.getParameter("option");
 		String courseName = request.getParameter("courseName");
 		String courseCode = request.getParameter("courseCode");
+		String[] availableSemesters = request.getParameterValues("activeSemesters");
 		
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
