@@ -87,9 +87,9 @@
                           <div class="col-sm-5">
                             <div class="form-group">
                               <label for="sel1">Available Semesters (hold shift to select more than one)</label>
-                              <select multiple  name="students" class="form-control" id="sel1">
+                              <select multiple="multiple" name="availableSemesters" class="form-control" id="sel1">
                                 <c:forEach var="sem" items="${allSemesters}">
-                                  <option onselect="selectRightBox()">
+                                  <option>
                                     <c:out value="${sem.semester}"/>
                                   </option>
                                 </c:forEach>
@@ -105,7 +105,7 @@
                           <div class="col-sm-5">
                             <div class="form-group">
                               <label for="sel2">Active Semesters (hold shift to select more than one)</label>
-                              <select multiple name="students" class="form-control" id="sel2">
+                              <select multiple="multiple" name="activeSemesters" class="form-control" id="sel2">
                               </select>
                             </div>  <!-- /.form-group -->
                           </div> <!-- /.col-sm-5 -->
