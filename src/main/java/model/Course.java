@@ -43,6 +43,10 @@ public class Course {
 	@Column(name = "last_modified")
 	private Date lastModified;
 	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="COURSE_SEMESTER", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="semester_id")})
+	private List<Semester> listOfSemesters = new ArrayList<Semester>();
+	
 	public Course() {}
 	
 	public UUID getCourseId() {
@@ -83,6 +87,14 @@ public class Course {
 	
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
+	}
+
+	public List<Semester> getListOfSemesters() {
+		return listOfSemesters;
+	}
+
+	public void setListOfSemesters(List<Semester> listOfSemesters) {
+		this.listOfSemesters = listOfSemesters;
 	}
 	
 }
