@@ -84,3 +84,8 @@ create table Results(
     constraint rslt_sem_id_fk foreign key (semester_id) references Semesters (semester_id),
     constraint rslt_marks_ck check (marks >= 0 and marks <= 100)
 );
+
+select * from STUDENT_RESULT;
+select * from SEMESTER_RESULTS;
+
+select * from Semesters;

@@ -31,3 +31,5 @@ describe roles;
 
 select * from hiberante_sequence;
 
+select * from COURSE_SEMESTER;
+
