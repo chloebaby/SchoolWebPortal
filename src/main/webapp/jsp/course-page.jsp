@@ -127,6 +127,7 @@
                                 <tr>
                                   <th>Course Code</th>
                                   <th>Course Name</th>
+                                  <th>Semesters<th>
                                   <th>Edit</th>
                                   <th>Assign Students</th>
                                   <th>Delete</th>
@@ -137,6 +138,11 @@
                                   <tr>
 	                                  <td><c:out value="${course.courseCode}" /></td>
 	                                  <td><c:out value="${course.courseName}"/></td>
+                                    <td>
+                                      <c:forEach var="sem" items="${course.listOfSemesters}">
+                                        <c:out value="${sem.semester}"/>
+                                      </c:forEach>
+                                    </td>
                                     <td><a href=<c:url value="/school/course?action=edit&courseId=${course.courseId}"/>>Edit</a></td>
                                     <td><a href=<c:url value="/school/course?action=assign&courseId=${course.courseId}"/>>Assign</a></td>
                                     <td><a onclick="return confirmCourseDelete()" href=<c:url value="/school/course?action=delete&courseId=${course.courseId}"/>>Delete</a></td>
