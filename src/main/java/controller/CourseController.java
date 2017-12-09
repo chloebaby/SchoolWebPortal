@@ -17,6 +17,7 @@ import service.SemesterServiceInterface;
 import service.StudentService;
 import service.StudentServiceInterface;
 import model.Course;
+import model.Semester;
 
 public class CourseController extends HttpServlet{
 	private CourseServiceInterface courseService;
@@ -36,6 +37,16 @@ public class CourseController extends HttpServlet{
 		String courseName = request.getParameter("courseName");
 		String courseCode = request.getParameter("courseCode");
 		String[] availableSemesters = request.getParameterValues("activeSemesters");
+		List<Semester> listOfSemesters = new ArrayList<Semester>();
+		
+		for(String semesterName : availableSemesters) {
+			Semester semester = new Semester();
+			UUID semesterId = semesterService.findUUIDBySemester(semesterName);
+			semester.setSemester(semesterName);
+			semester.setSemesterId(semesterId);
+			listOfSemesters.add(semester);
+		}
+		
 		
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
@@ -44,6 +55,7 @@ public class CourseController extends HttpServlet{
 		course.setCourseName(courseName);
 		course.setCourseCode(courseCode);
 		course.setLastModified(date);
+		course.setListOfSemesters(listOfSemesters);
 		
 		
 		if(option.equalsIgnoreCase("save")) {
@@ -77,8 +89,10 @@ public class CourseController extends HttpServlet{
 			request.setAttribute("allSemesters", semesterService.findAllSemesters());
 			getServletContext().getRequestDispatcher("/jsp/assignment-pages/course-assign-page.jsp").forward(request, response);
 		}else {
-			request.setAttribute("allCourses", courseService.findAllCourses());
-			request.setAttribute("allSemesters", semesterService.findAllSemesters());
+			List<Course> allCourses = courseService.findAllCourses();
+			List<Semester> allSemester = semesterService.findAllSemesters();
+			request.setAttribute("allCourses", allCourses);
+			request.setAttribute("allSemesters", allSemester);
 			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 		}
 	}
