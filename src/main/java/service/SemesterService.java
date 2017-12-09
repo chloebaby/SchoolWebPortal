@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.UUID;
 
 import dao.SemesterDAO;
 import daoimplementation.DAOSemesterImplementation;
@@ -16,6 +17,11 @@ public class SemesterService implements SemesterServiceInterface {
 	@Override
 	public List<Semester> findAllSemesters(){
 		return daoSemesterImplementation.selectAllSemesters();
+	}
+	
+	@Override
+	public UUID findUUIDBySemester(String semester) {
+		return daoSemesterImplementation.selectUUIDBySemesterName(semester);
 	}
 
 }
