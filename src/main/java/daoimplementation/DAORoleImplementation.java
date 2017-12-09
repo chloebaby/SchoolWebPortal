@@ -36,6 +36,7 @@ public class DAORoleImplementation extends SQLConnection implements RoleDAO {
 		Query query = getCurrentSession().createQuery(hql);
 		query.setParameter("rolename", rolename);
 		UUID roleId = (UUID) query.uniqueResult();
+		closeCurrentSession();
 		
 		return roleId;
 	}
