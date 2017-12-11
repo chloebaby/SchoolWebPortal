@@ -3,8 +3,9 @@
 function validateCourseForm(){
 	var courseCode = document.getElementById("courseCode").value;
 	var courseName = document.getElementById("courseName").value;
+	var selectedSemester = document.getElementById("sel2")
 	
-	if(courseCode == "" || courseName == ""){
+	if(courseCode == "" || courseName == "" || selectedSemester.options.length == 0){
 		alert("Enter in all required fields");
 		return false;
 	}else{
