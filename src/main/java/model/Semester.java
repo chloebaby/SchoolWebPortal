@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,6 +36,9 @@ public class Semester {
 	@JoinTable(name="SEMESTER_RESULTS", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
+	@ManyToMany(mappedBy="listOfSemesters")
+	private List<Course> listOfCourses;
+	
 	public Semester() {}
 	
 	public UUID getSemesterId() {
@@ -51,5 +55,21 @@ public class Semester {
 	
 	public void setSemester(String semester) {
 		this.semester = semester;
+	}
+
+	public List<Result> getListOfResults() {
+		return listOfResults;
+	}
+
+	public void setListOfResults(List<Result> listOfResults) {
+		this.listOfResults = listOfResults;
+	}
+
+	public List<Course> getListOfCourses() {
+		return listOfCourses;
+	}
+
+	public void setListOfCourses(List<Course> listOfCourses) {
+		this.listOfCourses = listOfCourses;
 	}
 }

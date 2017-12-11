@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,7 +44,7 @@ public class Course {
 	@Column(name = "last_modified")
 	private Date lastModified;
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="COURSE_SEMESTER", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="semester_id")})
 	private List<Semester> listOfSemesters = new ArrayList<Semester>();
 	
