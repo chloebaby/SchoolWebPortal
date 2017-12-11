@@ -114,11 +114,13 @@ public class CourseController extends HttpServlet{
 		
 		List<Semester> courseAssignedSemesters = course.getListOfSemesters();
 		
-		
+		outerForLoop:
 		for(int i = 0; i < semesters.size();) {
 			boolean isItemRemoved = false;
 			for(int j = 0; j < courseAssignedSemesters.size(); j++) {
-				if(semesters.get(i).getSemester().equals(courseAssignedSemesters.get(j).getSemester())){
+				if(semesters.size() == 0) {
+					break outerForLoop;
+				}else if(semesters.get(i).getSemester().equals(courseAssignedSemesters.get(j).getSemester())){
 					semesters.remove(i);
 					isItemRemoved = true;
 				}
