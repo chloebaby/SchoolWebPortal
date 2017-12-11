@@ -80,4 +80,8 @@ function leftBox(){
             i++;
         }
     }
+    
+	for(i = 0; i < selectTwo.options.length; i++){
+		selectTwo.options[i].selected = true;
+	}
 }
