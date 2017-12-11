@@ -38,6 +38,7 @@
           <div class="row">
             <div class="col-sm-12">
               <form action="${pageContext.request.contextPath}/school/course" onsubmit="return validateCourseForm()" method="post">
+                
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="form-group">
@@ -50,23 +51,57 @@
                     <div class="form-group">
                       <label for="courseCode">Course Code</label>
                       <input type="text" name="courseCode" class="form-control" id="courseCode" value="${course.courseCode}">
-                    </div>
-                  </div>
+                    </div> <!-- /.form-group -->
+                  </div> <!-- /.col-sm-6 -->
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="courseName">Course Name</label>
                         <input type="text" name="courseName" class="form-control" id="courseName" value="${course.courseName}">
-                      </div>
+                      </div> <!-- /.form-group -->
+                    </div> <!-- /.col-sm-6  -->
+                  </div> <!-- /.row -->
+                </div> <!-- /.row -->
+                
+                <div class="row">
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label for="sel1">Available Semesters (hold shift to select more than one)</label>
+                      <select multiple="multiple" name="availableSemesters" class="form-control" id="sel1">
+                        <c:forEach var="sem" items="${allSemesters}">
+                          <option>
+                            <c:out value="${sem.semester}"/>
+                          </option>
+                        </c:forEach>
+                      </select> <!-- /.form-control -->
+                    </div>  <!-- /.form-group -->
+                  </div> <!-- /.col-sm-5 -->
+                  <div class="col-sm-2">
+                    <div class="select-arrows">
+                      <button type="button" onclick="rightBox()" name="right" value=right class="btn btn-default"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
+                      <button type="button" onclick="leftBox()" name="left" value="left" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
                     </div>
-                  </div>
-                </div>
+                  </div> <!-- /.col-sm-2 -->
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label for="sel2">Active Semesters (hold shift to select more than one)</label>
+                      <select multiple="multiple" name="activeSemesters" class="form-control" id="sel2">
+                        <c:forEach var="courseSem" items="${course.listOfSemesters}">
+                          <option selected>
+                            <c:out value="${courseSem.semester}" />
+                          </option>
+                        </c:forEach>
+                      </select> <!-- /.form-control -->
+                    </div>  <!-- /.form-group -->
+                  </div> <!-- /.col-sm-5 -->
+                </div> <!-- /.row -->
+                
                 <div class="row">
                   <div class="col-sm-12">
                     <button type="submit" name="option" value="update" class="btn btn-primary">Submit</button>
                     <button type="submit" name="option" value="cancel" class="btn btn-danger">Cancel</button>
-                  </div>
-                </div>
+                  </div> <!-- /.col-sm-12 -->
+                </div> <!-- /.row -->
                 
               </form>
             </div> <!-- /.col-sm-12 -->
