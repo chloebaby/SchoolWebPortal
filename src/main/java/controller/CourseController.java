@@ -34,6 +34,44 @@ public class CourseController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String option = request.getParameter("option");
+		Course course = null;
+		
+		if(!option.equalsIgnoreCase("cancel")) {
+			course = buildCourse(request);
+		}
+
+		if(option.equalsIgnoreCase("save")) {
+			courseService.saveCourse(course);
+		}else if(option.equalsIgnoreCase("update")) {
+			course.setCourseId(UUID.fromString(request.getParameter("courseId")));
+			courseService.updateCourse(course);
+		}
+		
+		request.setAttribute("allCourses", courseService.findAllCourses());
+		request.setAttribute("allSemesters", semesterService.findAllSemesters());
+		getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String action = request.getParameter("action");
+		
+		if(action.equalsIgnoreCase("delete")) {
+			doDel(request, response);
+		}else if(action.equalsIgnoreCase("edit")) {
+			doEdit(request, response);
+		}else if(action.equalsIgnoreCase("assign")) {
+			doAssign(request, response);
+		}else {
+			List<Course> allCourses = courseService.findAllCourses();
+			List<Semester> allSemester = semesterService.findAllSemesters();
+			request.setAttribute("allCourses", allCourses);
+			request.setAttribute("allSemesters", allSemester);
+			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
+		}
+	}
+	
+	private Course buildCourse(HttpServletRequest request) throws ServletException {
 		String courseName = request.getParameter("courseName");
 		String courseCode = request.getParameter("courseCode");
 		String[] availableSemesters = request.getParameterValues("activeSemesters");
@@ -57,43 +95,50 @@ public class CourseController extends HttpServlet{
 		course.setLastModified(date);
 		course.setListOfSemesters(listOfSemesters);
 		
+		return course;
 		
-		if(option.equalsIgnoreCase("save")) {
-			courseService.saveCourse(course);
-		}else if(option.equalsIgnoreCase("update")) {
-			course.setCourseId(UUID.fromString(request.getParameter("courseId")));
-			courseService.updateCourse(course);
-		}
-		
+	}
+	
+	private void doDel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		UUID courseId = UUID.fromString(request.getParameter("courseId"));
+		courseService.deleteCourseById(courseId);
 		request.setAttribute("allCourses", courseService.findAllCourses());
+		request.setAttribute("allSemesters", semesterService.findAllSemesters());
 		getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
 	}
 	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String action = request.getParameter("action");
+	private void doEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		UUID courseId = UUID.fromString(request.getParameter("courseId"));
+		Course course = courseService.findCourseById(courseId);
+		List<Semester> semesters = semesterService.findAllSemesters();
 		
-		if(action.equalsIgnoreCase("delete")) {
-			UUID courseId = UUID.fromString(request.getParameter("courseId"));
-			courseService.deleteCourseById(courseId);
-			request.setAttribute("allCourses", courseService.findAllCourses());
-			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
-		}else if(action.equalsIgnoreCase("edit")) {
-			UUID courseId = UUID.fromString(request.getParameter("courseId"));
-			request.setAttribute("course", courseService.findCourseById(courseId));
-			getServletContext().getRequestDispatcher("/jsp/modify-pages/course-modified-page.jsp").forward(request, response);
-		}else if(action.equalsIgnoreCase("assign")) {
-			UUID courseId = UUID.fromString(request.getParameter("courseId"));
-			request.setAttribute("course", courseService.findCourseById(courseId));
-			request.setAttribute("allStudents", studentService.findAllStudents());
-			request.setAttribute("allSemesters", semesterService.findAllSemesters());
-			getServletContext().getRequestDispatcher("/jsp/assignment-pages/course-assign-page.jsp").forward(request, response);
-		}else {
-			List<Course> allCourses = courseService.findAllCourses();
-			List<Semester> allSemester = semesterService.findAllSemesters();
-			request.setAttribute("allCourses", allCourses);
-			request.setAttribute("allSemesters", allSemester);
-			getServletContext().getRequestDispatcher("/jsp/course-page.jsp").forward(request, response);
+		List<Semester> courseAssignedSemesters = course.getListOfSemesters();
+		
+		
+		for(int i = 0; i < semesters.size();) {
+			boolean isItemRemoved = false;
+			for(int j = 0; j < courseAssignedSemesters.size(); j++) {
+				if(semesters.get(i).getSemester().equals(courseAssignedSemesters.get(j).getSemester())){
+					semesters.remove(i);
+					isItemRemoved = true;
+				}
+			}
+			
+			if(!isItemRemoved) {
+				i++;
+			}
 		}
+		
+		request.setAttribute("course", courseService.findCourseById(courseId));
+		request.setAttribute("allSemesters", semesters);
+		getServletContext().getRequestDispatcher("/jsp/modify-pages/course-modified-page.jsp").forward(request, response);
+	}
+	
+	private void doAssign(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		UUID courseId = UUID.fromString(request.getParameter("courseId"));
+		request.setAttribute("course", courseService.findCourseById(courseId));
+		request.setAttribute("allStudents", studentService.findAllStudents());
+		request.setAttribute("allSemesters", semesterService.findAllSemesters());
+		getServletContext().getRequestDispatcher("/jsp/assignment-pages/course-assign-page.jsp").forward(request, response);
 	}
 }
