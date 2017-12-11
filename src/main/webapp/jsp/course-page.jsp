@@ -127,7 +127,7 @@
                                 <tr>
                                   <th>Course Code</th>
                                   <th>Course Name</th>
-                                  <th>Semesters<th>
+                                  <th>Semesters</th>
                                   <th>Edit</th>
                                   <th>Assign Students</th>
                                   <th>Delete</th>
