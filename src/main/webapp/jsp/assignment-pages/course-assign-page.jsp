@@ -67,9 +67,9 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="sel1">Semester</label>
-                      <select name="semester" class="form-control" id="sel1">
-                        <c:forEach var="sem" items="${allSemesters}">
+                      <label for="dropdown">Semester</label>
+                      <select name="semester" class="form-control" id="form-group">
+                        <c:forEach var="sem" items="${course.listOfSemesters}">
                           <option>
                             <c:out value="${sem.semester}"/>
                           </option>
