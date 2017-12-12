@@ -140,7 +140,6 @@ public class CourseController extends HttpServlet{
 		UUID courseId = UUID.fromString(request.getParameter("courseId"));
 		request.setAttribute("course", courseService.findCourseById(courseId));
 		request.setAttribute("allStudents", studentService.findAllStudents());
-		request.setAttribute("allSemesters", semesterService.findAllSemesters());
 		getServletContext().getRequestDispatcher("/jsp/assignment-pages/course-assign-page.jsp").forward(request, response);
 	}
 }
