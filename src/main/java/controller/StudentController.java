@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -20,6 +18,7 @@ import service.StudentService;
 import service.StudentServiceInterface;
 import service.UserRoleService;
 import service.UserRoleServiceInterface;
+import util.Constants;
 
 @SuppressWarnings("serial")
 public class StudentController extends HttpServlet{
@@ -36,7 +35,50 @@ public class StudentController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String option = request.getParameter("option");
+		String option = request.getParameter(Constants.REQUEST_PARAMETER_OPTION);
+
+		Student student = null;
+		UserRole userRole = null;
+		
+		if(!option.equalsIgnoreCase(Constants.REQUEST_ACTION_CANCEL)) {
+			student = buildStudent(request);
+			userRole = buildUserRole(request);
+		}
+		
+		if(option.equalsIgnoreCase(Constants.REQUEST_ACTION_SAVE)) {
+			studentService.saveStudent(student);
+			userRoleService.saveUserRole(userRole);
+			
+		}else if(option.equalsIgnoreCase(Constants.REQUEST_ACTION_UPDATE)) {
+			String studentId = request.getParameter(Constants.REQUEST_PARAMETER_STUDENTID);
+			student.setStudentId(UUID.fromString(studentId));
+			studentService.updateStudent(student);
+			userRoleService.updateUserRoleByUsername(userRole);
+		}
+		
+		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
+		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLROLES, roleService.findAllRoles());
+		getServletContext().getRequestDispatcher(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS).forward(request, response);
+		
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String action = request.getParameter(Constants.REQUEST_PARAMETER_ACTION);
+	
+		if(action.equalsIgnoreCase(Constants.REQUEST_ACTION_DELETE)) {
+			doDel(request, response);
+		}else if(action.equalsIgnoreCase(Constants.REQUEST_ACTION_EDIT)) {
+			doEdit(request, response);
+		}else {
+			request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
+			request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLROLES, roleService.findAllRoles());
+			getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_STUDENTPAGE).forward(request, response);
+		}
+		
+	}
+	
+	private Student buildStudent(HttpServletRequest request) throws ServletException{
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
@@ -49,7 +91,6 @@ public class StudentController extends HttpServlet{
 		
 		Student student = new Student();
 		User user = new User();
-		UserRole userRole = new UserRole();
 		Role role = new Role();
 		
 		role.setRolename(rolename);
@@ -62,10 +103,6 @@ public class StudentController extends HttpServlet{
 		user.setUsername(username);
 		user.setLastModified(date);
 		
-		userRole.setRolename(rolename);
-		userRole.setUsername(username);
-		userRole.setLastModified(date);
-		
 		student.setFirstName(firstName);
 		student.setLastName(lastName);
 		student.setEmail(email);
@@ -73,45 +110,39 @@ public class StudentController extends HttpServlet{
 		student.setRole(role);
 		student.setLastModified(date);
 		
-		if(option.equalsIgnoreCase("save")) {
-			studentService.saveStudent(student);
-			userRoleService.saveUserRole(userRole);
-			
-		}else if(option.equalsIgnoreCase("update")) {
-			String studentId = request.getParameter("studentId");
-			student.setStudentId(UUID.fromString(studentId));
-			studentService.updateStudent(student);
-			userRoleService.updateUserRoleByUsername(userRole);
-		}
+		return student;
+	}
+	
+	private UserRole buildUserRole(HttpServletRequest request) throws ServletException{
+		String rolename = request.getParameter("rolename");
+		String username = request.getParameter("username");
 		
+		UserRole userRole = new UserRole();
+		
+		java.util.Date today = new java.util.Date();
+		java.sql.Date date = new java.sql.Date(today.getTime());
+		
+		userRole.setRolename(rolename);
+		userRole.setUsername(username);
+		userRole.setLastModified(date);
+		
+		return userRole;
+	}
+	
+	private void doDel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		UUID studentId = UUID.fromString(request.getParameter("studentId"));
+		String username = request.getParameter("username");
+		userRoleService.deleteUserRolebyUsername(username);
+		studentService.deleteStudentById(studentId);
 		request.setAttribute("allStudents", studentService.findAllStudents());
 		request.setAttribute("allRoles", roleService.findAllRoles());
 		getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
-		
 	}
 	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String action = request.getParameter("action");
-	
-		if(action.equalsIgnoreCase("delete")) {
-			UUID studentId = UUID.fromString(request.getParameter("studentId"));
-			String username = request.getParameter("username");
-			userRoleService.deleteUserRolebyUsername(username);
-			studentService.deleteStudentById(studentId);
-			request.setAttribute("allStudents", studentService.findAllStudents());
-			request.setAttribute("allRoles", roleService.findAllRoles());
-			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
-		}else if(action.equalsIgnoreCase("edit")) {
-			UUID studentId = UUID.fromString(request.getParameter("studentId"));
-			request.setAttribute("student", studentService.findStudentById(studentId));
-			request.setAttribute("allRoles", roleService.findAllRoles());
-			getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
-		}else {
-			request.setAttribute("allStudents", studentService.findAllStudents());
-			request.setAttribute("allRoles", roleService.findAllRoles());
-			getServletContext().getRequestDispatcher("/jsp/student-page.jsp").forward(request, response);
-		}
-		
+	private void doEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		UUID studentId = UUID.fromString(request.getParameter("studentId"));
+		request.setAttribute("student", studentService.findStudentById(studentId));
+		request.setAttribute("allRoles", roleService.findAllRoles());
+		getServletContext().getRequestDispatcher("/jsp/modify-pages/student-modified-page.jsp").forward(request, response);
 	}
 }
