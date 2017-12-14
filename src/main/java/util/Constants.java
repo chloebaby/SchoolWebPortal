@@ -1,0 +1,30 @@
+package util;
+
+public class Constants {
+	public static final String REQUEST_ACTION_EDIT = "edit";
+	public static final String REQUEST_ACTION_CANCEL = "cancel";
+	public static final String REQUEST_ACTION_SAVE = "save";
+	public static final String REQUEST_ACTION_UPDATE = "update";
+	public static final String REQUEST_ACTION_DELETE = "delete";
+	public static final String REQUEST_ACTION_ASSIGN = "assign";
+	
+	public static final String REQUEST_PARAMETER_OPTION = "option";
+	public static final String REQUEST_PARAMETER_ACTION = "action";
+	public static final String REQUEST_PARAMETER_COURSEID = "courseId";
+	public static final String REQUEST_PARAMETER_COURSENAME = "courseName";
+	public static final String REQUEST_PARAMETER_COURSECODE = "courseCode";
+	public static final String REQUEST_PARAMETER_ACTIVESEMESTERS = "activeSemesters";
+	public static final String REQUEST_PARAMETER_STUDENTID = "studentId";
+	
+	public static final String REQUEST_ATTRIBUTE_ALLCOURSES = "allCourses";
+	public static final String REQUEST_ATTRIBUTE_ALLSEMESTERS = "allSemesters";
+	public static final String REQUEST_ATTRIBUTE_COURSE = "course";
+	public static final String REQUEST_ATTRIBUTE_ALLSTUDENTS = "allStudents";
+	public static final String REQUEST_ATTRIBUTE_ALLROLES = "allRoles";
+	
+	public static final String REQUEST_DISPATCHER_COURSEPAGE = "/jsp/course-page.jsp";
+	public static final String REQUEST_DISPATCHER_COURSEMODIFIYPAGE = "/jsp/modify-pages/course-modified-page.jsp";
+	public static final String REQUEST_DISPATCHER_COURSEASSIGNPAGE = "/jsp/assignment-pages/course-assign-page.jsp";
+	public static final String REQUEST_DISPATCHER_STUDENTPAGE = "/jsp/student-page.jsp";
+
+}
