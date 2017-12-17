@@ -22,9 +22,10 @@ import model.User;
 import model.UserRole;
 import service.StudentService;
 import service.StudentServiceInterface;
+import util.Constants;
 
 public class EmailController extends HttpServlet{
-	private StudentServiceInterface<Student, User, UserRole> studentService;
+	private StudentServiceInterface studentService;
 	
 	public EmailController(){
 		super();
@@ -33,10 +34,10 @@ public class EmailController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String action = request.getParameter("action");
-		String studentEmail = request.getParameter("studentEmail");
+		String action = request.getParameter(Constants.REQUEST_PARAMETER_ACTION);
+		String studentEmail = request.getParameter(Constants.REQUEST_PARAMETER_STUDENTEMAIL);
 		
-		if(action.equals("email")) {
+		if(action.equals(Constants.REQUEST_PARAMETER_EMAIL)) {
 			sendEmail(studentEmail);
 		}
 		
