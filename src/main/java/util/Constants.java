@@ -14,6 +14,7 @@ public class Constants {
 	public static final String REQUEST_PARAMETER_COURSENAME = "courseName";
 	public static final String REQUEST_PARAMETER_COURSECODE = "courseCode";
 	public static final String REQUEST_PARAMETER_ACTIVESEMESTERS = "activeSemesters";
+	public static final String REQUEST_PAREMETER_ACTIVESTUDENTS = "activeStudents";
 	public static final String REQUEST_PARAMETER_STUDENTID = "studentId";
 	public static final String REQUEST_PARAMETER_FIRSTNAME = "firstName";
 	public static final String REQUEST_PARAMETER_LASTNAME = "lastName";
@@ -22,6 +23,7 @@ public class Constants {
 	public static final String REQUEST_PARAMETER_PASSWORD = "password";
 	public static final String REQUEST_PARAMETER_EMAIL = "email";
 	public static final String REQUEST_PARAMETER_STUDENTEMAIL = "studentEmail";
+	public static final String REQUEST_PARAMETER_SEMESTER = "semester";
 	
 	public static final String REQUEST_ATTRIBUTE_ALLCOURSES = "allCourses";
 	public static final String REQUEST_ATTRIBUTE_ALLSEMESTERS = "allSemesters";
@@ -35,5 +37,7 @@ public class Constants {
 	public static final String REQUEST_DISPATCHER_COURSEASSIGNPAGE = "/jsp/assignment-pages/course-assign-page.jsp";
 	public static final String REQUEST_DISPATCHER_STUDENTPAGE = "/jsp/student-page.jsp";
 	public static final String REQUEST_DISPATCHER_STUDENTMODIFYPAGE = "/jsp/modify-pages/student-modified-page.jsp";
+	
+	public static final String MISC_VALUE_OPENROUNDBRACKET = "(";
 
 }
