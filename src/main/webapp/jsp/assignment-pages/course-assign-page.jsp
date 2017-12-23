@@ -37,7 +37,7 @@
         <div class="update-course-form">
           <div class="row">
             <div class="col-sm-12">
-              <form action="${pageContext.request.contextPath}/school/result" onsubmit="return validateResultForm()" method="post">
+              <form action="${pageContext.request.contextPath}/school/course-assign" onsubmit="return validateResultForm()" method="post">
                 
                 <div class="row">
                   <div class="col-sm-12">
@@ -65,6 +65,36 @@
                 </div> <!-- /.row -->
                 
                 <div class="row">
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label for="sel1">Available Students (hold shift to select more than one)</label>
+                        <select multiple name="students" class="form-control" id="sel1">
+                          <c:forEach var="student" items="${allStudents}">
+                            <option>
+                              <c:out value="${student.user.username} (${student.firstName} ${student.lastName})"/>
+                            </option>
+                          </c:forEach>
+                        </select>
+                    </div>
+                  </div>
+                    
+                  <div class="col-sm-2">
+                    <div class="select-arrows">
+                      <button type="button" onclick="rightBox()" name="right" value=right class="btn btn-default"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
+                      <button type="button" onclick="leftBox()" name="left" value="left" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label for="sel2">Active Students (hold shift to select more than one)</label>
+                        <select multiple="multiple" name="activeStudents" class="form-control" id="sel2">
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="dropdown">Semester</label>
@@ -77,23 +107,11 @@
                       </select> <!-- /.form-control -->
                     </div> <!-- /.form-group -->
                   </div> <!-- /.col-sm-6 -->
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="sel2">Students (hold shift to select more than one)</label>
-                      <select multiple name="students" class="form-control" id="sel2">
-                        <c:forEach var="student" items="${allStudents}">
-                          <option>
-                            <c:out value="${student.user.username} (${student.firstName} ${student.lastName})"/>
-                          </option>
-                        </c:forEach>
-                      </select>
-                    </div>  <!-- /.form-group -->
-                  </div> <!-- /.col-sm-6 -->
                 </div> <!-- /.row -->
                 
                 <div class="row">
                   <div class="col-sm-12">
-                    <button type="submit" name="option" value="assign" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
                     <button type="submit" name="option" value="cancel" class="btn btn-danger">Cancel</button>
                   </div>
                 </div>
