@@ -23,6 +23,10 @@
     <servlet-name>EmailController</servlet-name>
     <servlet-class>controller.EmailController</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CourseAssignController</servlet-name>
+    <servlet-class>controller.CourseAssignController</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>StudentController</servlet-name>
@@ -35,6 +39,10 @@
   <servlet-mapping>
 	  <servlet-name>EmailController</servlet-name>
 	  <url-pattern>/school/student/email</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseAssignController</servlet-name>
+    <url-pattern>/school/course-assign</url-pattern>
   </servlet-mapping>
   
   <security-constraint>
