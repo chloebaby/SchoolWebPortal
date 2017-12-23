@@ -7,10 +7,8 @@ import org.hibernate.SessionFactory;
 
 import dao.SchoolDAO;
 import dao.StudentDAO;
-import dao.UserDAO;
 import dao.UserRoleDAO;
 import daoimplementation.DAOStudentImplementation;
-import daoimplementation.DAOUserImplementation;
 import daoimplementation.DAOUserRoleImplementation;
 import model.Student;
 import model.User;
