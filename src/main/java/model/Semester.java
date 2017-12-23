@@ -32,7 +32,7 @@ public class Semester {
 	@Column(name = "semester", updatable = false, nullable = false)
 	private String semester;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="SEMESTER_RESULTS", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
