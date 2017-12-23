@@ -1,12 +1,16 @@
 package model;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -21,13 +25,16 @@ public class Result {
 	@Type(type = "uuid-char")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "result_id", updatable = false, nullable = false)
-	UUID resultId;
+	private UUID resultId;
 	
-	@Column(name = "marks")
-	int marks;
+	@Column(name = "marks", nullable = true)
+	private int marks;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listOfResults")
+	private List<Semester> listOfSemesters;
 	
 	@Column(name = "last_modified")
-	Date lastModified;
+	private Date lastModified;
 	
 	public Result() {}
 	
@@ -47,6 +54,14 @@ public class Result {
 		this.marks = marks;
 	}
 	
+	public List<Semester> getListOfSemesters() {
+		return listOfSemesters;
+	}
+
+	public void setListOfSemesters(List<Semester> listOfSemesters) {
+		this.listOfSemesters = listOfSemesters;
+	}
+
 	public Date getLastModified() {
 		return lastModified;
 	}
