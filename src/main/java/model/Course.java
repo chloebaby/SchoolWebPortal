@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -37,14 +39,15 @@ public class Course {
 	@Column(name = "course_code")
 	private String courseCode;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="COURSE_RESULT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
 	@Column(name = "last_modified")
 	private Date lastModified;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="COURSE_SEMESTER", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="semester_id")})
 	private List<Semester> listOfSemesters = new ArrayList<Semester>();
 	
