@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 
 import dao.SemesterDAO;
 import model.Semester;
+import model.Student;
 import sqlconnection.SQLConnection;
 
 public class DAOSemesterImplementation extends SQLConnection implements SemesterDAO{
@@ -35,5 +36,22 @@ public class DAOSemesterImplementation extends SQLConnection implements Semester
 		closeCurrentSession();
 		
 		return semesterId;
+	}
+	
+	@Override
+	public Semester selectSemesterByUUID(UUID semesterId) {
+		openCurrentSession();
+		Semester semester = getCurrentSession().get(Semester.class, semesterId);
+		closeCurrentSession();
+		return semester;
+	}
+	
+	@Override
+	public void updateSemester(Semester semester) {
+		openCurrentSession();
+		openCurrentTransaction();
+		getCurrentSession().update(semester);
+		commitTransaction();
+		closeCurrentSession();
 	}
 }
