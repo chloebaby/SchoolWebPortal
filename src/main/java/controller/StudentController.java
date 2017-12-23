@@ -58,7 +58,7 @@ public class StudentController extends HttpServlet{
 		
 		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
 		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLROLES, roleService.findAllRoles());
-		getServletContext().getRequestDispatcher(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS).forward(request, response);
+		getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_STUDENTPAGE).forward(request, response);
 		
 	}
 	
