@@ -23,5 +23,15 @@ public class SemesterService implements SemesterServiceInterface {
 	public UUID findUUIDBySemester(String semester) {
 		return daoSemesterImplementation.selectUUIDBySemesterName(semester);
 	}
+	
+	@Override
+	public Semester findSemesterByUUID(UUID semesterId) {
+		return daoSemesterImplementation.selectSemesterByUUID(semesterId);
+	}
+	
+	@Override
+	public void updateSemester(Semester semester) {
+		daoSemesterImplementation.updateSemester(semester);
+	}
 
 }
