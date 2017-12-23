@@ -48,7 +48,7 @@ public class Student {
 	@Column(name = "email")
 	private String email;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="STUDENT_RESULT", joinColumns={@JoinColumn(name="student_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
@@ -112,11 +112,9 @@ public class Student {
 		return listOfResults;
 	}
 
-
 	public void setListOfResults(List<Result> listOfResults) {
 		this.listOfResults = listOfResults;
 	}
-
 
 	public Date getLastModified() {
 		return lastModified;
