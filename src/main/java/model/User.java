@@ -5,8 +5,10 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -28,6 +30,9 @@ public class User {
 	
 	@Column(name = "password")
 	private String password;
+	
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
+	private Student student;
 	
 	@Column(name = "last_modified")
 	private Date lastModified;
@@ -56,6 +61,14 @@ public class User {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Date getLastModified() {
