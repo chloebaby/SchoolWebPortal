@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -37,6 +39,7 @@ public class Semester {
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
 	@ManyToMany(mappedBy="listOfSemesters")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Course> listOfCourses;
 	
 	public Semester() {}
