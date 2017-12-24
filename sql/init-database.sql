@@ -89,3 +89,28 @@ select * from STUDENT_RESULT;
 select * from SEMESTER_RESULTS;
 
 select * from Semesters;
+select * from Courses;
+select * from COURSE_RESULT;
+select * from STUDENT_COURSE;
+select * from SEMESTER_RESULTS;
+select * from STUDENT_RESULT;
+select * from Results;
+select * from Students;
+
+select stu.first_name from Courses crs
+join COURSE_STUDENT crs_stu on crs.course_id=crs_stu.course_id
+join Students stu on crs_stu.student_id=stu.student_id
+join COURSE_SEMESTER crs_sem on crs.course_id = crs_sem.course_id
+join Semesters sem on crs_sem.semester_id = crs.course_id;
+
+select * from Semesters;
+select * from Courses;
+select * from COURSE_SEMESTER;
+
+
+select sem.semester, stu.first_name from Semesters sem
+join COURSE_SEMESTER crs_sem on crs_sem.semester_id = sem.semester_id
+join Courses crs on crs_sem.course_id = crs.course_id
+join COURSE_STUDENT crs_stu on crs.course_id=crs_stu.course_id
+join Students stu on crs_stu.student_id=stu.student_id
+where crs.course_id='38a85798-cdc8-4d7b-bc39-d837fc55072f';
