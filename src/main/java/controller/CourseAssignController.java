@@ -84,12 +84,14 @@ public class CourseAssignController extends HttpServlet{
 			List<Result> studentResult = student.getListOfResults();
 			studentResult.add(result);
 			student.setListOfResults(studentResult);
+			student.setLastModified(date);
 			studentService.updateStudent(student);
 			
 			
 			List<Result> courseResult = course.getListOfResults();
 			courseResult.add(result);
 			course.setListOfResults(courseResult);
+			course.setLastModified(date);
 			courseService.updateCourse(course);
 			
 			for(Semester sem : listOfSemesters) {
