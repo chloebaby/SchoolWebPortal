@@ -3,6 +3,7 @@ package model;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -42,6 +43,11 @@ public class Course {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="COURSE_RESULT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
+	
+	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="COURSE_STUDENT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
+	private Set<Student> listOfStudents;
 	
 	@Column(name = "last_modified")
 	private Date lastModified;
@@ -83,6 +89,14 @@ public class Course {
 
 	public void setListOfResults(List<Result> listOfResults) {
 		this.listOfResults = listOfResults;
+	}
+
+	public Set<Student> getListOfStudents() {
+		return listOfStudents;
+	}
+
+	public void setListOfStudents(Set<Student> listOfStudents) {
+		this.listOfStudents = listOfStudents;
 	}
 
 	public Date getLastModified() {
