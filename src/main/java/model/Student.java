@@ -54,6 +54,7 @@ public class Student {
 	private String email;
 	
 	@ManyToMany(mappedBy = "listOfStudents")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Course> listOfCourses;
 	
 	@OneToMany(cascade = CascadeType.ALL)
