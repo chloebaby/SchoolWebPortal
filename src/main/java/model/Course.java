@@ -44,7 +44,7 @@ public class Course {
 	@JoinTable(name="COURSE_RESULT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="COURSE_STUDENT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
 	private Set<Student> listOfStudents;

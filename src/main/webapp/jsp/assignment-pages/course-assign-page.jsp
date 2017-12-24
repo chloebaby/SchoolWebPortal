@@ -120,6 +120,37 @@
             </div> <!-- /.col-sm-12 -->
           </div> <!-- /.row -->
         </div> <!-- /.update-course-form  -->
+        
+        <div class="table-section">
+          <div class="row">
+            <div class="col-sm-12">
+              
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>User Name</th>
+                    <th>Semester</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <c:forEach var="student" items="${course.listOfStudents}">
+                    <tr>
+                      <td><c:out value="${student.firstName}" /></td>
+                      <td><c:out value="${student.lastName}" /></td>
+                      <td><c:out value="${student.user.username}" /></td>
+                      <td>Semester</td>
+                      <td><a>delete</a></td>
+                    </tr>
+                  </c:forEach>
+                </tbody>
+              </table>
+              
+            </div>
+          </div>
+        </div>
       
       </div> <!-- /.container -->
     </div> <!-- /.update-course-page -->

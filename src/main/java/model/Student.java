@@ -3,6 +3,7 @@ package model;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -12,12 +13,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -48,7 +53,11 @@ public class Student {
 	@Column(name = "email")
 	private String email;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "listOfStudents")
+	private Set<Course> listOfCourses;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="STUDENT_RESULT", joinColumns={@JoinColumn(name="student_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
@@ -108,6 +117,16 @@ public class Student {
 		this.email = email;
 	}
 	
+	public Set<Course> getListOfCourses() {
+		return listOfCourses;
+	}
+
+
+	public void setListOfCourses(Set<Course> listOfCourses) {
+		this.listOfCourses = listOfCourses;
+	}
+
+
 	public List<Result> getListOfResults() {
 		return listOfResults;
 	}
