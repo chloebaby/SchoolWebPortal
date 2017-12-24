@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -91,6 +92,9 @@ public class CourseAssignController extends HttpServlet{
 			List<Result> courseResult = course.getListOfResults();
 			courseResult.add(result);
 			course.setListOfResults(courseResult);
+			Set<Student> courseStudent = course.getListOfStudents();
+			courseStudent.add(student);
+			course.setListOfStudents(courseStudent);
 			course.setLastModified(date);
 			courseService.updateCourse(course);
 			
