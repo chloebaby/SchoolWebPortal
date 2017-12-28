@@ -37,13 +37,7 @@ public class Student {
 	@Column(name = "student_id", updatable = false, nullable = false)
 	private UUID studentId;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "role_id")
-	private Role role;
+
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -53,10 +47,17 @@ public class Student {
 	
 	@Column(name = "email")
 	private String email;
+
+	@Column(name = "last_modified")
+	private Date lastModified;
 	
-	@ManyToMany(mappedBy = "listOfStudents")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<Course> listOfCourses;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "role_id")
+	private Role role;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="student")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -64,10 +65,11 @@ public class Student {
 	
 	@ManyToMany(mappedBy = "listOfStudents")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<Semester> listOfSemesters = new HashSet<Semester>();
+	private Set<Course> listOfCourses;
 	
-	@Column(name = "last_modified")
-	private Date lastModified;
+	@ManyToMany(mappedBy = "listOfStudents")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<Semester> listOfSemesters = new HashSet<Semester>();
 	
 	public Student() {}
 	

@@ -31,11 +31,11 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
-	private Student student;
-	
 	@Column(name = "last_modified")
 	private Date lastModified;
+	
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
+	private Student student;
 	
 	public User() {}
 	

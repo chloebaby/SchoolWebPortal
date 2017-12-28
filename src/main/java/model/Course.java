@@ -39,6 +39,9 @@ public class Course {
 	
 	@Column(name = "course_code")
 	private String courseCode;
+
+	@Column(name = "last_modified")
+	private Date lastModified;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -48,9 +51,6 @@ public class Course {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="COURSE_STUDENT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
 	private Set<Student> listOfStudents;
-	
-	@Column(name = "last_modified")
-	private Date lastModified;
 	
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)

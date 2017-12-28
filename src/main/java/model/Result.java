@@ -36,6 +36,9 @@ public class Result {
 	@Column(name = "marks", nullable = true)
 	private int marks;
 	
+	@Column(name = "last_modified")
+	private Date lastModified;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="RESULT_STUDENT", joinColumns={@JoinColumn(name="result_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
@@ -49,9 +52,6 @@ public class Result {
 	@ManyToMany(mappedBy = "listOfResults")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Semester> listOfSemesters;
-	
-	@Column(name = "last_modified")
-	private Date lastModified;
 	
 	public Result() {}
 	
