@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -57,10 +58,13 @@ public class Student {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Course> listOfCourses;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy ="student")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinTable(name="STUDENT_RESULT", joinColumns={@JoinColumn(name="student_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
+	
+	@ManyToMany(mappedBy = "listOfStudents")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private Set<Semester> listOfSemesters = new HashSet<Semester>();
 	
 	@Column(name = "last_modified")
 	private Date lastModified;
@@ -135,6 +139,16 @@ public class Student {
 	public void setListOfResults(List<Result> listOfResults) {
 		this.listOfResults = listOfResults;
 	}
+
+	public Set<Semester> getListOfSemesters() {
+		return listOfSemesters;
+	}
+
+
+	public void setListOfSemesters(Set<Semester> listOfSemesters) {
+		this.listOfSemesters = listOfSemesters;
+	}
+
 
 	public Date getLastModified() {
 		return lastModified;
