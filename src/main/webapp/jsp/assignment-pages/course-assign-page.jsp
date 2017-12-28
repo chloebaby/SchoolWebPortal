@@ -141,24 +141,17 @@
                       <td><c:out value="${student.firstName}" /></td>
                       <td><c:out value="${student.lastName}" /></td>
                       <td><c:out value="${student.user.username}" /></td>
-                      <td>
-<%--                         <c:forEach var="semester" items="${course.listOfSemesters}">
-                          <c:choose>
-                            <c:when test="${student.course. }"
-                          </c:choose>
-                        </c:forEach> --%>
-                        <c:forEach var="studentCourse" items="${student.listOfCourses}">
-                          <c:forEach var="courseSemester" items="${studentCourse.listOfSemesters}">
-                            <c:forEach var="semesterCourse" items="${courseSemester.listOfCourses}">
-                              <c:choose>
-                                <c:when test="${studentCourse.courseId eq course.courseId and semesterCourse.courseId eq course.courseId}">
-                                  <c:out value="${courseSemester.semester}" />
-                                </c:when>
-                              </c:choose>
-                            </c:forEach>
+                      <c:forEach var="sem" items="${student.listOfSemesters}">
+                        <c:forEach var="stu" items="${sem.listOfStudents}">
+                          <c:forEach var="semCrs" items="${course.listOfSemesters}">
+                            <c:choose>
+                              <c:when test="${student.studentId eq stu.studentId and sem.semesterId eq semCrs.semesterId}">
+                                <td><c:out value="${sem.semester}" /></td>
+                              </c:when>
+                            </c:choose>
                           </c:forEach>
                         </c:forEach>
-                        </td>
+                      </c:forEach>
                       <td><a>delete</a></td>
                     </tr>
                   </c:forEach>
