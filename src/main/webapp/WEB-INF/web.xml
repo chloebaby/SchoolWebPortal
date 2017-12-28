@@ -27,6 +27,10 @@
     <servlet-name>CourseAssignController</servlet-name>
     <servlet-class>controller.CourseAssignController</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ResultController</servlet-name>
+    <servlet-class>controller.ResultController</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>StudentController</servlet-name>
@@ -43,6 +47,10 @@
   <servlet-mapping>
     <servlet-name>CourseAssignController</servlet-name>
     <url-pattern>/school/course-assign</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ResultController</servlet-name>
+    <url-pattern>/school/result</url-pattern>
   </servlet-mapping>
   
   <security-constraint>
