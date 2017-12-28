@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -18,6 +17,8 @@ import model.Student;
 import model.User;
 import service.CourseService;
 import service.CourseServiceInterface;
+import service.ResultService;
+import service.ResultServiceInterface;
 import service.SemesterService;
 import service.SemesterServiceInterface;
 import service.StudentService;
@@ -31,6 +32,7 @@ public class CourseAssignController extends HttpServlet{
 	private SemesterServiceInterface semesterService;
 	private StudentServiceInterface studentService;
 	private UserServiceInterface userService;
+	private ResultServiceInterface resultService;
 	
 	public CourseAssignController() {
 		super();
@@ -38,6 +40,7 @@ public class CourseAssignController extends HttpServlet{
 		semesterService = new SemesterService();
 		studentService = new StudentService();
 		userService = new UserService();
+		resultService = new ResultService();
 	}
 	
 	@Override 
@@ -60,23 +63,19 @@ public class CourseAssignController extends HttpServlet{
 	
 	private void makeAssignment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		UUID courseId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_COURSEID));
-		String courseName = request.getParameter(Constants.REQUEST_PARAMETER_COURSENAME);
 		String[] selectedStudents = request.getParameterValues(Constants.REQUEST_PAREMETER_ACTIVESTUDENTS);
 		String semesterName = request.getParameter(Constants.REQUEST_PARAMETER_SEMESTER);
 		
 		java.util.Date today = new java.util.Date();
 		java.sql.Date date = new java.sql.Date(today.getTime());
 		
-		List<Result> results = new ArrayList<Result>();
 		String[] usernames = new String[selectedStudents.length];
 		Course course = courseService.findCourseById(courseId);
 		List<Semester> listOfSemesters = course.getListOfSemesters();
 		
 		for(int i = 0; i < selectedStudents.length; i++) {
 			Result result = new Result();
-			//result.setMarks(Integer.valueOf(null));
 			result.setLastModified(date);
-			results.add(result);
 			usernames[i] = selectedStudents[i].substring(0, selectedStudents[i].indexOf(Constants.MISC_VALUE_OPENROUNDBRACKET));
 			usernames[i].trim();
 			
@@ -86,7 +85,8 @@ public class CourseAssignController extends HttpServlet{
 			studentResult.add(result);
 			student.setListOfResults(studentResult);
 			student.setLastModified(date);
-			studentService.updateStudent(student);
+			result.setStudent(student);
+			resultService.saveResult(result);
 			
 			
 			List<Result> courseResult = course.getListOfResults();
@@ -98,12 +98,21 @@ public class CourseAssignController extends HttpServlet{
 			course.setLastModified(date);
 			courseService.updateCourse(course);
 			
+			result.setCourse(course);
+			resultService.updateResult(result);
+			
 			for(Semester sem : listOfSemesters) {
 				if(sem.getSemester().equals(semesterName)) {
 					Semester semester = semesterService.findSemesterByUUID(sem.getSemesterId());
 					List<Result> semesterResults = semester.getListOfResults();
+					Set<Student> semesterStudent = semester.getListOfStudents();
+					Set<Semester> studentSemester = student.getListOfSemesters();
 					semesterResults.add(result);
+					semesterStudent.add(student);
+					studentSemester.add(semester);
 					semester.setListOfResults(semesterResults);
+					semester.setListOfStudents(semesterStudent);
+					student.setListOfSemesters(studentSemester);
 					semesterService.updateSemester(semester);
 				}
 			}
