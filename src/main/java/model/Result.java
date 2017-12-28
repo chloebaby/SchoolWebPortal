@@ -4,16 +4,22 @@ import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -30,7 +36,18 @@ public class Result {
 	@Column(name = "marks", nullable = true)
 	private int marks;
 	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listOfResults")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="RESULT_STUDENT", joinColumns={@JoinColumn(name="result_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
+	private Student student;
+	
+	@ManyToOne
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="RESULT_COURSE", joinColumns={@JoinColumn(name="result_id")},inverseJoinColumns={@JoinColumn(name="course_id")})
+	private Course course;
+	
+	@ManyToMany(mappedBy = "listOfResults")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Semester> listOfSemesters;
 	
 	@Column(name = "last_modified")
@@ -54,6 +71,22 @@ public class Result {
 		this.marks = marks;
 	}
 	
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	public List<Semester> getListOfSemesters() {
 		return listOfSemesters;
 	}
