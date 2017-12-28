@@ -40,8 +40,8 @@ public class Course {
 	@Column(name = "course_code")
 	private String courseCode;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name="COURSE_RESULT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
 	@ManyToMany(cascade = CascadeType.ALL)
