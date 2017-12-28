@@ -1,9 +1,11 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import junit.framework.TestCase;
+import model.Result;
 import model.Role;
 import model.Student;
 import model.User;
@@ -14,6 +16,7 @@ public class TestStudentService extends TestCase {
 	private StudentServiceInterface studentService;
 	private RoleServiceInterface roleService;
 	private UserRoleServiceInterface userRoleService;
+	private ResultServiceInterface resultService;
 	private Student student;
 	private Role role;
 	private User user;
@@ -36,6 +39,9 @@ public class TestStudentService extends TestCase {
 		date = new java.sql.Date(today.getTime());
 		
 		roleService = new RoleService();
+		studentService = new StudentService();
+		userRoleService = new UserRoleService();
+		resultService = new ResultService();
 		
 		List<Role> actualRoles = roleService.findAllRoles();
 		
@@ -77,10 +83,26 @@ public class TestStudentService extends TestCase {
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		studentService.deleteStudentById(student.getStudentId());
 	}
 	
-	public void testFindAllStudents() {
-		List<Student> allStudents = daoStudentImplementation.select();
+	public void testAssociateStudentToResult(){
+		Result result = new Result();
+		result.setLastModified(date);
+		//resultService.saveResult(result);
+		
+		List<Result> studentResult = student.getListOfResults();
+		studentResult.add(result);
+		student.setListOfResults(studentResult);
+		student.setLastModified(date);
+		//studentService.updateStudent(student);
+		result.setStudent(student);
+		
+		resultService.saveResult(result);
+		
+		
 	}
+	
+
 
 }
