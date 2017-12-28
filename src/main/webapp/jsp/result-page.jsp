@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,7 +56,7 @@
           
           <div class="col-sm-10">
             <div class="tab-content">
-              <div class="tab-pane text-style" id="tab3">
+              <div class="tab-pane active text-style" id="tab3">
               
                 <div class="result-form">
                   
@@ -87,9 +88,58 @@
                   <div class="row">
                     <div class="col-sm-12">
                     
-                    </div>
-                  </div>
-                </div>
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Course Name</th>
+                            <th>Mark</th>
+                            <th>Semester</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <c:forEach var="result" items="${allResults}" varStatus="status">
+                            <tr>
+                              
+                              <c:forEach var="stu" items="${result.student.listOfResults}">
+                                <c:choose>
+                                  <c:when test="${result.resultId eq stu.resultId}">
+                                   <td><c:out value="${result.student.firstName}"/></td>
+                                   <td><c:out value="${result.student.lastName }" /></td>
+                                  </c:when>
+                                </c:choose>
+                              </c:forEach>
+                              
+                              <c:forEach var="crs" items="${result.course.listOfResults}">
+                                <c:choose>
+                                  <c:when test="${result.resultId eq crs.resultId }">
+                                    <td><c:out value="${result.course.courseName}" /></td>
+                                  </c:when>
+                                </c:choose>
+                              </c:forEach>
+                                
+                             <td><c:out value="${result.marks}" /></td>
+                             
+                             <c:forEach var="sem" items="${result.listOfSemesters}">
+                              <c:forEach var="res" items="${sem.listOfResults}">
+                                <c:choose>
+                                  <c:when test="${result.resultId eq res.resultId}">
+                                    <td><c:out value="${sem.semester}" /></td>
+                                  </c:when>
+                                </c:choose>
+                              </c:forEach>
+                             </c:forEach>
+                            </tr>
+                          </c:forEach>
+
+                          
+                        </tbody>
+                      </table>
+                    
+                    </div> <!-- /.col-sm-12 -->
+                  </div> <!-- /.row -->
+                </div> <!-- /.table-section -->
                 
                 
               </div> <!-- /.tab-pane .text-style -->
