@@ -31,12 +31,14 @@ public class Constants {
 	public static final String REQUEST_ATTRIBUTE_ALLSTUDENTS = "allStudents";
 	public static final String REQUEST_ATTRIBUTE_ALLROLES = "allRoles";
 	public static final String REQUEST_ATTRIBUTE_STUDENT = "student";
+	public static final String REQUEST_ATTRIBUTE_ALLRESULTS = "allResults";
 	
 	public static final String REQUEST_DISPATCHER_COURSEPAGE = "/jsp/course-page.jsp";
 	public static final String REQUEST_DISPATCHER_COURSEMODIFIYPAGE = "/jsp/modify-pages/course-modified-page.jsp";
 	public static final String REQUEST_DISPATCHER_COURSEASSIGNPAGE = "/jsp/assignment-pages/course-assign-page.jsp";
 	public static final String REQUEST_DISPATCHER_STUDENTPAGE = "/jsp/student-page.jsp";
 	public static final String REQUEST_DISPATCHER_STUDENTMODIFYPAGE = "/jsp/modify-pages/student-modified-page.jsp";
+	public static final String REQUEST_DISPATCHER_RESULTPAGE = "/jsp/result-page.jsp";
 	
 	public static final String MISC_VALUE_OPENROUNDBRACKET = "(";
 
