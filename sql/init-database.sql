@@ -114,3 +114,20 @@ join Courses crs on crs_sem.course_id = crs.course_id
 join COURSE_STUDENT crs_stu on crs.course_id=crs_stu.course_id
 join Students stu on crs_stu.student_id=stu.student_id
 where crs.course_id='38a85798-cdc8-4d7b-bc39-d837fc55072f';
+
+
+select * from Students;
+select * from Results;
+select * from RESULT_STUDENT;
+select * from COURSE_STUDENT;
+select * from RESULT_COURSE;
+select * from COURSE_SEMESTER;
+select * from SEMESTER_RESULTS;
+select * from STUDENT_SEMESTER;
+
+select * from Roles;
+
+select stu.first_name, stu.last_name, res.marks
+from Students stu
+join RESULT_STUDENT res_stu on stu.student_id = res_stu.student_id
+join Results res on res_stu.result_id = res.result_id;
