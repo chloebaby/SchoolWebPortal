@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -12,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -35,12 +36,18 @@ public class Semester {
 	private String semester;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="SEMESTER_RESULTS", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
+	@JoinTable(name="SEMESTER_RESULT", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private List<Result> listOfResults = new ArrayList<Result>();
 	
 	@ManyToMany(mappedBy="listOfSemesters")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Course> listOfCourses;
+	private List<Course> listOfCourses = new ArrayList<Course>();
+	
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name="STUDENT_SEMESTER", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
+	private Set<Student> listOfStudents = new HashSet<Student>();
+	
 	
 	public Semester() {}
 	
@@ -74,5 +81,13 @@ public class Semester {
 
 	public void setListOfCourses(List<Course> listOfCourses) {
 		this.listOfCourses = listOfCourses;
+	}
+
+	public Set<Student> getListOfStudents() {
+		return listOfStudents;
+	}
+
+	public void setListOfStudents(Set<Student> listOfStudents) {
+		this.listOfStudents = listOfStudents;
 	}
 }
