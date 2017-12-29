@@ -16,6 +16,8 @@ public class Constants {
 	public static final String REQUEST_PARAMETER_ACTIVESEMESTERS = "activeSemesters";
 	public static final String REQUEST_PAREMETER_ACTIVESTUDENTS = "activeStudents";
 	public static final String REQUEST_PARAMETER_STUDENTID = "studentId";
+	public static final String REQUEST_PARAMETER_SEMETERID = "semesterId";
+	public static final String REQUEST_PARAMETER_RESULTID = "resultId";
 	public static final String REQUEST_PARAMETER_FIRSTNAME = "firstName";
 	public static final String REQUEST_PARAMETER_LASTNAME = "lastName";
 	public static final String REQUEST_PARAMETER_ROLENAME = "rolename";
@@ -24,6 +26,7 @@ public class Constants {
 	public static final String REQUEST_PARAMETER_EMAIL = "email";
 	public static final String REQUEST_PARAMETER_STUDENTEMAIL = "studentEmail";
 	public static final String REQUEST_PARAMETER_SEMESTER = "semester";
+	public static final String REQUEST_PARAMETER_MARK = "mark";
 	
 	public static final String REQUEST_ATTRIBUTE_ALLCOURSES = "allCourses";
 	public static final String REQUEST_ATTRIBUTE_ALLSEMESTERS = "allSemesters";
@@ -32,6 +35,7 @@ public class Constants {
 	public static final String REQUEST_ATTRIBUTE_ALLROLES = "allRoles";
 	public static final String REQUEST_ATTRIBUTE_STUDENT = "student";
 	public static final String REQUEST_ATTRIBUTE_ALLRESULTS = "allResults";
+	public static final String REQUEST_ATTRIBUTE_RESULT = "result";
 	
 	public static final String REQUEST_DISPATCHER_COURSEPAGE = "/jsp/course-page.jsp";
 	public static final String REQUEST_DISPATCHER_COURSEMODIFIYPAGE = "/jsp/modify-pages/course-modified-page.jsp";
@@ -39,6 +43,7 @@ public class Constants {
 	public static final String REQUEST_DISPATCHER_STUDENTPAGE = "/jsp/student-page.jsp";
 	public static final String REQUEST_DISPATCHER_STUDENTMODIFYPAGE = "/jsp/modify-pages/student-modified-page.jsp";
 	public static final String REQUEST_DISPATCHER_RESULTPAGE = "/jsp/result-page.jsp";
+	public static final String REQUEST_DISPATCHER_RESULTMODIFYPAGE = "/jsp/modify-pages/result-modified-page.jsp";
 	
 	public static final String MISC_VALUE_OPENROUNDBRACKET = "(";
 
