@@ -146,21 +146,24 @@
                           <c:forEach var="semCrs" items="${course.listOfSemesters}">
                             <c:choose>
                               <c:when test="${student.studentId eq stu.studentId and sem.semesterId eq semCrs.semesterId}">
-                                <td><c:out value="${sem.semester}" /></td>
+                                <td>
+                                  <c:out value="${sem.semester}" />
+                                  <c:set var="semId" scope="request" value="${sem.semesterId}"/>
+                                </td>
                               </c:when>
                             </c:choose>
                           </c:forEach>
                         </c:forEach>
                       </c:forEach>
-                      <td><a>delete</a></td>
+                      <td><a href=<c:url value="/school/course-assign?action=delete&studentId=${student.studentId}&courseId=${course.courseId}&semesterId=${semId}"/>>Delete</a></td>
                     </tr>
                   </c:forEach>
                 </tbody>
-              </table>
+              </table> <!-- /.table .table-hover -->
               
-            </div>
-          </div>
-        </div>
+            </div> <!-- /.col-sm-12 -->
+          </div> <!-- /.row -->
+        </div> <!-- /.table-section -->
       
       </div> <!-- /.container -->
     </div> <!-- /.update-course-page -->
