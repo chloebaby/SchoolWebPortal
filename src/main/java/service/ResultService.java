@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.UUID;
 
 import dao.ResultDAO;
 import daoimplementation.DAOResultImplementation;
@@ -29,4 +30,8 @@ public class ResultService implements ResultServiceInterface {
 		daoResultImplementation.updateResult(result);
 	}
 
+	@Override
+	public Result findResultById(UUID resultId) {
+		return daoResultImplementation.selectResultById(resultId);
+	}
 }
