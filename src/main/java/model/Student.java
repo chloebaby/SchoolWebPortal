@@ -61,11 +61,11 @@ public class Student {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="student")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Result> listOfResults = new ArrayList<Result>();
+	private Set<Result> listOfResults = new HashSet<Result>();
 	
 	@ManyToMany(mappedBy = "listOfStudents")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<Course> listOfCourses;
+	private Set<Course> listOfCourses = new HashSet<Course>();
 	
 	@ManyToMany(mappedBy = "listOfStudents")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -134,11 +134,11 @@ public class Student {
 	}
 
 
-	public List<Result> getListOfResults() {
+	public Set<Result> getListOfResults() {
 		return listOfResults;
 	}
 
-	public void setListOfResults(List<Result> listOfResults) {
+	public void setListOfResults(Set<Result> listOfResults) {
 		this.listOfResults = listOfResults;
 	}
 
