@@ -1,6 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -58,7 +62,11 @@ public class CourseAssignController extends HttpServlet{
 	
 	@Override 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String action = request.getParameter(Constants.REQUEST_PARAMETER_ACTION);
 		
+		if(action.equalsIgnoreCase(Constants.REQUEST_ACTION_DELETE)) {
+			doDel(request, response);
+		}
 	}
 	
 	private void makeAssignment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -81,7 +89,7 @@ public class CourseAssignController extends HttpServlet{
 			
 			User user = userService.findUserByUsername(usernames[i]);
 			Student student = user.getStudent();
-			List<Result> studentResult = student.getListOfResults();
+			Set<Result> studentResult = student.getListOfResults();
 			studentResult.add(result);
 			student.setListOfResults(studentResult);
 			student.setLastModified(date);
@@ -89,7 +97,7 @@ public class CourseAssignController extends HttpServlet{
 			resultService.saveResult(result);
 			
 			
-			List<Result> courseResult = course.getListOfResults();
+			Set<Result> courseResult = course.getListOfResults();
 			courseResult.add(result);
 			course.setListOfResults(courseResult);
 			Set<Student> courseStudent = course.getListOfStudents();
@@ -104,7 +112,7 @@ public class CourseAssignController extends HttpServlet{
 			for(Semester sem : listOfSemesters) {
 				if(sem.getSemester().equals(semesterName)) {
 					Semester semester = semesterService.findSemesterByUUID(sem.getSemesterId());
-					List<Result> semesterResults = semester.getListOfResults();
+					Set<Result> semesterResults = semester.getListOfResults();
 					Set<Student> semesterStudent = semester.getListOfStudents();
 					Set<Semester> studentSemester = student.getListOfSemesters();
 					semesterResults.add(result);
@@ -116,8 +124,6 @@ public class CourseAssignController extends HttpServlet{
 					semesterService.updateSemester(semester);
 				}
 			}
-			
-			
 		}
 		
 		request.setAttribute(Constants.REQUEST_ATTRIBUTE_COURSE, courseService.findCourseById(courseId));
@@ -125,4 +131,56 @@ public class CourseAssignController extends HttpServlet{
 		getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_COURSEASSIGNPAGE).forward(request, response);
 		
 	}
+	
+	private void doDel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		UUID studentId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_STUDENTID));
+		UUID courseId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_COURSEID));
+		UUID semesterId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_SEMETERID));
+		
+		Student student = studentService.findStudentById(studentId);
+		Course course = courseService.findCourseById(courseId);
+		Semester semester = semesterService.findSemesterByUUID(semesterId);
+		
+		removeStudentFromSemesterAssociation(student, semester);
+		removeStudentFromCourseAssociation(student, course);
+		
+		request.setAttribute(Constants.REQUEST_ATTRIBUTE_COURSE, courseService.findCourseById(courseId));
+		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
+		getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_COURSEASSIGNPAGE).forward(request, response);
+	}
+	
+	private void removeStudentFromSemesterAssociation(Student student, Semester semester) {
+		Set<Student> semesterStudent = semester.getListOfStudents();
+		Collection<Student> removeSemesterStudent = new LinkedList<Student>(semesterStudent);
+		
+		Iterator<Student> removeSemesterStudentIterator = removeSemesterStudent.iterator();
+		
+		while(removeSemesterStudentIterator.hasNext()) {
+			Student stu = removeSemesterStudentIterator.next();
+			if(stu.getStudentId().toString().equals(student.getStudentId().toString())) {
+				removeSemesterStudentIterator.remove();
+			}
+		}
+		
+		semester.setListOfStudents(new HashSet<Student>(removeSemesterStudent));
+		semesterService.updateSemester(semester);
+	}
+	
+	private void removeStudentFromCourseAssociation(Student student, Course course) {
+		Set<Student> courseStudent = course.getListOfStudents();
+		Collection<Student> removeCourseStudent = new LinkedList<Student>(courseStudent);
+		
+		Iterator<Student> removeCourseStudentIterator = removeCourseStudent.iterator();
+		
+		while(removeCourseStudentIterator.hasNext()) {
+			Student stu = removeCourseStudentIterator.next();
+			if(stu.getStudentId().toString().equals(student.getStudentId().toString())){
+				removeCourseStudentIterator.remove();
+			}
+		}
+		
+		course.setListOfStudents(new HashSet<Student>(removeCourseStudent));
+		courseService.updateCourse(course);
+	}
+	
 }
