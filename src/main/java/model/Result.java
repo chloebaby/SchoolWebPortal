@@ -1,20 +1,19 @@
 package model;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -51,7 +50,7 @@ public class Result {
 	
 	@ManyToMany(mappedBy = "listOfResults")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Semester> listOfSemesters;
+	private Set<Semester> listOfSemesters = new HashSet<Semester>();
 	
 	public Result() {}
 	
@@ -87,11 +86,11 @@ public class Result {
 		this.course = course;
 	}
 
-	public List<Semester> getListOfSemesters() {
+	public Set<Semester> getListOfSemesters() {
 		return listOfSemesters;
 	}
 
-	public void setListOfSemesters(List<Semester> listOfSemesters) {
+	public void setListOfSemesters(Set<Semester> listOfSemesters) {
 		this.listOfSemesters = listOfSemesters;
 	}
 
