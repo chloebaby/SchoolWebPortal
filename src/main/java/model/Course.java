@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -9,7 +10,6 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -45,12 +45,12 @@ public class Course {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Result> listOfResults = new ArrayList<Result>();
+	private Set<Result> listOfResults = new HashSet<Result>();
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="COURSE_STUDENT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
-	private Set<Student> listOfStudents;
+	private Set<Student> listOfStudents = new HashSet<Student>();
 	
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -83,11 +83,11 @@ public class Course {
 		this.courseCode = courseCode;
 	}
 	
-	public List<Result> getListOfResults() {
+	public Set<Result> getListOfResults() {
 		return listOfResults;
 	}
 
-	public void setListOfResults(List<Result> listOfResults) {
+	public void setListOfResults(Set<Result> listOfResults) {
 		this.listOfResults = listOfResults;
 	}
 
