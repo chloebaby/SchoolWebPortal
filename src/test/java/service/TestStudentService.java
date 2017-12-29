@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import junit.framework.TestCase;
@@ -76,6 +77,7 @@ public class TestStudentService extends TestCase {
 		student.setUser(user);
 		student.setRole(role);
 		student.setLastModified(date);
+		student.setEmail(email);
 		
 		studentService.saveStudent(student);
 		userRoleService.saveUserRole(userRole);
@@ -89,13 +91,11 @@ public class TestStudentService extends TestCase {
 	public void testAssociateStudentToResult(){
 		Result result = new Result();
 		result.setLastModified(date);
-		//resultService.saveResult(result);
 		
-		List<Result> studentResult = student.getListOfResults();
+		Set<Result> studentResult = student.getListOfResults();
 		studentResult.add(result);
 		student.setListOfResults(studentResult);
 		student.setLastModified(date);
-		//studentService.updateStudent(student);
 		result.setStudent(student);
 		
 		resultService.saveResult(result);
