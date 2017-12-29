@@ -122,8 +122,9 @@ select * from RESULT_STUDENT;
 select * from COURSE_STUDENT;
 select * from RESULT_COURSE;
 select * from COURSE_SEMESTER;
-select * from SEMESTER_RESULTS;
+select * from SEMESTER_RESULT;
 select * from STUDENT_SEMESTER;
+select * from Semesters;
 
 select * from Roles;
 
