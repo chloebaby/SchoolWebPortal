@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +16,7 @@
 
     <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/css/sidebar-stylesheet.css" />" rel="stylesheet">
-    <link href="<c:url value="/css/student-stylesheet.css" />" rel="stylesheet">
+    <link href="<c:url value="/css/result-stylesheet.css" />" rel="stylesheet">
   </head>
   
   <body>
@@ -34,7 +33,7 @@
         </div> <!-- ./navbar-header -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><c:out value="${user}"/>/></a></li>
+            <li><a href="#"><c:out value="${user}"/></a></li>
             <li><a href="<c:url value="/logout.jsp"/>">Sign Out</a></li>
           </ul> <!-- /.nav .navbar-nav .navbar-right -->
         </div> <!-- /.navbar-collapse -->
@@ -96,10 +95,12 @@
                             <th>Course Name</th>
                             <th>Mark</th>
                             <th>Semester</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <c:forEach var="result" items="${allResults}" varStatus="status">
+                          <c:forEach var="result" items="${allResults}">
                             <tr>
                               
                               <c:forEach var="stu" items="${result.student.listOfResults}">
@@ -130,12 +131,15 @@
                                 </c:choose>
                               </c:forEach>
                              </c:forEach>
+                             
+                             <td><a href=<c:url value="/school/result?action=edit&resultId=${result.resultId}"/>>Edit</a></td>
+                             <td><a>Delete</a></td>
                             </tr>
                           </c:forEach>
 
                           
                         </tbody>
-                      </table>
+                      </table> <!-- /.table .table-hover -->
                     
                     </div> <!-- /.col-sm-12 -->
                   </div> <!-- /.row -->
