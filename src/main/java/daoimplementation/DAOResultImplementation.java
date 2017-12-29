@@ -1,11 +1,13 @@
 package daoimplementation;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.query.Query;
 
 import dao.ResultDAO;
 import model.Result;
+import model.Student;
 import sqlconnection.SQLConnection;
 
 public class DAOResultImplementation extends SQLConnection implements ResultDAO {
@@ -39,6 +41,14 @@ public class DAOResultImplementation extends SQLConnection implements ResultDAO 
 		getCurrentSession().update(result);
 		commitTransaction();
 		closeCurrentSession();
+	}
+	
+	@Override
+	public Result selectResultById(UUID resultId) {
+		openCurrentSession();
+		Result result = getCurrentSession().get(Result.class, resultId);
+		closeCurrentSession();
+		return result;
 	}
 
 }
