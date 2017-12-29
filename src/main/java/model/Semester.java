@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,7 +38,7 @@ public class Semester {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="SEMESTER_RESULT", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
-	private List<Result> listOfResults = new ArrayList<Result>();
+	private Set<Result> listOfResults = new HashSet<Result>();
 	
 	@ManyToMany(mappedBy="listOfSemesters")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -67,11 +68,11 @@ public class Semester {
 		this.semester = semester;
 	}
 
-	public List<Result> getListOfResults() {
+	public Set<Result> getListOfResults() {
 		return listOfResults;
 	}
 
-	public void setListOfResults(List<Result> listOfResults) {
+	public void setListOfResults(Set<Result> listOfResults) {
 		this.listOfResults = listOfResults;
 	}
 
