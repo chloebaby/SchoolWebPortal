@@ -24,6 +24,11 @@ public class TestStudentService extends TestCase {
 	private UserRole userRole;
 	private java.util.Date today;
 	private java.sql.Date date;
+	private String firstName = "Morty";
+	private String lastName = "Smith";
+	private String email = "morty.smith@hotmail.ca";
+	private String rolename = null;
+	private UUID roleId = null;
 	
 	public TestStudentService(String name) {
 		super(name);
@@ -31,11 +36,6 @@ public class TestStudentService extends TestCase {
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		String firstName = "Morty";
-		String lastName = "Smith";
-		String email = "morty.smith@hotmail.ca";
-		String rolename = null;
-		UUID roleId = null;
 		today = new java.util.Date();
 		date = new java.sql.Date(today.getTime());
 		
@@ -88,7 +88,28 @@ public class TestStudentService extends TestCase {
 		studentService.deleteStudentById(student.getStudentId());
 	}
 	
-	public void testAssociateStudentToResult(){
+	public void testFindAllStudents() throws Exception{
+		assertNotNull(studentService.findAllStudents());
+	}
+	
+	public void testFindStudentById() throws Exception{
+		assertNotNull(studentService.findStudentById(student.getStudentId()));
+	}
+	
+	public void testUpdateStudent() throws Exception{
+		String actualFirstName = firstName;
+		String updatedFirstName = "Beth";
+		String expectedFirstName = updatedFirstName;
+		
+		student.setFirstName("Beth");
+		studentService.updateStudent(student);
+		
+		Student updatedStudent = studentService.findStudentById(student.getStudentId());
+		
+		assertEquals(expectedFirstName, student.getFirstName());
+	}
+	
+	public void testAssociateStudentToResult() throws Exception{
 		Result result = new Result();
 		result.setLastModified(date);
 		
@@ -99,10 +120,5 @@ public class TestStudentService extends TestCase {
 		result.setStudent(student);
 		
 		resultService.saveResult(result);
-		
-		
 	}
-	
-
-
 }
