@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -34,7 +36,8 @@ public class User {
 	@Column(name = "last_modified")
 	private Date lastModified;
 	
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToOne(mappedBy = "user")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Student student;
 	
 	public User() {}

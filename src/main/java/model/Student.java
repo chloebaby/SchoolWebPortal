@@ -51,11 +51,13 @@ public class Student {
 	@Column(name = "last_modified")
 	private Date lastModified;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "role_id")
 	private Role role;
 	

@@ -36,7 +36,8 @@ public class Semester {
 	@Column(name = "semester", updatable = false, nullable = false)
 	private String semester;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="SEMESTER_RESULT", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="result_id")})
 	private Set<Result> listOfResults = new HashSet<Result>();
 	
