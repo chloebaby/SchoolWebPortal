@@ -1,7 +1,11 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import junit.framework.TestCase;
 import model.Course;
+import model.Semester;
 
 public class TestCourseService extends TestCase {
 	private java.util.Date today;
@@ -56,6 +60,44 @@ public class TestCourseService extends TestCase {
 		Course updatedCourse = courseService.findCourseById(course.getCourseId());
 		
 		assertEquals(expectedCourseName, updatedCourse.getCourseName());
+	}
+	
+	public void testAssignSemesterToCourse() {
+		String summer = "summer";
+		String winter = "winter";
+		String fall = "fall";
+		
+		Semester summerSemester = new Semester();
+		summerSemester.setSemester(summer);
+		
+		Semester winterSemester = new Semester();
+		winterSemester.setSemester(winter);
+		
+		Semester fallSemester = new Semester();
+		fallSemester.setSemester(fall);
+		
+		List<Semester> actualAvailableSemesters = new ArrayList<Semester>();
+		
+		actualAvailableSemesters.add(summerSemester);
+		actualAvailableSemesters.add(winterSemester);
+		actualAvailableSemesters.add(fallSemester);
+		
+		course.setListOfSemesters(actualAvailableSemesters);
+		
+		courseService.updateCourse(course);
+		
+		Course semesterCourse = courseService.findCourseById(course.getCourseId());
+		
+		List<Semester> expectedAvailableSemesters = semesterCourse.getListOfSemesters();
+		
+		for(Semester availableSemester : actualAvailableSemesters) {
+			for(Semester expectedSemester : expectedAvailableSemesters) {
+				if(availableSemester.getSemester().equals(expectedSemester.getSemester())) {
+					assertTrue(true);
+					break;
+				}
+			}
+		}
 	}
 
 }
