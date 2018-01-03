@@ -47,7 +47,7 @@ public class Course {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Result> listOfResults = new HashSet<Result>();
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="COURSE_STUDENT", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
 	private Set<Student> listOfStudents = new HashSet<Student>();

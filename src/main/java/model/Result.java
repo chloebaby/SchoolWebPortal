@@ -38,7 +38,7 @@ public class Result {
 	@Column(name = "last_modified")
 	private Date lastModified;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="RESULT_STUDENT", joinColumns={@JoinColumn(name="result_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
 	private Student student;
