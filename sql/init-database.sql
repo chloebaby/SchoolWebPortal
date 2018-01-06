@@ -127,6 +127,8 @@ select * from STUDENT_SEMESTER;
 select * from Semesters;
 
 select * from Roles;
+select * from Users;
+select * from Semesters;
 
 select stu.first_name, stu.last_name, res.marks
 from Students stu
