@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -17,19 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Student;
-import model.User;
-import model.UserRole;
-import service.StudentService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import service.StudentServiceInterface;
 import util.Constants;
 
 public class EmailController extends HttpServlet{
 	private StudentServiceInterface studentService;
+	private ClassPathXmlApplicationContext ctx;
 	
 	public EmailController(){
 		super();
-		studentService = new StudentService();
+		ctx = new ClassPathXmlApplicationContext(Constants.SPRING_BEAN_CONTEXT);
+		studentService = (StudentServiceInterface)ctx.getBean(Constants.SPRING_BEAN_STUDENTSERVICE);
 	}
 	
 	@Override

@@ -1,52 +1,53 @@
 package daoimplementation;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 import javax.persistence.Query;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import dao.UserRoleDAO;
 import model.UserRole;
-import sqlconnection.SQLConnection;
 
-public class DAOUserRoleImplementation extends SQLConnection implements UserRoleDAO {
+public class DAOUserRoleImplementation  implements UserRoleDAO {
+	private SessionFactory sessionFactory;
 	
-	public DAOUserRoleImplementation() {
-		super();
+	public DAOUserRoleImplementation() {}
+	
+	public DAOUserRoleImplementation(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 	
 	@Override
 	public void insertUserRole(UserRole userRole) {
-		openCurrentSession();
-		openCurrentTransaction();
-		getCurrentSession().save(userRole);
-		commitTransaction();
-		closeCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+		session.save(userRole);
 	}
 	
 	@Override
 	public void updateUserRoleByUsername(UserRole userRole) {
+		Session session = sessionFactory.getCurrentSession();
 		String hql = "update UserRole set rolename = :rolename, lastModified = :lastModified where username = :username";
-		openCurrentSession();
-		openCurrentTransaction();
-		Query query = getCurrentSession().createQuery(hql);
+		Query query = session.createQuery(hql);
 		query.setParameter("rolename", userRole.getRolename());
 		query.setParameter("lastModified", userRole.getLastModified());
 		query.setParameter("username", userRole.getUsername());
 		int result = query.executeUpdate();
-		commitTransaction();
-		closeCurrentSession();
 	}
 	
+	@Override
 	public void deleteUserRoleByUsername(String username) {
+		Session session = sessionFactory.getCurrentSession();
 		String hql = "delete from UserRole where username = :username";
-		openCurrentSession();
-		openCurrentTransaction();
-		Query query = getCurrentSession().createQuery(hql);
+		Query query = session.createQuery(hql);
 		query.setParameter("username", username);
 		query.executeUpdate();
-		commitTransaction();
-		closeCurrentSession();
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 }

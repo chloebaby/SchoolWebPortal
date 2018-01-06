@@ -2,9 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -12,11 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.CourseService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import service.CourseServiceInterface;
-import service.SemesterService;
 import service.SemesterServiceInterface;
-import service.StudentService;
 import service.StudentServiceInterface;
 import util.Constants;
 import model.Course;
@@ -27,12 +24,14 @@ public class CourseController extends HttpServlet{
 	private CourseServiceInterface courseService;
 	private StudentServiceInterface studentService;
 	private SemesterServiceInterface semesterService;
+	private ClassPathXmlApplicationContext ctx;
 	
 	public CourseController() {
 		super();
-		courseService = new CourseService();
-		studentService = new StudentService();
-		semesterService = new SemesterService();
+		ctx = new ClassPathXmlApplicationContext(Constants.SPRING_BEAN_CONTEXT);
+		courseService = (CourseServiceInterface)ctx.getBean(Constants.SPRING_BEAN_COURSESERVICE);
+		studentService = (StudentServiceInterface)ctx.getBean(Constants.SPRING_BEAN_STUDENTSERVICE);
+		semesterService = (SemesterServiceInterface)ctx.getBean(Constants.SPRING_BEAN_SEMESTERSERVICE);
 	}
 	
 	@Override

@@ -10,4 +10,5 @@ public interface SemesterServiceInterface {
 	public UUID findUUIDBySemester(String semester);
 	public Semester findSemesterByUUID(UUID semesterId);
 	public void updateSemester(Semester semester);
+	public void saveSemester(Semester semester);
 }

@@ -8,4 +8,5 @@ import model.Role;
 public interface RoleDAO {
 	public List<Role> selectRoles();
 	public UUID selectUUIDByRoleName(String rolename);
+	public void saveRole(Role role);
 }

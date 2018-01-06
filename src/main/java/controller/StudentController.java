@@ -8,15 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import model.Role;
 import model.Student;
 import model.User;
 import model.UserRole;
-import service.RoleService;
 import service.RoleServiceInterface;
-import service.StudentService;
 import service.StudentServiceInterface;
-import service.UserRoleService;
 import service.UserRoleServiceInterface;
 import util.Constants;
 
@@ -25,12 +24,14 @@ public class StudentController extends HttpServlet{
 	private StudentServiceInterface studentService;
 	private RoleServiceInterface roleService;
 	private UserRoleServiceInterface userRoleService;
+	private ClassPathXmlApplicationContext ctx;
 	
 	public StudentController(){
 		super();
-		studentService = new StudentService();
-		roleService = new RoleService();
-		userRoleService = new UserRoleService();
+		ctx = new ClassPathXmlApplicationContext(Constants.SPRING_BEAN_CONTEXT);
+		studentService = (StudentServiceInterface)ctx.getBean(Constants.SPRING_BEAN_STUDENTSERVICE);
+		roleService = (RoleServiceInterface)ctx.getBean(Constants.SPRING_BEAN_ROLESERVICE);
+		userRoleService = (UserRoleServiceInterface)ctx.getBean(Constants.SPRING_BEAN_USERROLESERVICE);
 	}
 	
 	@Override

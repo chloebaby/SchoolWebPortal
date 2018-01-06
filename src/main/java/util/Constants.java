@@ -46,5 +46,14 @@ public class Constants {
 	public static final String REQUEST_DISPATCHER_RESULTMODIFYPAGE = "/jsp/modify-pages/result-modified-page.jsp";
 	
 	public static final String MISC_VALUE_OPENROUNDBRACKET = "(";
-
+	
+	public static final String SPRING_BEAN_CONTEXT = "context.xml";
+	public static final String SPRING_BEAN_STUDENTSERVICE = "studentService";
+	public static final String SPRING_BEAN_ROLESERVICE = "roleService";
+	public static final String SPRING_BEAN_USERROLESERVICE = "userRoleService";
+	public static final String SPRING_BEAN_SEMESTERSERVICE = "semesterService";
+	public static final String SPRING_BEAN_COURSESERVICE = "courseService";
+	public static final String SPRING_BEAN_RESULTSERVICE = "resultService";
+	public static final String SPRING_BEAN_USERSERVICE = "userService";
+	
 }

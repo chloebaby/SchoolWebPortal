@@ -3,55 +3,68 @@ package daoimplementation;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import dao.SemesterDAO;
 import model.Semester;
 import model.Student;
-import sqlconnection.SQLConnection;
 
-public class DAOSemesterImplementation extends SQLConnection implements SemesterDAO{
-
-	public DAOSemesterImplementation() {
-		super();
+public class DAOSemesterImplementation implements SemesterDAO{
+	private SessionFactory sessionFactory;
+	
+	public DAOSemesterImplementation() {}
+	
+	public DAOSemesterImplementation(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 	
 	@Override
 	public List<Semester> selectAllSemesters(){
-		openCurrentSession();
-		Query query = getCurrentSession().createQuery("From Semester");
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("From Semester");
 		List<Semester> allSemesters = query.list();
-		closeCurrentSession();
 		
 		return allSemesters;
 	}
 	
 	@Override
 	public UUID selectUUIDBySemesterName(String semester) {
+		Session session = sessionFactory.getCurrentSession();
 		String hql = "select semesterId from Semester where semester = :semester";
-		openCurrentSession();
-		Query query = getCurrentSession().createQuery(hql);
+		Query query = session.createQuery(hql);
 		query.setParameter("semester", semester);
 		UUID semesterId = (UUID)query.uniqueResult();
-		closeCurrentSession();
 		
 		return semesterId;
 	}
 	
 	@Override
 	public Semester selectSemesterByUUID(UUID semesterId) {
-		openCurrentSession();
-		Semester semester = getCurrentSession().get(Semester.class, semesterId);
-		closeCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+		Semester semester = session.get(Semester.class, semesterId);
 		return semester;
 	}
 	
 	@Override
 	public void updateSemester(Semester semester) {
-		openCurrentSession();
-		openCurrentTransaction();
-		getCurrentSession().update(semester);
-		commitTransaction();
-		closeCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+		session.update(semester);
+	}
+	
+	@Override
+	public void saveSemester(Semester semester) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(semester);
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 }

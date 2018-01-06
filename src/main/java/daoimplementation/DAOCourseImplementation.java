@@ -1,67 +1,62 @@
 package daoimplementation;
 
-import sqlconnection.SQLConnection;
-
-import dao.SchoolDAO;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import dao.CourseDAO;
 import model.Course;
-import model.Student;
 
-public class DAOCourseImplementation extends SQLConnection implements CourseDAO{
+public class DAOCourseImplementation implements CourseDAO{
+	private SessionFactory sessionFactory;
 	
-	public DAOCourseImplementation() {
-		super();
+	public DAOCourseImplementation() {}
+	
+	public DAOCourseImplementation(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 	
 	@Override
 	public List<Course> selectAllCourses(){
-		openCurrentSession();
-		Query query = getCurrentSession().createQuery("FROM Course");
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Course");
 		List<Course> allCourses = query.list();
-		closeCurrentSession();
-		
 		return allCourses;
 	}
 	
+	@Override
 	public Course selectCourseById(UUID courseId){
-		openCurrentSession();
-		Course course = getCurrentSession().get(Course.class, courseId);
-		closeCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+		Course course = session.get(Course.class, courseId);
 		return course;
 	}
 	
+	@Override
 	public void insertCourse(Course course) {
-		openCurrentSession();
-		openCurrentTransaction();
-		getCurrentSession().save(course);
-		commitTransaction();
-		closeCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+		session.save(course);
 	}
 	
+	@Override
 	public void deleteCourse(Course course) {
-		openCurrentSession();
-		openCurrentTransaction();
-		getCurrentSession().delete(course);
-		commitTransaction();
-		closeCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(course);
 	}
 	
+	@Override
 	public void updateCourse(Course course) {
-		openCurrentSession();
-		openCurrentTransaction();
-		getCurrentSession().update(course);
-		commitTransaction();
-		closeCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
+		session.update(course);
+	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 }

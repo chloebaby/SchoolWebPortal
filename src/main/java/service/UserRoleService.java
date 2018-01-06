@@ -1,26 +1,42 @@
 package service;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import dao.UserRoleDAO;
-import daoimplementation.DAOUserRoleImplementation;
 import model.UserRole;
 
 public class UserRoleService implements UserRoleServiceInterface{
-
-	private UserRoleDAO daoUserImplementation;
+	private UserRoleDAO daoUserRoleImplementation;
 	
-	public UserRoleService() {
-		daoUserImplementation = new DAOUserRoleImplementation();
+	public UserRoleService() {}
+	
+	public UserRoleService(UserRoleDAO daoUserRoleImplementation) {
+		this.daoUserRoleImplementation = daoUserRoleImplementation;
 	}
 	
+	@Override
+	@Transactional
 	public void saveUserRole(UserRole userRole) {
-		daoUserImplementation.insertUserRole(userRole);
+		daoUserRoleImplementation.insertUserRole(userRole);
 	}
 	
+	@Override
+	@Transactional
 	public void updateUserRoleByUsername(UserRole userRole) {
-		daoUserImplementation.updateUserRoleByUsername(userRole);
+		daoUserRoleImplementation.updateUserRoleByUsername(userRole);
 	}
 	
+	@Override
+	@Transactional
 	public void deleteUserRolebyUsername(String username) {
-		daoUserImplementation.deleteUserRoleByUsername(username);
+		daoUserRoleImplementation.deleteUserRoleByUsername(username);
+	}
+
+	public UserRoleDAO getDaoUserRoleImplementation() {
+		return daoUserRoleImplementation;
+	}
+
+	public void setDaoUserRoleImplementation(UserRoleDAO daoUserRoleImplementation) {
+		this.daoUserRoleImplementation = daoUserRoleImplementation;
 	}
 }

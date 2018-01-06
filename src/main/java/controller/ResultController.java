@@ -8,25 +8,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import model.Result;
-import service.CourseService;
 import service.CourseServiceInterface;
-import service.ResultService;
 import service.ResultServiceInterface;
-import service.StudentService;
 import service.StudentServiceInterface;
 import util.Constants;
 
+@SuppressWarnings("serial")
 public class ResultController extends HttpServlet{
 	private ResultServiceInterface resultService;
 	private StudentServiceInterface studentService;
 	private CourseServiceInterface courseService;
+	private ClassPathXmlApplicationContext ctx;
 	
 	public ResultController() {
 		super();
-		resultService = new ResultService();
-		studentService = new StudentService();
-		courseService = new CourseService();
+		ctx = new ClassPathXmlApplicationContext(Constants.SPRING_BEAN_CONTEXT);
+		resultService = (ResultServiceInterface)ctx.getBean(Constants.SPRING_BEAN_RESULTSERVICE);
+		studentService = (StudentServiceInterface)ctx.getBean(Constants.SPRING_BEAN_STUDENTSERVICE);
+		courseService = (CourseServiceInterface)ctx.getBean(Constants.SPRING_BEAN_COURSESERVICE);
 	}
 	
 	@Override

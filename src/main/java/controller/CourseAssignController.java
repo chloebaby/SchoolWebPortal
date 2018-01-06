@@ -14,20 +14,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import model.Course;
 import model.Result;
 import model.Semester;
 import model.Student;
 import model.User;
-import service.CourseService;
 import service.CourseServiceInterface;
-import service.ResultService;
 import service.ResultServiceInterface;
-import service.SemesterService;
 import service.SemesterServiceInterface;
-import service.StudentService;
 import service.StudentServiceInterface;
-import service.UserService;
 import service.UserServiceInterface;
 import util.Constants;
 
@@ -37,14 +34,16 @@ public class CourseAssignController extends HttpServlet{
 	private StudentServiceInterface studentService;
 	private UserServiceInterface userService;
 	private ResultServiceInterface resultService;
+	private ClassPathXmlApplicationContext ctx;
 	
 	public CourseAssignController() {
 		super();
-		courseService = new CourseService();
-		semesterService = new SemesterService();
-		studentService = new StudentService();
-		userService = new UserService();
-		resultService = new ResultService();
+		ctx = new ClassPathXmlApplicationContext(Constants.SPRING_BEAN_CONTEXT);
+		courseService = (CourseServiceInterface)ctx.getBean(Constants.SPRING_BEAN_COURSESERVICE);
+		semesterService = (SemesterServiceInterface)ctx.getBean(Constants.SPRING_BEAN_SEMESTERSERVICE);
+		studentService = (StudentServiceInterface)ctx.getBean(Constants.SPRING_BEAN_STUDENTSERVICE);
+		userService = (UserServiceInterface)ctx.getBean(Constants.SPRING_BEAN_USERSERVICE);
+		resultService = (ResultServiceInterface)ctx.getBean(Constants.SPRING_BEAN_RESULTSERVICE);
 	}
 	
 	@Override 

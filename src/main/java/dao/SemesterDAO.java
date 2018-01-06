@@ -10,4 +10,5 @@ public interface SemesterDAO {
 	public UUID selectUUIDBySemesterName(String semester);
 	public Semester selectSemesterByUUID(UUID semesterId);
 	public void updateSemester(Semester semester);
+	public void saveSemester(Semester semester);
 }
