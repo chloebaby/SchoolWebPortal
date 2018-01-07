@@ -10,7 +10,6 @@ import org.hibernate.query.Query;
 import dao.ResultDAO;
 import model.Result;
 import model.Student;
-import sqlconnection.SQLConnection;
 
 public class DAOResultImplementation implements ResultDAO {
 	private SessionFactory sessionFactory;
