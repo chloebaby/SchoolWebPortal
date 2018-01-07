@@ -73,9 +73,9 @@
                           <div class="col-sm-6">
                             <div class="form-group">
                               
-                            </div>
-                          </div>
-                        </div>
+                            </div> <!-- /.form-group -->
+                          </div> <!-- /.col-sm-6 -->
+                        </div> <!-- /.row -->
                       </form>
                       
                     </div> <!-- /.col-sm-12 -->
