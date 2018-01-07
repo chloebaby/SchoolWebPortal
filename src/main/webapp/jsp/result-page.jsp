@@ -96,7 +96,6 @@
                             <th>Mark</th>
                             <th>Semester</th>
                             <th>Edit</th>
-                            <th>Delete</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -133,7 +132,6 @@
                              </c:forEach>
                              
                              <td><a href=<c:url value="/school/result?action=edit&resultId=${result.resultId}"/>>Edit</a></td>
-                             <td><a>Delete</a></td>
                             </tr>
                           </c:forEach>
 
