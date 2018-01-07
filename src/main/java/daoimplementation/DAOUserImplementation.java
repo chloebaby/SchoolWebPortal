@@ -7,7 +7,6 @@ import org.hibernate.query.Query;
 import dao.UserDAO;
 import model.Student;
 import model.User;
-import sqlconnection.SQLConnection;
 
 public class DAOUserImplementation implements UserDAO {
 	private SessionFactory sessionFactory;

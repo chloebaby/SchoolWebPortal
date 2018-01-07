@@ -15,7 +15,6 @@ import org.hibernate.query.Query;
 import dao.RoleDAO;
 import model.Role;
 import model.Student;
-import sqlconnection.SQLConnection;
 
 public class DAORoleImplementation implements RoleDAO {
 	private SessionFactory sessionFactory;
