@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.SchoolDAO;
@@ -15,6 +16,7 @@ import model.Student;
 import model.User;
 import model.UserRole;
 
+@Service
 public class StudentService implements StudentServiceInterface{
 	private StudentDAO daoStudentImplementation;
 	
