@@ -37,7 +37,7 @@ public class StudentController{
 		userRoleService = (UserRoleServiceInterface)ctx.getBean(Constants.SPRING_BEAN_USERROLESERVICE);
 	}
 	
-	@RequestMapping(value="/school/student", method=RequestMethod.GET)
+	@RequestMapping(value="/student", method=RequestMethod.GET)
 	public ModelAndView getStudentPage() {
 		ModelAndView model = new ModelAndView("student-page");
 		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
