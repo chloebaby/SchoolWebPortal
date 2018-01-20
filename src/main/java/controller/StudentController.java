@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import model.Role;
 import model.Student;
@@ -19,22 +23,31 @@ import service.StudentServiceInterface;
 import service.UserRoleServiceInterface;
 import util.Constants;
 
-@SuppressWarnings("serial")
-public class StudentController extends HttpServlet{
+@Controller
+public class StudentController{
 	private StudentServiceInterface studentService;
 	private RoleServiceInterface roleService;
 	private UserRoleServiceInterface userRoleService;
 	private ClassPathXmlApplicationContext ctx;
 	
 	public StudentController(){
-		super();
 		ctx = new ClassPathXmlApplicationContext(Constants.SPRING_BEAN_CONTEXT);
 		studentService = (StudentServiceInterface)ctx.getBean(Constants.SPRING_BEAN_STUDENTSERVICE);
 		roleService = (RoleServiceInterface)ctx.getBean(Constants.SPRING_BEAN_ROLESERVICE);
 		userRoleService = (UserRoleServiceInterface)ctx.getBean(Constants.SPRING_BEAN_USERROLESERVICE);
 	}
 	
-	@Override
+	@RequestMapping(value="/school/student", method=RequestMethod.GET)
+	public ModelAndView getStudentPage() {
+		ModelAndView model = new ModelAndView("student-page");
+		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
+		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLROLES, roleService.findAllRoles());
+		
+		return model;
+	}
+	
+	
+/*	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String option = request.getParameter(Constants.REQUEST_PARAMETER_OPTION);
 
@@ -145,5 +158,5 @@ public class StudentController extends HttpServlet{
 		request.setAttribute(Constants.REQUEST_ATTRIBUTE_STUDENT, studentService.findStudentById(studentId));
 		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLROLES, roleService.findAllRoles());
 		getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_STUDENTMODIFYPAGE).forward(request, response);
-	}
+	}*/
 }
