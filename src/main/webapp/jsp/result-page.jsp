@@ -46,7 +46,7 @@
         	<div class="col-sm-2">
             <nav class="nav-sidebar">
               <ul class="nav tabs">
-                <li class=""><a href="<c:url value="/school/student?action=#"/>">Students</a></li>
+                <li class=""><a href="<c:url value="/school/student"/>">Students</a></li>
                 <li class=""><a href="<c:url value="/school/course?action=#"/>">Courses</a></li>
                 <li class="active"><a href="<c:url value="/school/result?action=#"/>">Results</a></li>
               </ul> <!-- /.nav .tabs -->
