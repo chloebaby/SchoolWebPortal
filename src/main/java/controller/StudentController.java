@@ -39,7 +39,7 @@ public class StudentController{
 	
 	@RequestMapping(value="/student", method=RequestMethod.GET)
 	public ModelAndView getStudentPage() {
-		ModelAndView model = new ModelAndView("student-page");
+		ModelAndView model = new ModelAndView(Constants.REQUEST_DISPATCHER_STUDENTPAGE);
 		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
 		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLROLES, roleService.findAllRoles());
 		
