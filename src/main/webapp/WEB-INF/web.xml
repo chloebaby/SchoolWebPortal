@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>SchoolWebApp</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>jsp/index.jsp</welcome-file>
   </welcome-file-list>
   
   <servlet>
@@ -12,96 +12,7 @@
   
   <servlet-mapping>
     <servlet-name>spring-dispatcher</servlet-name>
-    <url-pattern>/school</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
-  
-<!--   <servlet>
-    <servlet-name>StudentController</servlet-name>
-    <servlet-class>controller.StudentController</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>CourseController</servlet-name>
-    <servlet-class>controller.CourseController</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>EmailController</servlet-name>
-    <servlet-class>controller.EmailController</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>CourseAssignController</servlet-name>
-    <servlet-class>controller.CourseAssignController</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>ResultController</servlet-name>
-    <servlet-class>controller.ResultController</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>StudentController</servlet-name>
-    <url-pattern>/school/student</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CourseController</servlet-name>
-    <url-pattern>/school/course</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-	  <servlet-name>EmailController</servlet-name>
-	  <url-pattern>/school/student/email</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CourseAssignController</servlet-name>
-    <url-pattern>/school/course-assign</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ResultController</servlet-name>
-    <url-pattern>/school/result</url-pattern>
-  </servlet-mapping> -->
-  
-  <security-constraint>
-    <web-resource-collection>
-      <web-resource-name>Restricted</web-resource-name>
-      <url-pattern>/*</url-pattern>
-    </web-resource-collection>
-    <auth-constraint>
-      <role-name>school-admin</role-name>
-    </auth-constraint>
-  </security-constraint>
-  <security-constraint>
-    <web-resource-collection>
-      <web-resource-name>Exclude from Security</web-resource-name>
-      <url-pattern>/css/*</url-pattern>
-      <url-pattern>/img/*</url-pattern>
-      <url-pattern>/js/*</url-pattern>
-      <url-pattern>/fonts/*</url-pattern>
-      <url-pattern>/logout.jsp</url-pattern>
-    </web-resource-collection>
-  </security-constraint>
-<!--   <security-constraint> -->
-<!--     <web-resource-collection> -->
-<!--         <web-resource-name>securedapp</web-resource-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </web-resource-collection> -->
-<!--     <user-data-constraint> -->
-<!--         <transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
-<!--     </user-data-constraint> -->
-<!-- </security-constraint> -->
-  
-  <login-config>
-    <auth-method>FORM</auth-method>
-    <form-login-config>
-      <form-login-page>/login.html</form-login-page>
-      <form-error-page>/login-error.html</form-error-page>
-    </form-login-config>
-  </login-config>
-  
-  <filter>
-    <filter-name>UserLoginFilter</filter-name>
-    <filter-class>filters.UserLoginFilter</filter-class>
-  </filter>
-  
-  <filter-mapping>
-    <filter-name>UserLoginFilter</filter-name>
-    <url-pattern>/index.jsp</url-pattern>
-  </filter-mapping>
   
 </web-app>
