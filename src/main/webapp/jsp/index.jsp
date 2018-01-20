@@ -13,10 +13,6 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>School Portal</title>
-
-    <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
-    <link href="<c:url value="/css/sidebar-stylesheet.css" />" rel="stylesheet">
-    <link href="<c:url value="/css/dashboard-stylesheet.css" />" rel="stylesheet">
   </head>
   <body>
      <%
