@@ -3,15 +3,19 @@
   <display-name>SchoolWebApp</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
-<!--     <welcome-file>index.html</welcome-file> -->
-<!--     <welcome-file>index.htm</welcome-file> -->
-<!--     <welcome-file>index.jsp</welcome-file> -->
-<!--     <welcome-file>default.html</welcome-file> -->
-<!--     <welcome-file>default.htm</welcome-file> -->
-<!--     <welcome-file>default.jsp</welcome-file> -->
   </welcome-file-list>
   
   <servlet>
+    <servlet-name>spring-dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>spring-dispatcher</servlet-name>
+    <url-pattern>/school</url-pattern>
+  </servlet-mapping>
+  
+<!--   <servlet>
     <servlet-name>StudentController</servlet-name>
     <servlet-class>controller.StudentController</servlet-class>
   </servlet>
@@ -51,7 +55,7 @@
   <servlet-mapping>
     <servlet-name>ResultController</servlet-name>
     <url-pattern>/school/result</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
   
   <security-constraint>
     <web-resource-collection>
