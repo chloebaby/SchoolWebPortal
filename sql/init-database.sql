@@ -128,6 +128,7 @@ select * from Semesters;
 
 select * from Roles;
 select * from Users;
+select * from UserRoles;
 select * from Semesters;
 
 select stu.first_name, stu.last_name, res.marks
