@@ -36,7 +36,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <form action="${pageContext.request.contextPath}/school/student" onsubmit="return validateStudentForm()" method="post">
+            <form action="${pageContext.request.contextPath}/school/student/update" onsubmit="return validateStudentForm()" method="post">
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
