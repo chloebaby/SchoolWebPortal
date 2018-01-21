@@ -1,6 +1,8 @@
 package daoimplementation;
 
-import javax.persistence.Query;
+import java.util.UUID;
+
+import org.hibernate.query.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,14 +26,9 @@ public class DAOUserRoleImplementation  implements UserRoleDAO {
 	}
 	
 	@Override
-	public void updateUserRoleByUsername(UserRole userRole) {
+	public void updateUserRole(UserRole userRole) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "update UserRole set rolename = :rolename, lastModified = :lastModified where username = :username";
-		Query query = session.createQuery(hql);
-		query.setParameter("rolename", userRole.getRolename());
-		query.setParameter("lastModified", userRole.getLastModified());
-		query.setParameter("username", userRole.getUsername());
-		int result = query.executeUpdate();
+		session.update(userRole);
 	}
 	
 	@Override
@@ -41,6 +38,16 @@ public class DAOUserRoleImplementation  implements UserRoleDAO {
 		Query query = session.createQuery(hql);
 		query.setParameter("username", username);
 		query.executeUpdate();
+	}
+	
+	@Override
+	public UserRole selectUserRoleByUsername(String username) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM UserRole where username = :username";
+		Query query = session.createQuery(hql);
+		query.setParameter("username", username);
+		UserRole userRole = (UserRole) query.uniqueResult();
+		return userRole;
 	}
 
 	public SessionFactory getSessionFactory() {

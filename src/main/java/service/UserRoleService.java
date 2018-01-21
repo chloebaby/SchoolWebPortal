@@ -22,14 +22,20 @@ public class UserRoleService implements UserRoleServiceInterface{
 	
 	@Override
 	@Transactional
-	public void updateUserRoleByUsername(UserRole userRole) {
-		daoUserRoleImplementation.updateUserRoleByUsername(userRole);
+	public void updateUserRole(UserRole userRole) {
+		daoUserRoleImplementation.updateUserRole(userRole);
 	}
 	
 	@Override
 	@Transactional
 	public void deleteUserRolebyUsername(String username) {
 		daoUserRoleImplementation.deleteUserRoleByUsername(username);
+	}
+	
+	@Override
+	@Transactional
+	public UserRole findUserRoleByUsername(String username) {
+		return daoUserRoleImplementation.selectUserRoleByUsername(username);
 	}
 
 	public UserRoleDAO getDaoUserRoleImplementation() {
