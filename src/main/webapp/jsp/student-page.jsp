@@ -68,7 +68,7 @@
 	                <div class="row">
 	                  <div class="col-sm-12">
 	                    
-	                    <form action="${pageContext.request.contextPath}/school/student" onsubmit="return validateStudentForm()" method="post">
+	                    <form action="${pageContext.request.contextPath}/school/student/create" onsubmit="return validateStudentForm()" method="post">
 	                      <div class="row">
 	                        <div class="col-sm-6">
 			                      <div class="form-group">
@@ -157,8 +157,8 @@
                               <td><c:out value="${student.user.username}"/></td>
                               <td><c:out value="${student.role.rolename }"/></td>
 					                    <td><c:out value="${student.email}"/></td>
-                              <td><a href=<c:url value="/school/student?action=edit&studentId=${student.studentId}"/>>Edit</a></td>
-	                            <td><a onclick="return confirmStudentDelete()" href=<c:url value="/school/student?action=delete&studentId=${student.studentId}&username=${student.user.username}"/>>Delete</a></td>
+                              <td><a href=<c:url value="/school/student/edit/${student.studentId}"/>>Edit</a></td>
+	                            <td><a onclick="return confirmStudentDelete()" href=<c:url value="/school/student/delete/${student.studentId}/${student.user.username}"/>>Delete</a></td>
 					                    <td><a href=<c:url value="/school/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
 					                  </tr>
 				                  </c:forEach>
