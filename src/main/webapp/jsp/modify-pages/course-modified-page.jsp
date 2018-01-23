@@ -37,7 +37,7 @@
         <div class="update-course-form">
           <div class="row">
             <div class="col-sm-12">
-              <form action="${pageContext.request.contextPath}/school/course" onsubmit="return validateCourseForm()" method="post">
+              <form action="${pageContext.request.contextPath}/school/course/update" onsubmit="return validateCourseForm()" method="post">
                 
                 <div class="row">
                   <div class="col-sm-12">
