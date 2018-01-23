@@ -3,13 +3,14 @@ package daoimplementation;
 import java.util.UUID;
 
 import org.hibernate.query.Query;
-
+import org.springframework.stereotype.Repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import dao.UserRoleDAO;
 import model.UserRole;
 
+@Repository
 public class DAOUserRoleImplementation  implements UserRoleDAO {
 	private SessionFactory sessionFactory;
 	

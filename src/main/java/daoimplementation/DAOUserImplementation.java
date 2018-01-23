@@ -3,11 +3,13 @@ package daoimplementation;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import dao.UserDAO;
 import model.Student;
 import model.User;
 
+@Repository
 public class DAOUserImplementation implements UserDAO {
 	private SessionFactory sessionFactory;
 	

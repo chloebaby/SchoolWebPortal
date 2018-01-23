@@ -11,11 +11,13 @@ import java.util.UUID;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import dao.RoleDAO;
 import model.Role;
 import model.Student;
 
+@Repository
 public class DAORoleImplementation implements RoleDAO {
 	private SessionFactory sessionFactory;
 	

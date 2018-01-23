@@ -6,11 +6,13 @@ import java.util.UUID;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import dao.ResultDAO;
 import model.Result;
 import model.Student;
 
+@Repository
 public class DAOResultImplementation implements ResultDAO {
 	private SessionFactory sessionFactory;
 	
