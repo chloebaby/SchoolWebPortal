@@ -1,17 +1,21 @@
 package daoimplementation;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.SemesterDAO;
 import model.Semester;
 import model.Student;
 
+@Repository
 public class DAOSemesterImplementation implements SemesterDAO{
 	private SessionFactory sessionFactory;
 	
@@ -22,12 +26,13 @@ public class DAOSemesterImplementation implements SemesterDAO{
 	}
 	
 	@Override
-	public List<Semester> selectAllSemesters(){
+	public Set<Semester> selectAllSemesters(){
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("From Semester");
 		List<Semester> allSemesters = query.list();
+		Set<Semester> setAllSemesters = new HashSet<Semester>(allSemesters);
 		
-		return allSemesters;
+		return setAllSemesters;
 	}
 	
 	@Override

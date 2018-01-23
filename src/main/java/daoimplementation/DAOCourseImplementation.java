@@ -6,10 +6,12 @@ import java.util.UUID;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import dao.CourseDAO;
 import model.Course;
 
+@Repository
 public class DAOCourseImplementation implements CourseDAO{
 	private SessionFactory sessionFactory;
 	
