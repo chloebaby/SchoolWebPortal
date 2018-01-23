@@ -78,7 +78,7 @@ public class CourseAssignController extends HttpServlet{
 		
 		String[] usernames = new String[selectedStudents.length];
 		Course course = courseService.findCourseById(courseId);
-		List<Semester> listOfSemesters = course.getListOfSemesters();
+		Set<Semester> listOfSemesters = course.getListOfSemesters();
 		
 		for(int i = 0; i < selectedStudents.length; i++) {
 			Result result = new Result();
