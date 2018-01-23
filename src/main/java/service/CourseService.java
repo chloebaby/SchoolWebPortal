@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.CourseDAO;
@@ -11,6 +12,7 @@ import daoimplementation.DAOCourseImplementation;
 import daoimplementation.DAOStudentImplementation;
 import model.Course;
 
+@Service
 public class CourseService implements CourseServiceInterface{
 	private CourseDAO daoCourseImplementation;
 	
