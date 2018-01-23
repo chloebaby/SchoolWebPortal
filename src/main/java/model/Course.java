@@ -55,7 +55,7 @@ public class Course {
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="COURSE_SEMESTER", joinColumns={@JoinColumn(name="course_id")},inverseJoinColumns={@JoinColumn(name="semester_id")})
-	private List<Semester> listOfSemesters = new ArrayList<Semester>();
+	private Set<Semester> listOfSemesters = new HashSet<Semester>();
 	
 	public Course() {}
 	
@@ -107,11 +107,11 @@ public class Course {
 		this.lastModified = lastModified;
 	}
 
-	public List<Semester> getListOfSemesters() {
+	public Set<Semester> getListOfSemesters() {
 		return listOfSemesters;
 	}
 
-	public void setListOfSemesters(List<Semester> listOfSemesters) {
+	public void setListOfSemesters(Set<Semester> listOfSemesters) {
 		this.listOfSemesters = listOfSemesters;
 	}
 	
