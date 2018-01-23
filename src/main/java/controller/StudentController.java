@@ -1,12 +1,6 @@
 package controller;
 
-import java.io.IOException;
 import java.util.UUID;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -46,7 +40,7 @@ public class StudentController{
 	}
 	
 	@RequestMapping(value="/student/create", method=RequestMethod.POST)
-	public ModelAndView createStudent(@ModelAttribute("student") Student student, @ModelAttribute("user") User user, @ModelAttribute("role") Role role) {
+	public ModelAndView createStudent(@ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_STUDENT) Student student, @ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_USER) User user, @ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_ROLE) Role role) {
 		boolean update = false;
 		UserRole userRole = buildUserRole(role, user, update);
 		Student buildStudent = buildStudent(student, role, user);
@@ -58,13 +52,13 @@ public class StudentController{
 	}
 	
 	@RequestMapping(value="/student/edit/{studentId}", method=RequestMethod.GET)
-	public ModelAndView getStudentUpdatePage(@PathVariable("studentId") String id) {
+	public ModelAndView getStudentUpdatePage(@PathVariable(Constants.REQUEST_PATH_VARIABLE_STUDENTID) String id) {
 		UUID studentId = UUID.fromString(id);
 		return getStudentUpdateModel(studentId);
 	}
 	
 	@RequestMapping(value="/student/update", method=RequestMethod.POST)
-	public ModelAndView updateStudent(@ModelAttribute("student") Student student, @ModelAttribute("user") User user, @ModelAttribute("role") Role role, @RequestParam("option") String optionSubmit) {
+	public ModelAndView updateStudent(@ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_STUDENT) Student student, @ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_USER) User user, @ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_ROLE) Role role, @RequestParam(Constants.REQUEST_PARAMETER_OPTION) String optionSubmit) {
 		String option = optionSubmit;
 		if(option.equalsIgnoreCase(Constants.REQUEST_ACTION_UPDATE)){
 			boolean update = true;
@@ -79,7 +73,7 @@ public class StudentController{
 	}
 	
 	@RequestMapping(value="/student/delete/{studentId}/{username}", method=RequestMethod.GET)
-	public ModelAndView deleteStudent(@PathVariable("studentId") String id, @PathVariable("username") String username) {
+	public ModelAndView deleteStudent(@PathVariable(Constants.REQUEST_PATH_VARIABLE_STUDENTID) String id, @PathVariable(Constants.REQUEST_PATH_VARIABLE_USERNAME) String username) {
 		UUID studentId = UUID.fromString(id);
 		userRoleService.deleteUserRolebyUsername(username);
 		studentService.deleteStudentById(studentId);
