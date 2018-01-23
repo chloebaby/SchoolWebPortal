@@ -1,10 +1,12 @@
 package service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.UserRoleDAO;
 import model.UserRole;
 
+@Service
 public class UserRoleService implements UserRoleServiceInterface{
 	private UserRoleDAO daoUserRoleImplementation;
 	

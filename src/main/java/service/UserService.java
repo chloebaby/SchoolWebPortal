@@ -1,10 +1,12 @@
 package service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.UserDAO;
 import model.User;
 
+@Service
 public class UserService implements UserServiceInterface {
 	private UserDAO daoUserImplementation;
 	
