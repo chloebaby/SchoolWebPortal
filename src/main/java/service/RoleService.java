@@ -3,11 +3,13 @@ package service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.RoleDAO;
 import model.Role;
 
+@Service
 public class RoleService implements RoleServiceInterface{
 	private RoleDAO daoRoleImplementation;
 	
