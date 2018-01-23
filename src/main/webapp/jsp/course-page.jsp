@@ -50,7 +50,7 @@
             <nav class="nav-sidebar">
               <ul class="nav tabs">
                 <li class=""><a href="<c:url value="/school/student"/>">Students</a></li>
-                <li class="active"><a href="<c:url value="/school/course?action=#"/>">Courses</a></li>
+                <li class="active"><a href="<c:url value="/school/course"/>">Courses</a></li>
                 <li class=""><a href="<c:url value="/school/result?action=#"/>">Results</a></li>
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
@@ -67,7 +67,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       
-                      <form action="${pageContext.request.contextPath}/school/course" onsubmit="return validateCourseForm()" method="post">
+                      <form action="${pageContext.request.contextPath}/school/course/create" onsubmit="return validateCourseForm()" method="post">
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
@@ -143,9 +143,9 @@
                                         <c:out value="${sem.semester}"/>
                                       </c:forEach>
                                     </td>
-                                    <td><a href=<c:url value="/school/course?action=edit&courseId=${course.courseId}"/>>Edit</a></td>
-                                    <td><a href=<c:url value="/school/course?action=assign&courseId=${course.courseId}"/>>Assign</a></td>
-                                    <td><a onclick="return confirmCourseDelete()" href=<c:url value="/school/course?action=delete&courseId=${course.courseId}"/>>Delete</a></td>
+                                    <td><a href=<c:url value="/school/course/edit/${course.courseId}"/>>Edit</a></td>
+                                    <td><a href=<c:url value="/school/course/assign/${course.courseId}"/>>Assign</a></td>
+                                    <td><a onclick="return confirmCourseDelete()" href=<c:url value="/school/course/delete/${course.courseId}"/>>Delete</a></td>
                                   </tr>
                                 </c:forEach>
                               </tbody>
