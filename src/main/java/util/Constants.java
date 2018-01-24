@@ -17,6 +17,7 @@ public class Constants {
 	public static final String REQUEST_PATH_VARIABLE_STUDENTID = "studentId";
 	public static final String REQUEST_PATH_VARIABLE_COURSEID = "courseId";
 	public static final String REQUEST_PATH_VARIABLE_SEMESTERID = "semesterId";
+	public static final String REQUEST_PATH_VARIABLE_RESULTID = "resultId";
 	public static final String REQUEST_PATH_VARIABLE_USERNAME = "username";
 
 	public static final String REQUEST_PARAMETER_OPTION = "option";
@@ -53,8 +54,8 @@ public class Constants {
 	public static final String REQUEST_DISPATCHER_COURSEASSIGNPAGE = "assignment-pages/course-assign-page";
 	public static final String REQUEST_DISPATCHER_STUDENTPAGE = "student-page";
 	public static final String REQUEST_DISPATCHER_STUDENTMODIFYPAGE = "modify-pages/student-modified-page";
-	public static final String REQUEST_DISPATCHER_RESULTPAGE = "/jsp/result-page.jsp";
-	public static final String REQUEST_DISPATCHER_RESULTMODIFYPAGE = "/jsp/modify-pages/result-modified-page.jsp";
+	public static final String REQUEST_DISPATCHER_RESULTPAGE = "result-page";
+	public static final String REQUEST_DISPATCHER_RESULTMODIFYPAGE = "modify-pages/result-modified-page";
 	
 	public static final String MISC_VALUE_OPENROUNDBRACKET = "(";
 	
