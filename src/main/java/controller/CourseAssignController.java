@@ -1,20 +1,20 @@
 package controller;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import model.Course;
 import model.Result;
@@ -28,7 +28,8 @@ import service.StudentServiceInterface;
 import service.UserServiceInterface;
 import util.Constants;
 
-public class CourseAssignController extends HttpServlet{
+@Controller
+public class CourseAssignController{
 	private CourseServiceInterface courseService;
 	private SemesterServiceInterface semesterService;
 	private StudentServiceInterface studentService;
@@ -37,7 +38,6 @@ public class CourseAssignController extends HttpServlet{
 	private ClassPathXmlApplicationContext ctx;
 	
 	public CourseAssignController() {
-		super();
 		ctx = new ClassPathXmlApplicationContext(Constants.SPRING_BEAN_CONTEXT);
 		courseService = (CourseServiceInterface)ctx.getBean(Constants.SPRING_BEAN_COURSESERVICE);
 		semesterService = (SemesterServiceInterface)ctx.getBean(Constants.SPRING_BEAN_SEMESTERSERVICE);
@@ -46,39 +46,41 @@ public class CourseAssignController extends HttpServlet{
 		resultService = (ResultServiceInterface)ctx.getBean(Constants.SPRING_BEAN_RESULTSERVICE);
 	}
 	
-	@Override 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String option = request.getParameter(Constants.REQUEST_PARAMETER_OPTION);
-		
-		if(option.equals(Constants.REQUEST_ACTION_SAVE)) {
-			makeAssignment(request, response);
-		}else{
-			request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLCOURSES, courseService.findAllCourses());
-			request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLSEMESTERS, semesterService.findAllSemesters());
-			getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_COURSEPAGE).forward(request, response);
+	@RequestMapping(value="/course/assign", method=RequestMethod.POST)
+	public ModelAndView makeCourseAssignment(@ModelAttribute("course") Course course, @RequestParam(Constants.REQUEST_PAREMETER_ACTIVESTUDENTS) String[] selectedStudents, @RequestParam(Constants.REQUEST_PARAMETER_SEMESTER) String selectedSemester, @RequestParam(Constants.REQUEST_PARAMETER_OPTION) String optionSubmit) {
+		ModelAndView model = null;
+		String option = optionSubmit;
+		if(option.equalsIgnoreCase(Constants.REQUEST_ACTION_SAVE)) {
+			model = makeAssignment(course, selectedStudents, selectedSemester);
+		}else {
+			model = getCoursesModel();
 		}
+		
+		return model;
 	}
 	
-	@Override 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String action = request.getParameter(Constants.REQUEST_PARAMETER_ACTION);
+	@RequestMapping(value="/course/assign/delete/{studentId}/{courseId}/{semesterId}", method=RequestMethod.GET)
+	public ModelAndView deleteCourseAssignment(@PathVariable(Constants.REQUEST_PATH_VARIABLE_STUDENTID) String stdId, @PathVariable(Constants.REQUEST_PATH_VARIABLE_COURSEID) String cId, @PathVariable(Constants.REQUEST_PATH_VARIABLE_SEMESTERID) String sId) {
+		UUID studentId = UUID.fromString(stdId);
+		UUID courseId = UUID.fromString(cId);
+		UUID semesterId = UUID.fromString(sId);
 		
-		if(action.equalsIgnoreCase(Constants.REQUEST_ACTION_DELETE)) {
-			doDel(request, response);
-		}
-	}
-	
-	private void makeAssignment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		UUID courseId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_COURSEID));
-		String[] selectedStudents = request.getParameterValues(Constants.REQUEST_PAREMETER_ACTIVESTUDENTS);
-		String semesterName = request.getParameter(Constants.REQUEST_PARAMETER_SEMESTER);
-		
-		java.util.Date today = new java.util.Date();
-		java.sql.Date date = new java.sql.Date(today.getTime());
-		
-		String[] usernames = new String[selectedStudents.length];
+		Student student = studentService.findStudentById(studentId);
 		Course course = courseService.findCourseById(courseId);
+		Semester semester = semesterService.findSemesterByUUID(semesterId);
+		
+		removeStudentFromSemesterAssociation(student, semester);
+		removeStudentFromCourseAssociation(student, course);
+		
+		return getCourseAssignmentModel(courseId);
+	}
+	
+	private ModelAndView makeAssignment(Course course, String[] selectedStudents, String selectedSemester) {
+		String[] usernames = new String[selectedStudents.length];
+		UUID courseId = course.getCourseId();
+		course = courseService.findCourseById(courseId);
 		Set<Semester> listOfSemesters = course.getListOfSemesters();
+		java.sql.Date date = generateLastModifiedDate();
 		
 		for(int i = 0; i < selectedStudents.length; i++) {
 			Result result = new Result();
@@ -109,7 +111,7 @@ public class CourseAssignController extends HttpServlet{
 			resultService.updateResult(result);
 			
 			for(Semester sem : listOfSemesters) {
-				if(sem.getSemester().equals(semesterName)) {
+				if(sem.getSemester().equals(selectedSemester)) {
 					Semester semester = semesterService.findSemesterByUUID(sem.getSemesterId());
 					Set<Result> semesterResults = semester.getListOfResults();
 					Set<Student> semesterStudent = semester.getListOfStudents();
@@ -125,27 +127,22 @@ public class CourseAssignController extends HttpServlet{
 			}
 		}
 		
-		request.setAttribute(Constants.REQUEST_ATTRIBUTE_COURSE, courseService.findCourseById(courseId));
-		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
-		getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_COURSEASSIGNPAGE).forward(request, response);
+		return getCourseAssignmentModel(courseId);
+	}
+	
+	private ModelAndView getCourseAssignmentModel(UUID courseId) {
+		ModelAndView model = new ModelAndView(Constants.REQUEST_DISPATCHER_COURSEASSIGNPAGE);
+		model.addObject(Constants.REQUEST_ATTRIBUTE_COURSE, courseService.findCourseById(courseId));
+		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
+		return model;
 		
 	}
 	
-	private void doDel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		UUID studentId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_STUDENTID));
-		UUID courseId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_COURSEID));
-		UUID semesterId = UUID.fromString(request.getParameter(Constants.REQUEST_PARAMETER_SEMETERID));
-		
-		Student student = studentService.findStudentById(studentId);
-		Course course = courseService.findCourseById(courseId);
-		Semester semester = semesterService.findSemesterByUUID(semesterId);
-		
-		removeStudentFromSemesterAssociation(student, semester);
-		removeStudentFromCourseAssociation(student, course);
-		
-		request.setAttribute(Constants.REQUEST_ATTRIBUTE_COURSE, courseService.findCourseById(courseId));
-		request.setAttribute(Constants.REQUEST_ATTRIBUTE_ALLSTUDENTS, studentService.findAllStudents());
-		getServletContext().getRequestDispatcher(Constants.REQUEST_DISPATCHER_COURSEASSIGNPAGE).forward(request, response);
+	private ModelAndView getCoursesModel() {
+		ModelAndView model = new ModelAndView(Constants.REQUEST_DISPATCHER_COURSEPAGE);
+		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLCOURSES, courseService.findAllCourses());
+		model.addObject(Constants.REQUEST_ATTRIBUTE_ALLSEMESTERS, semesterService.findAllSemesters());
+		return model;
 	}
 	
 	private void removeStudentFromSemesterAssociation(Student student, Semester semester) {
@@ -182,4 +179,8 @@ public class CourseAssignController extends HttpServlet{
 		courseService.updateCourse(course);
 	}
 	
+	private java.sql.Date generateLastModifiedDate(){
+		java.util.Date today = new java.util.Date();
+		return new java.sql.Date(today.getTime());
+	}
 }
