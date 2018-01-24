@@ -19,6 +19,7 @@
     <link href="<c:url value="/css/course-stylesheet.css" />" rel="stylesheet">
     
     <script src="<c:url value="/js/course-page.js" />"></script>
+    <script src="<c:url value="/js/course-assign.js"/>"></script>
     
   </head>
   <body>
@@ -37,7 +38,7 @@
         <div class="update-course-form">
           <div class="row">
             <div class="col-sm-12">
-              <form action="${pageContext.request.contextPath}/school/course-assign" onsubmit="return validateResultForm()" method="post">
+              <form action="${pageContext.request.contextPath}/school/course/assign" onsubmit="return validateResultForm()" method="post">
                 
                 <div class="row">
                   <div class="col-sm-12">
@@ -112,7 +113,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <button type="submit" name="option" value="save" class="btn btn-primary">Submit</button>
-                    <button type="submit" name="option" value="cancel" class="btn btn-danger">Cancel</button>
+                    <button type="submit" name="option" onclick="onCancel()" value="cancel" class="btn btn-danger">Cancel</button>
                   </div>
                 </div>
                 
@@ -155,7 +156,7 @@
                           </c:forEach>
                         </c:forEach>
                       </c:forEach>
-                      <td><a href=<c:url value="/school/course-assign?action=delete&studentId=${student.studentId}&courseId=${course.courseId}&semesterId=${semId}"/>>Delete</a></td>
+                      <td><a href=<c:url value="/school/course/assign/delete/${student.studentId}/${course.courseId}/${semId}"/>>Delete</a></td>
                     </tr>
                   </c:forEach>
                 </tbody>
