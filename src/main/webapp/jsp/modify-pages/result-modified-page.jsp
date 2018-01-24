@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-sm-12">
             
-            <form action="${pageContext.request.contextPath}/school/result" method="post">
+            <form action="${pageContext.request.contextPath}/school/result/update" method="post">
               
               <div class="row">
                 <div class="col-sm-6">
