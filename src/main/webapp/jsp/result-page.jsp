@@ -47,8 +47,8 @@
             <nav class="nav-sidebar">
               <ul class="nav tabs">
                 <li class=""><a href="<c:url value="/school/student"/>">Students</a></li>
-                <li class=""><a href="<c:url value="/school/course?action=#"/>">Courses</a></li>
-                <li class="active"><a href="<c:url value="/school/result?action=#"/>">Results</a></li>
+                <li class=""><a href="<c:url value="/school/course"/>">Courses</a></li>
+                <li class="active"><a href="<c:url value="/school/result"/>">Results</a></li>
               </ul> <!-- /.nav .tabs -->
             </nav> <!-- /.nav-sidebar -->
           </div> <!-- /.col-sm-2 -->
@@ -131,7 +131,7 @@
                               </c:forEach>
                              </c:forEach>
                              
-                             <td><a href=<c:url value="/school/result?action=edit&resultId=${result.resultId}"/>>Edit</a></td>
+                             <td><a href=<c:url value="/school/result/edit/${result.resultId}"/>>Edit</a></td>
                             </tr>
                           </c:forEach>
 
