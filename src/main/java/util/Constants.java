@@ -16,6 +16,7 @@ public class Constants {
 	
 	public static final String REQUEST_PATH_VARIABLE_STUDENTID = "studentId";
 	public static final String REQUEST_PATH_VARIABLE_COURSEID = "courseId";
+	public static final String REQUEST_PATH_VARIABLE_SEMESTERID = "semesterId";
 	public static final String REQUEST_PATH_VARIABLE_USERNAME = "username";
 
 	public static final String REQUEST_PARAMETER_OPTION = "option";
