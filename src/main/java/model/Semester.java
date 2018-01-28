@@ -2,14 +2,13 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -48,7 +47,7 @@ public class Semester {
 	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name="STUDENT_SEMESTER", joinColumns={@JoinColumn(name="semester_id")},inverseJoinColumns={@JoinColumn(name="student_id")})
-	private Set<Student> listOfStudents = new HashSet<Student>();
+	private List<Student> listOfStudents = new LinkedList<Student>();
 	
 	
 	public Semester() {}
@@ -85,11 +84,11 @@ public class Semester {
 		this.listOfCourses = listOfCourses;
 	}
 
-	public Set<Student> getListOfStudents() {
+	public List<Student> getListOfStudents() {
 		return listOfStudents;
 	}
 
-	public void setListOfStudents(Set<Student> listOfStudents) {
+	public void setListOfStudents(List<Student> listOfStudents) {
 		this.listOfStudents = listOfStudents;
 	}
 }
