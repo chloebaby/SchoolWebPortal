@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.List;
+
+import model.Student;
 import model.UserRole;
 
 public interface UserRoleDAO {
