@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -10,6 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import model.Role;
 import model.Student;
@@ -79,6 +89,17 @@ public class StudentController{
 		studentService.deleteStudentById(studentId);
 		
 		return getStudentsModel();
+	}
+	
+	@RequestMapping(value="/student/pdf/{studentId}", method=RequestMethod.GET)
+	public ModelAndView generateStudentPDF(@PathVariable(Constants.REQUEST_PARAMETER_STUDENTID) String id) {
+		UUID studentId = UUID.fromString(id);
+		Student student = studentService.findStudentById(studentId);
+		
+		ModelAndView model = new ModelAndView("pdfView");
+		
+		return model;
+		
 	}
 	
 	private UserRole buildUserRole(Role role, User user, boolean update) {
