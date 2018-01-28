@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -114,14 +115,11 @@ public class CourseAssignController{
 				if(sem.getSemester().equals(selectedSemester)) {
 					Semester semester = semesterService.findSemesterByUUID(sem.getSemesterId());
 					Set<Result> semesterResults = semester.getListOfResults();
-					Set<Student> semesterStudent = semester.getListOfStudents();
-					Set<Semester> studentSemester = student.getListOfSemesters();
+					List<Student> semesterStudent = semester.getListOfStudents();
 					semesterResults.add(result);
 					semesterStudent.add(student);
-					studentSemester.add(semester);
 					semester.setListOfResults(semesterResults);
 					semester.setListOfStudents(semesterStudent);
-					student.setListOfSemesters(studentSemester);
 					semesterService.updateSemester(semester);
 				}
 			}
@@ -146,7 +144,7 @@ public class CourseAssignController{
 	}
 	
 	private void removeStudentFromSemesterAssociation(Student student, Semester semester) {
-		Set<Student> semesterStudent = semester.getListOfStudents();
+		List<Student> semesterStudent = semester.getListOfStudents();
 		Collection<Student> removeSemesterStudent = new LinkedList<Student>(semesterStudent);
 		
 		Iterator<Student> removeSemesterStudentIterator = removeSemesterStudent.iterator();
@@ -158,7 +156,7 @@ public class CourseAssignController{
 			}
 		}
 		
-		semester.setListOfStudents(new HashSet<Student>(removeSemesterStudent));
+		semester.setListOfStudents(new LinkedList<Student>(removeSemesterStudent));
 		semesterService.updateSemester(semester);
 	}
 	
