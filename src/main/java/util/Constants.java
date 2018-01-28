@@ -68,4 +68,6 @@ public class Constants {
 	public static final String SPRING_BEAN_RESULTSERVICE = "resultService";
 	public static final String SPRING_BEAN_USERSERVICE = "userService";
 	
+	public static final String PDF_FILENAME = "StudentResults.pdf";
+	
 }
