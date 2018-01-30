@@ -161,7 +161,7 @@
                               <td><a href=<c:url value="/school/student/edit/${student.studentId}"/>>Edit</a></td>
 	                            <td><a onclick="return confirmStudentDelete()" href=<c:url value="/school/student/delete/${student.studentId}/${student.user.username}"/>>Delete</a></td>
 					                    <td><a href=<c:url value="/school/student/email?action=email&studentEmail=${student.email}"/>>Send Email</a></td>
-                              <th><a href=<c:url value="/school/student/pdf/${student.studentId}"/>>PDF</a></th>
+                              <th><a href=<c:url value="/school/student/pdf/${student.studentId}"/> target="_blank">PDF</a></th>
 					                  </tr>
 				                  </c:forEach>
 			                  </tbody>
