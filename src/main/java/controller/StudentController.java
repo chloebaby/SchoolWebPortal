@@ -96,9 +96,11 @@ public class StudentController{
 		UUID studentId = UUID.fromString(id);
 		Student student = studentService.findStudentById(studentId);
 		
-		ModelAndView model = new ModelAndView("pdfView");
-		
-		return model;
+		if(student.getListOfResults().size() != 0) {
+			return new ModelAndView(Constants.PDF_VIEW, Constants.PDF_COMMAND, student);
+		}else {
+			return getStudentsModel();
+		}
 		
 	}
 	
