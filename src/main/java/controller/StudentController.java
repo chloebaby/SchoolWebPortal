@@ -28,6 +28,7 @@ import model.UserRole;
 import service.RoleServiceInterface;
 import service.StudentServiceInterface;
 import service.UserRoleServiceInterface;
+import service.UserServiceInterface;
 import util.Constants;
 
 @Controller
@@ -35,6 +36,7 @@ public class StudentController{
 	private StudentServiceInterface studentService;
 	private RoleServiceInterface roleService;
 	private UserRoleServiceInterface userRoleService;
+	private UserServiceInterface userService;
 	private ClassPathXmlApplicationContext ctx;
 	
 	public StudentController(){
@@ -42,6 +44,7 @@ public class StudentController{
 		studentService = (StudentServiceInterface)ctx.getBean(Constants.SPRING_BEAN_STUDENTSERVICE);
 		roleService = (RoleServiceInterface)ctx.getBean(Constants.SPRING_BEAN_ROLESERVICE);
 		userRoleService = (UserRoleServiceInterface)ctx.getBean(Constants.SPRING_BEAN_USERROLESERVICE);
+		userService = (UserServiceInterface)ctx.getBean(Constants.SPRING_BEAN_USERSERVICE);
 	}
 	
 	@RequestMapping(value="/student", method=RequestMethod.GET)
@@ -53,7 +56,7 @@ public class StudentController{
 	public ModelAndView createStudent(@ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_STUDENT) Student student, @ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_USER) User user, @ModelAttribute(Constants.REQUEST_MODEL_ATTRIBUTE_ROLE) Role role) {
 		boolean update = false;
 		UserRole userRole = buildUserRole(role, user, update);
-		Student buildStudent = buildStudent(student, role, user);
+		Student buildStudent = buildStudent(student, role, user, update);
 		
 		studentService.saveStudent(buildStudent);
 		userRoleService.saveUserRole(userRole);
@@ -73,7 +76,7 @@ public class StudentController{
 		if(option.equalsIgnoreCase(Constants.REQUEST_ACTION_UPDATE)){
 			boolean update = true;
 			UserRole userRole = buildUserRole(role, user, update);
-			student = buildStudent(student, role, user);
+			student = buildStudent(student, role, user, update);
 			studentService.updateStudent(student);
 			userRoleService.updateUserRole(userRole);
 		}
@@ -118,12 +121,20 @@ public class StudentController{
 		return userRole;
 	}
 	
-	private Student buildStudent(Student student, Role role, User user) {
+	private Student buildStudent(Student student, Role role, User user, boolean update) {
 		UUID roleId = roleService.findUUIDByRolename(role.getRolename());
 		role.setRoleId(roleId);
 		
+		User studentUser = null;
+		if(update == false) {
+			studentUser = user;
+		}else {
+			studentUser = userService.findUserByUsername(user.getUsername());
+			studentUser.setUsername(user.getUsername());
+		}
+		
 		user.setLastModified(generateLastModifiedDate());
-		student.setUser(user);
+		student.setUser(studentUser);
 		student.setRole(role);
 		student.setLastModified(generateLastModifiedDate());
 		
