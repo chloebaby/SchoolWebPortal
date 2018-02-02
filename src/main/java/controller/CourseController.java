@@ -112,6 +112,7 @@ public class CourseController{
 		List<Semester> listCourseSemester = new LinkedList<Semester>(courseSemester);
 		List<Semester> listSemesters = new LinkedList<Semester>(semesters);
 		
+		try {
 		outerForLoop:
 		for(int i = 0; i < listSemesters.size();) {
 			boolean isItemRemoved = false;
@@ -127,6 +128,9 @@ public class CourseController{
 			if(!isItemRemoved) {
 				i++;
 			}
+		}
+		}catch(Exception e) {
+			return getCoursesModel();
 		}
 		
 		model.addObject(Constants.REQUEST_ATTRIBUTE_COURSE, courseService.findCourseById(courseId));
