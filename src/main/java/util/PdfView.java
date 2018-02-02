@@ -64,8 +64,6 @@ public class PdfView extends AbstractITextPdfView {
 		table.addCell(cell);
 		
 		Set<Result> studentResults = student.getListOfResults();
-		Set<Course> studentCourse = student.getListOfCourses();
-		Set<Semester> studentSemester = student.getListOfSemesters();
 		
 		Iterator<Result> studentResultsIterator = studentResults.iterator();
 		
